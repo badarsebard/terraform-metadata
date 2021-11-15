@@ -1,0 +1,4068 @@
+{
+  ".schema_version": "2",
+  ".sdk_type": "terraform-plugin-sdk-v2",
+  "name": "aquasec",
+  "type": "provider",
+  "version": "v0.8.2",
+  "provider": {
+    "aqua_url": {
+      "Type": "String",
+      "Optional": true,
+      "DefaultFunc": "ENV(AQUA_URL)"
+    },
+    "ca_certificate_path": {
+      "Type": "String",
+      "Optional": true,
+      "Description": "This is the file path for server CA certificates if they are not available on the host OS.",
+      "DefaultFunc": "ENV(AQUA_CA_CERT_PATH)"
+    },
+    "config_path": {
+      "Type": "String",
+      "Optional": true,
+      "Description": "This is the file path for Aqua provider configuration. The default configuration path is ~/.aqua/tf.config",
+      "DefaultFunc": "ENV(AQUA_CONFIG)"
+    },
+    "password": {
+      "Type": "String",
+      "Optional": true,
+      "DefaultFunc": "ENV(AQUA_PASSWORD)"
+    },
+    "username": {
+      "Type": "String",
+      "Optional": true,
+      "DefaultFunc": "ENV(AQUA_USER)"
+    },
+    "verify_tls": {
+      "Type": "Bool",
+      "Optional": true,
+      "Description": "If true, server tls certificates will be verified by the client before making a connection. Defaults to true.",
+      "DefaultFunc": "ENV(AQUA_TLS_VERIFY)"
+    }
+  },
+  "resources": {
+    "aquasec_container_runtime_policy": {
+      "allowed_executables": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "List of executables that are allowed for the user.",
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "application_scopes": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "Indicates the application scope of the service.",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "audit_all_network_activity": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "If true, all network activity will be audited."
+      },
+      "audit_all_processes_activity": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "If true, all process activity will be audited."
+      },
+      "audit_full_command_arguments": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "If true, full command arguments will be audited."
+      },
+      "author": {
+        "Type": "String",
+        "Description": "Username of the account that created the service.",
+        "Computed": true
+      },
+      "block_access_host_network": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "If true, prevent containers from running with access to host network."
+      },
+      "block_adding_capabilities": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "If true, prevent containers from running with adding capabilities with `--cap-add` privilege."
+      },
+      "block_container_exec": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "If true, exec into a container is prevented."
+      },
+      "block_low_port_binding": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "If true, prevent containers from running with the capability to bind in port lower than 1024."
+      },
+      "block_non_compliant_images": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "If true, running non-compliant image in the container is prevented."
+      },
+      "block_non_compliant_workloads": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "If true, running containers in non-compliant pods is prevented."
+      },
+      "block_privileged_containers": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "If true, prevent containers from running with privileged container capability."
+      },
+      "block_root_user": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "If true, prevent containers from running with root user."
+      },
+      "block_unregistered_images": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "If true, running images in the container that are not registered in Aqua is prevented."
+      },
+      "block_use_ipc_namespace": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "If true, prevent containers from running with the privilege to use the IPC namespace."
+      },
+      "block_use_pid_namespace": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "If true, prevent containers from running with the privilege to use the PID namespace."
+      },
+      "block_use_user_namespace": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "If true, prevent containers from running with the privilege to use the user namespace."
+      },
+      "block_use_uts_namespace": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "If true, prevent containers from running with the privilege to use the UTS namespace."
+      },
+      "blocked_capabilities": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "If true, prevents containers from using specific Unix capabilities.",
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "blocked_executables": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "List of executables that are prevented from running in containers.",
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "blocked_files": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "List of files that are prevented from being read, modified and executed in the containers.",
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "blocked_inbound_ports": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "List of blocked inbound ports.",
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "blocked_outbound_ports": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "List of blocked outbound ports.",
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "blocked_packages": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "Prevent containers from reading, writing, or executing all files in the list of packages.",
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "blocked_volumes": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "List of volumes that are prevented from being mounted in the containers.",
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "The description of the container runtime policy"
+      },
+      "enable_drift_prevention": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "If true, executables that are not in the original image is prevented from running."
+      },
+      "enable_fork_guard": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "If true, fork bombs are prevented in the containers."
+      },
+      "enable_ip_reputation_security": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "If true, detect and prevent communication from containers to IP addresses known to have a bad reputation."
+      },
+      "enable_port_scan_detection": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "If true, detects port scanning behavior in the container."
+      },
+      "enabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "Indicates if the runtime policy is enabled or not.",
+        "Default": {
+          "Type": "bool",
+          "Value": "true"
+        }
+      },
+      "enforce": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "Indicates that policy should effect container execution (not just for audit).",
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "enforce_after_days": {
+        "Type": "Int",
+        "Optional": true,
+        "Description": "Indicates the number of days after which the runtime policy will be changed to enforce mode."
+      },
+      "exceptional_readonly_files_and_directories": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "List of files and directories to be excluded from the read-only list.",
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "fork_guard_process_limit": {
+        "Type": "Int",
+        "Optional": true,
+        "Description": "Process limit for the fork guard."
+      },
+      "limit_new_privileges": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "If true, prevents the container from obtaining new privileges at runtime. (only enabled in enforce mode)"
+      },
+      "name": {
+        "Type": "String",
+        "Required": true,
+        "Description": "Name of the container runtime policy"
+      },
+      "readonly_files_and_directories": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "List of files and directories to be restricted as read-only",
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "scope_expression": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "Logical expression of how to compute the dependency of the scope variables.",
+        "Computed": true
+      },
+      "scope_variables": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "List of scope attributes.",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "attribute": {
+              "Type": "String",
+              "Required": true,
+              "Description": "Class of supported scope."
+            },
+            "value": {
+              "Type": "String",
+              "Required": true,
+              "Description": "Value assigned to the attribute."
+            }
+          }
+        }
+      }
+    },
+    "aquasec_enforcer_groups": {
+      "admission_control": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "allow_kube_enforcer_audit": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "audit_all": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "audit_failed_login": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "audit_success_login": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "auto_discover_configure_registries": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "auto_discovery_enabled": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "auto_scan_discovered_images_running_containers": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "block_admission_control": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "command": {
+        "Type": "Set",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "default": {
+              "Type": "String",
+              "Optional": true
+            },
+            "kubernetes": {
+              "Type": "String",
+              "Optional": true
+            },
+            "swarm": {
+              "Type": "String",
+              "Optional": true
+            },
+            "windows": {
+              "Type": "String",
+              "Optional": true
+            }
+          }
+        }
+      },
+      "container_activity_protection": {
+        "Type": "Bool",
+        "Computed": true
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true
+      },
+      "enforce": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "gateway_address": {
+        "Type": "String",
+        "Computed": true
+      },
+      "gateway_name": {
+        "Type": "String",
+        "Computed": true
+      },
+      "gateways": {
+        "Type": "List",
+        "Required": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "group_id": {
+        "Type": "String",
+        "Required": true
+      },
+      "host_network_protection": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "host_os": {
+        "Type": "String",
+        "Computed": true
+      },
+      "host_protection": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "image_assurance": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "install_command": {
+        "Type": "String",
+        "Computed": true
+      },
+      "last_update": {
+        "Type": "Int",
+        "Computed": true
+      },
+      "last_updated": {
+        "Type": "String",
+        "Optional": true
+      },
+      "logical_name": {
+        "Type": "String",
+        "Required": true
+      },
+      "micro_enforce_injection": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "network_protection": {
+        "Type": "Bool",
+        "Computed": true
+      },
+      "orchestrator": {
+        "Type": "Set",
+        "Required": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "master": {
+              "Type": "Bool",
+              "Optional": true
+            },
+            "namespace": {
+              "Type": "String",
+              "Optional": true
+            },
+            "service_account": {
+              "Type": "String",
+              "Optional": true
+            },
+            "type": {
+              "Type": "String",
+              "Optional": true
+            }
+          }
+        }
+      },
+      "token": {
+        "Type": "String",
+        "Computed": true
+      },
+      "type": {
+        "Type": "String",
+        "Required": true
+      },
+      "user_access_control": {
+        "Type": "Bool",
+        "Optional": true
+      }
+    },
+    "aquasec_firewall_policy": {
+      "author": {
+        "Type": "String",
+        "Description": "Username of the account that created the policy.",
+        "Computed": true
+      },
+      "block_icmp_ping": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "Indicates whether policy includes blocking incoming 'ping' requests."
+      },
+      "block_metadata_service": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "Indicates whether policy includes blocking metadata services of the cloud."
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "Description of the Firewall Policy."
+      },
+      "inbound_networks": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "Information on network addresses that are allowed to pass in data or requests.",
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "allow": {
+              "Type": "Bool",
+              "Required": true,
+              "Description": "Indicates whether the specified resources are allowed to pass in data or requests."
+            },
+            "port_range": {
+              "Type": "String",
+              "Required": true,
+              "Description": "Range of ports affected by firewall."
+            },
+            "resource": {
+              "Type": "String",
+              "Optional": true,
+              "Description": "Information of the resource.",
+              "Computed": true
+            },
+            "resource_type": {
+              "Type": "String",
+              "Required": true,
+              "Description": "Type of the resource"
+            }
+          }
+        }
+      },
+      "lastupdate": {
+        "Type": "Int",
+        "Description": "Timestamp of the last update in Unix time format.",
+        "Computed": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true,
+        "Description": "Name of the policy, no longer than 128 characters and no slash characters."
+      },
+      "outbound_networks": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "Information on network addresses that are allowed to receive data or requests.",
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "allow": {
+              "Type": "Bool",
+              "Required": true,
+              "Description": "Indicates whether the specified resources are allowed to receive data or requests."
+            },
+            "port_range": {
+              "Type": "String",
+              "Required": true,
+              "Description": "Range of ports affected by firewall."
+            },
+            "resource": {
+              "Type": "String",
+              "Optional": true,
+              "Description": "Information of the resource.",
+              "Computed": true
+            },
+            "resource_type": {
+              "Type": "String",
+              "Required": true,
+              "Description": "Type of the resource."
+            }
+          }
+        }
+      },
+      "type": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "Indicates the class of protection defined by the firewall.",
+        "Computed": true
+      },
+      "version": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "Aqua version functionality supported",
+        "Computed": true
+      }
+    },
+    "aquasec_function_runtime_policy": {
+      "application_scopes": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "Indicates the application scope of the service.",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "author": {
+        "Type": "String",
+        "Description": "Username of the account that created the service.",
+        "Computed": true
+      },
+      "block_malicious_executables": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "If true, prevent creation of malicious executables in functions during their runtime post invocation.",
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "blocked_executables": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "List of executables that are prevented from running in containers.",
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "The description of the function runtime policy"
+      },
+      "enabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "Indicates if the runtime policy is enabled or not.",
+        "Default": {
+          "Type": "bool",
+          "Value": "true"
+        }
+      },
+      "enforce": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "Indicates that policy should effect container execution (not just for audit).",
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "honeypot_access_key": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "Honeypot User ID (Access Key)"
+      },
+      "honeypot_apply_on": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "List of options to apply the honeypot on (Environment Vairable, Layer, File)",
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "honeypot_secret_key": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "Honeypot User Password (Secret Key)"
+      },
+      "honeypot_serverless_app_name": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "Serverless application name"
+      },
+      "name": {
+        "Type": "String",
+        "Required": true,
+        "Description": "Name of the function runtime policy"
+      },
+      "scope_expression": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "Logical expression of how to compute the dependency of the scope variables.",
+        "Computed": true
+      },
+      "scope_variables": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "List of scope attributes.",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "attribute": {
+              "Type": "String",
+              "Required": true,
+              "Description": "Class of supported scope."
+            },
+            "value": {
+              "Type": "String",
+              "Required": true,
+              "Description": "Value assigned to the attribute."
+            }
+          }
+        }
+      }
+    },
+    "aquasec_host_runtime_policy": {
+      "application_scopes": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "Indicates the application scope of the service.",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "audit_all_os_user_activity": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "If true, all process activity will be audited."
+      },
+      "audit_full_command_arguments": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "If true, full command arguments will be audited."
+      },
+      "author": {
+        "Type": "String",
+        "Description": "Username of the account that created the service.",
+        "Computed": true
+      },
+      "blocked_files": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "List of files that are prevented from being read, modified and executed in the containers.",
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "The description of the host runtime policy"
+      },
+      "enable_ip_reputation_security": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "If true, detect and prevent communication from containers to IP addresses known to have a bad reputation."
+      },
+      "enabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "Indicates if the runtime policy is enabled or not.",
+        "Default": {
+          "Type": "bool",
+          "Value": "true"
+        }
+      },
+      "enforce": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "Indicates that policy should effect container execution (not just for audit).",
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "enforce_after_days": {
+        "Type": "Int",
+        "Optional": true,
+        "Description": "Indicates the number of days after which the runtime policy will be changed to enforce mode."
+      },
+      "file_integrity_monitoring": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "Configuration for file integrity monitoring.",
+        "MaxItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "excluded_paths": {
+              "Type": "List",
+              "Optional": true,
+              "Description": "List of paths to be excluded from being monitored.",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "excluded_processes": {
+              "Type": "List",
+              "Optional": true,
+              "Description": "List of processes to be excluded from being monitored.",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "excluded_users": {
+              "Type": "List",
+              "Optional": true,
+              "Description": "List of users to be excluded from being monitored.",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "monitor_attributes": {
+              "Type": "Bool",
+              "Optional": true,
+              "Description": "If true, add attributes operations will be monitored."
+            },
+            "monitor_create": {
+              "Type": "Bool",
+              "Optional": true,
+              "Description": "If true, create operations will be monitored."
+            },
+            "monitor_delete": {
+              "Type": "Bool",
+              "Optional": true,
+              "Description": "If true, deletion operations will be monitored."
+            },
+            "monitor_modify": {
+              "Type": "Bool",
+              "Optional": true,
+              "Description": "If true, modification operations will be monitored."
+            },
+            "monitor_read": {
+              "Type": "Bool",
+              "Optional": true,
+              "Description": "If true, read operations will be monitored."
+            },
+            "monitored_paths": {
+              "Type": "List",
+              "Optional": true,
+              "Description": "List of paths to be monitored.",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "monitored_processes": {
+              "Type": "List",
+              "Optional": true,
+              "Description": "List of processes to be monitored.",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "monitored_users": {
+              "Type": "List",
+              "Optional": true,
+              "Description": "List of users to be monitored.",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            }
+          }
+        }
+      },
+      "monitor_system_time_changes": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "If true, system time changes will be monitored."
+      },
+      "monitor_windows_services": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "If true, windows service operations will be monitored."
+      },
+      "name": {
+        "Type": "String",
+        "Required": true,
+        "Description": "Name of the host runtime policy"
+      },
+      "os_groups_allowed": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "List of OS (Linux or Windows) groups that are allowed to authenticate to the host, and block authentication requests from all others. Groups can be either Linux groups or Windows AD groups.",
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "os_groups_blocked": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "List of OS (Linux or Windows) groups that are not allowed to authenticate to the host, and block authentication requests from all others. Groups can be either Linux groups or Windows AD groups.",
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "os_users_allowed": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "List of OS (Linux or Windows) users that are allowed to authenticate to the host, and block authentication requests from all others.",
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "os_users_blocked": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "List of OS (Linux or Windows) users that are not allowed to authenticate to the host, and block authentication requests from all others.",
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "scope_expression": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "Logical expression of how to compute the dependency of the scope variables.",
+        "Computed": true
+      },
+      "scope_variables": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "List of scope attributes.",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "attribute": {
+              "Type": "String",
+              "Required": true,
+              "Description": "Class of supported scope."
+            },
+            "value": {
+              "Type": "String",
+              "Required": true,
+              "Description": "Value assigned to the attribute."
+            }
+          }
+        }
+      },
+      "windows_registry_monitoring": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "Configuration for windows registry monitoring.",
+        "MaxItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "excluded_paths": {
+              "Type": "List",
+              "Optional": true,
+              "Description": "List of paths to be excluded from being monitored.",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "excluded_processes": {
+              "Type": "List",
+              "Optional": true,
+              "Description": "List of registry processes to be excluded from being monitored.",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "excluded_users": {
+              "Type": "List",
+              "Optional": true,
+              "Description": "List of registry users to be excluded from being monitored.",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "monitor_attributes": {
+              "Type": "Bool",
+              "Optional": true,
+              "Description": "If true, add attributes operations will be monitored."
+            },
+            "monitor_create": {
+              "Type": "Bool",
+              "Optional": true,
+              "Description": "If true, create operations will be monitored."
+            },
+            "monitor_delete": {
+              "Type": "Bool",
+              "Optional": true,
+              "Description": "If true, deletion operations will be monitored."
+            },
+            "monitor_modify": {
+              "Type": "Bool",
+              "Optional": true,
+              "Description": "If true, modification operations will be monitored."
+            },
+            "monitor_read": {
+              "Type": "Bool",
+              "Optional": true,
+              "Description": "If true, read operations will be monitored."
+            },
+            "monitored_paths": {
+              "Type": "List",
+              "Optional": true,
+              "Description": "List of paths to be monitored.",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "monitored_processes": {
+              "Type": "List",
+              "Optional": true,
+              "Description": "List of registry processes to be monitored.",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "monitored_users": {
+              "Type": "List",
+              "Optional": true,
+              "Description": "List of registry users to be monitored.",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            }
+          }
+        }
+      },
+      "windows_registry_protection": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "Configuration for windows registry protection.",
+        "MaxItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "excluded_paths": {
+              "Type": "List",
+              "Optional": true,
+              "Description": "List of registry paths to be excluded from being protected.",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "excluded_processes": {
+              "Type": "List",
+              "Optional": true,
+              "Description": "List of registry processes to be excluded from being protected.",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "excluded_users": {
+              "Type": "List",
+              "Optional": true,
+              "Description": "List of registry paths to be users from being protected.",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "protected_paths": {
+              "Type": "List",
+              "Optional": true,
+              "Description": "List of registry paths to be protected.",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "protected_processes": {
+              "Type": "List",
+              "Optional": true,
+              "Description": "List of registry processes to be protected.",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "protected_users": {
+              "Type": "List",
+              "Optional": true,
+              "Description": "List of registry users to be protected.",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            }
+          }
+        }
+      }
+    },
+    "aquasec_image": {
+      "allow_image": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "If this field is set to true, the image will be whitelisted."
+      },
+      "architecture": {
+        "Type": "String",
+        "Description": "The image architecture.",
+        "Computed": true
+      },
+      "assurance_checks_performed": {
+        "Type": "List",
+        "Description": "The list of image assurance checks performed on the image.",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "assurance_type": {
+              "Type": "String",
+              "Description": "The type of the Assurance Policy the check originated from.",
+              "Computed": true
+            },
+            "blocking": {
+              "Type": "Bool",
+              "Description": "Whether the check is blocking (i.e. a failure should trigger a disallow).",
+              "Computed": true
+            },
+            "control": {
+              "Type": "String",
+              "Description": "The name of the image assurance control.",
+              "Computed": true
+            },
+            "dta_skipped": {
+              "Type": "Bool",
+              "Description": "If DTA was skipped.",
+              "Computed": true
+            },
+            "dta_skipped_reason": {
+              "Type": "String",
+              "Description": "The reason why DTA was skipped.",
+              "Computed": true
+            },
+            "failed": {
+              "Type": "Bool",
+              "Description": "Whether the image failed the check.",
+              "Computed": true
+            },
+            "policy_name": {
+              "Type": "String",
+              "Description": "The name of the Image Assurance Policy the check originated from.",
+              "Computed": true
+            }
+          }
+        }
+      },
+      "author": {
+        "Type": "String",
+        "Description": "The name of the user who registered the image.",
+        "Computed": true
+      },
+      "blacklisted": {
+        "Type": "Bool",
+        "Description": "Whether the image is blacklisted.",
+        "Computed": true
+      },
+      "block_image": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "If this field is set to true, the image will be blacklisted."
+      },
+      "comment": {
+        "Type": "String",
+        "Description": "The image creation comment.",
+        "Computed": true
+      },
+      "created": {
+        "Type": "String",
+        "Description": "The date and time when the image was registered.",
+        "Computed": true
+      },
+      "critical_vulnerabilities": {
+        "Type": "Int",
+        "Description": "Number of critical severity vulnerabilities detected in the image.",
+        "Computed": true
+      },
+      "default_user": {
+        "Type": "String",
+        "Description": "The default user of the image.",
+        "Computed": true
+      },
+      "digest": {
+        "Type": "String",
+        "Description": "The content digest of the image.",
+        "Computed": true
+      },
+      "disallowed": {
+        "Type": "Bool",
+        "Description": "Whether the image is disallowed (non-compliant).",
+        "Computed": true
+      },
+      "disallowed_by_assurance_checks": {
+        "Type": "Bool",
+        "Description": "Whether the image was disallowed because of Image Assurance Policies.",
+        "Computed": true
+      },
+      "docker_id": {
+        "Type": "String",
+        "Description": "The Docker image ID.",
+        "Computed": true
+      },
+      "docker_labels": {
+        "Type": "List",
+        "Description": "Docker labels of the image.",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "docker_version": {
+        "Type": "String",
+        "Description": "The Docker version used when building the image.",
+        "Computed": true
+      },
+      "dta_severity_score": {
+        "Type": "String",
+        "Description": "DTA severity score.",
+        "Computed": true
+      },
+      "dta_skipped": {
+        "Type": "Bool",
+        "Description": "If DTA was skipped.",
+        "Computed": true
+      },
+      "dta_skipped_reason": {
+        "Type": "String",
+        "Description": "The reason why DTA was skipped.",
+        "Computed": true
+      },
+      "environment_variables": {
+        "Type": "List",
+        "Description": "Environment variables in the image.",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "high_vulnerabilities": {
+        "Type": "Int",
+        "Description": "Number of high severity vulnerabilities detected in the image.",
+        "Computed": true
+      },
+      "history": {
+        "Type": "List",
+        "Description": "The Docker history of the image.",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "comment": {
+              "Type": "String",
+              "Description": "The commit comment for the image, if any.",
+              "Computed": true
+            },
+            "created": {
+              "Type": "String",
+              "Description": "The date of creation of the layer.",
+              "Computed": true
+            },
+            "created_by": {
+              "Type": "String",
+              "Description": "The command that generated the layer.",
+              "Computed": true
+            },
+            "id": {
+              "Type": "String",
+              "Description": "The image ID of the layer (if any).",
+              "Computed": true
+            },
+            "size": {
+              "Type": "Int",
+              "Description": "The size of the image.",
+              "Computed": true
+            }
+          }
+        }
+      },
+      "image_size": {
+        "Type": "Int",
+        "Description": "The size of the image in bytes.",
+        "Computed": true
+      },
+      "image_type": {
+        "Type": "String",
+        "Description": "The type of the image.",
+        "Computed": true
+      },
+      "labels": {
+        "Type": "List",
+        "Description": "Aqua labels of the image.",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "low_vulnerabilities": {
+        "Type": "Int",
+        "Description": "Number of low severity vulnerabilities detected in the image.",
+        "Computed": true
+      },
+      "malware": {
+        "Type": "Int",
+        "Description": "Number of malware found on the image.",
+        "Computed": true
+      },
+      "medium_vulnerabilities": {
+        "Type": "Int",
+        "Description": "Number of medium severity vulnerabilities detected in the image.",
+        "Computed": true
+      },
+      "name": {
+        "Type": "String",
+        "Description": "The name of the image.",
+        "Computed": true
+      },
+      "negligible_vulnerabilities": {
+        "Type": "Int",
+        "Description": "Number of negligible severity vulnerabilities detected in the image.",
+        "Computed": true
+      },
+      "newer_image_exists": {
+        "Type": "Bool",
+        "Description": "Whether a new version of the image is available in the registry but is not scanned and registered yet.",
+        "Computed": true
+      },
+      "os": {
+        "Type": "String",
+        "Description": "The operating system detected in the image",
+        "Computed": true
+      },
+      "os_version": {
+        "Type": "String",
+        "Description": "The version of the OS detected in the image.",
+        "Computed": true
+      },
+      "parent": {
+        "Type": "String",
+        "Description": "The ID of the parent image.",
+        "Computed": true
+      },
+      "partial_results": {
+        "Type": "Bool",
+        "Description": "Whether the image could only be partially scanned.",
+        "Computed": true
+      },
+      "pending_disallowed": {
+        "Type": "Bool",
+        "Description": "Whether the image is non-compliant, but is pending this status due to running containers.",
+        "Computed": true
+      },
+      "permission": {
+        "Type": "String",
+        "Description": "Permission of the image.",
+        "Computed": true
+      },
+      "permission_author": {
+        "Type": "String",
+        "Description": "The name of the user who last modified the image permissions.",
+        "Computed": true
+      },
+      "permission_comment": {
+        "Type": "String",
+        "Description": "The comment provided when the image permissions were last modified",
+        "Computed": true
+      },
+      "permission_modification_comment": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "A comment on why the image was whitelisted or blacklisted"
+      },
+      "registry": {
+        "Type": "String",
+        "Required": true,
+        "Description": "The name of the registry where the image is stored."
+      },
+      "registry_type": {
+        "Type": "String",
+        "Description": "Type of the registry.",
+        "Computed": true
+      },
+      "repo_digests": {
+        "Type": "List",
+        "Description": "The repository digests.",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "repository": {
+        "Type": "String",
+        "Required": true,
+        "Description": "The name of the image's repository."
+      },
+      "scan_date": {
+        "Type": "String",
+        "Description": "The date and time when the image was last scanned.",
+        "Computed": true
+      },
+      "scan_error": {
+        "Type": "String",
+        "Description": "If the image scan failed, the failure message.",
+        "Computed": true
+      },
+      "scan_status": {
+        "Type": "String",
+        "Description": "The scan status of the image (either 'pending', 'in_progress', 'finished', 'failed' or 'not_started').",
+        "Computed": true
+      },
+      "sensitive_data": {
+        "Type": "Int",
+        "Description": "Number of sensitive data detected in the image.",
+        "Computed": true
+      },
+      "tag": {
+        "Type": "String",
+        "Required": true,
+        "Description": "The tag of the image."
+      },
+      "total_vulnerabilities": {
+        "Type": "Int",
+        "Description": "The total number of vulnerabilities detected in the image.",
+        "Computed": true
+      },
+      "virtual_size": {
+        "Type": "Int",
+        "Description": "The virtual size of the image.",
+        "Computed": true
+      },
+      "vulnerabilities": {
+        "Type": "List",
+        "Description": "A list of all the vulnerabilities found in the image",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "ack_author": {
+              "Type": "String",
+              "Computed": true
+            },
+            "ack_comment": {
+              "Type": "String",
+              "Computed": true
+            },
+            "ack_expiration_configured_at": {
+              "Type": "String",
+              "Computed": true
+            },
+            "ack_expiration_configured_by": {
+              "Type": "String",
+              "Computed": true
+            },
+            "ack_expiration_days": {
+              "Type": "Int",
+              "Computed": true
+            },
+            "ack_scope": {
+              "Type": "String",
+              "Computed": true
+            },
+            "acknowledge_date": {
+              "Type": "String",
+              "Computed": true
+            },
+            "ancestor_pkg": {
+              "Type": "String",
+              "Description": "The ancestor of this package.",
+              "Computed": true
+            },
+            "aqua_score": {
+              "Type": "Float",
+              "Description": "The score generated for the vulnerability by Aqua.",
+              "Computed": true
+            },
+            "aqua_score_classification": {
+              "Type": "String",
+              "Description": "Score classification by Aqua.",
+              "Computed": true
+            },
+            "aqua_scoring_system": {
+              "Type": "String",
+              "Description": "The score system for the vulnerability by Aqua",
+              "Computed": true
+            },
+            "aqua_severity": {
+              "Type": "String",
+              "Description": "The severity generated for the vulnerability by Aqua.",
+              "Computed": true
+            },
+            "aqua_severity_classification": {
+              "Type": "String",
+              "Description": "Classification of the severity defined by Aqua.",
+              "Computed": true
+            },
+            "aqua_vectors": {
+              "Type": "String",
+              "Description": "The vectors generated for the vulnerability by Aqua",
+              "Computed": true
+            },
+            "audit_events_count": {
+              "Type": "Int",
+              "Description": "Number of audit events.",
+              "Computed": true
+            },
+            "block_events_count": {
+              "Type": "Int",
+              "Description": "Number of blocked events.",
+              "Computed": true
+            },
+            "classification": {
+              "Type": "String",
+              "Description": "Classification of the vulnerability.",
+              "Computed": true
+            },
+            "description": {
+              "Type": "String",
+              "Description": "The description of the vulnerability.",
+              "Computed": true
+            },
+            "digest": {
+              "Type": "String",
+              "Description": "The content digest of the image.",
+              "Computed": true
+            },
+            "exploit_reference": {
+              "Type": "String",
+              "Description": "Reference of the exploit.",
+              "Computed": true
+            },
+            "exploit_type": {
+              "Type": "String",
+              "Description": "Type of the exploit.",
+              "Computed": true
+            },
+            "first_found_date": {
+              "Type": "String",
+              "Description": "The date when this vulnerability was first found.",
+              "Computed": true
+            },
+            "fix_version": {
+              "Type": "String",
+              "Description": "Fixed version of the resource.",
+              "Computed": true
+            },
+            "image_name": {
+              "Type": "String",
+              "Description": "Name of the image.",
+              "Computed": true
+            },
+            "last_found_date": {
+              "Type": "String",
+              "Description": "The date when this vulnerability was last found.",
+              "Computed": true
+            },
+            "modification_date": {
+              "Type": "String",
+              "Description": "Thhe date when this vulnerability was modified.",
+              "Computed": true
+            },
+            "name": {
+              "Type": "String",
+              "Description": "The name of the vulnerability.",
+              "Computed": true
+            },
+            "nvd_cvss2_score": {
+              "Type": "Float",
+              "Description": "CVSS2 score by NVD",
+              "Computed": true
+            },
+            "nvd_cvss2_vectors": {
+              "Type": "String",
+              "Description": "CVSS2 vectors by NVD",
+              "Computed": true
+            },
+            "nvd_cvss3_score": {
+              "Type": "Float",
+              "Description": "CVSS3 score by NVD",
+              "Computed": true
+            },
+            "nvd_cvss3_severity": {
+              "Type": "String",
+              "Description": "CVSS3 severity by NVD",
+              "Computed": true
+            },
+            "nvd_cvss3_vectors": {
+              "Type": "String",
+              "Description": "CVSS3 vectors by NVD",
+              "Computed": true
+            },
+            "nvd_severity": {
+              "Type": "String",
+              "Description": "Type of the severity identified by NVD.",
+              "Computed": true
+            },
+            "nvd_url": {
+              "Type": "String",
+              "Description": "URL of the details of this vulnerability by NVD.",
+              "Computed": true
+            },
+            "os": {
+              "Type": "String",
+              "Description": "Name of the Operating System.",
+              "Computed": true
+            },
+            "os_version": {
+              "Type": "String",
+              "Description": "The version of the OS.",
+              "Computed": true
+            },
+            "permission": {
+              "Type": "String",
+              "Description": "permission on the image",
+              "Computed": true
+            },
+            "publish_date": {
+              "Type": "String",
+              "Description": "The date this vulnerability was published.",
+              "Computed": true
+            },
+            "registry": {
+              "Type": "String",
+              "Description": "Registry of the image.",
+              "Computed": true
+            },
+            "repository": {
+              "Type": "String",
+              "Description": "Repository of the image.",
+              "Computed": true
+            },
+            "resource_architecture": {
+              "Type": "String",
+              "Description": "Architecture of the resource.",
+              "Computed": true
+            },
+            "resource_cpe": {
+              "Type": "String",
+              "Description": "Common Platform Enumeration (CPE) of the resource.",
+              "Computed": true
+            },
+            "resource_format": {
+              "Type": "String",
+              "Description": "Code format of the resource (java, apk etc.).",
+              "Computed": true
+            },
+            "resource_hash": {
+              "Type": "String",
+              "Description": "Hash of the resource.",
+              "Computed": true
+            },
+            "resource_licenses": {
+              "Type": "List",
+              "Description": "List of license supported by the resource.",
+              "Computed": true,
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "resource_name": {
+              "Type": "String",
+              "Description": "Name of the resource.",
+              "Computed": true
+            },
+            "resource_path": {
+              "Type": "String",
+              "Description": "Path of the resource.",
+              "Computed": true
+            },
+            "resource_type": {
+              "Type": "String",
+              "Description": "Type of the resource",
+              "Computed": true
+            },
+            "resource_version": {
+              "Type": "String",
+              "Description": "Version of the resource.",
+              "Computed": true
+            },
+            "severity_classification": {
+              "Type": "String",
+              "Description": "Classification of the severity.",
+              "Computed": true
+            },
+            "solution": {
+              "Type": "String",
+              "Description": "Solution for the vulnerability.",
+              "Computed": true
+            },
+            "temporal_vector": {
+              "Type": "String",
+              "Computed": true
+            },
+            "v_patch_applied_by": {
+              "Type": "String",
+              "Computed": true
+            },
+            "v_patch_applied_on": {
+              "Type": "String",
+              "Computed": true
+            },
+            "v_patch_enforced_by": {
+              "Type": "String",
+              "Computed": true
+            },
+            "v_patch_enforced_on": {
+              "Type": "String",
+              "Computed": true
+            },
+            "v_patch_policy_enforce": {
+              "Type": "Bool",
+              "Computed": true
+            },
+            "v_patch_policy_name": {
+              "Type": "String",
+              "Computed": true
+            },
+            "v_patch_reverted_by": {
+              "Type": "String",
+              "Computed": true
+            },
+            "v_patch_reverted_on": {
+              "Type": "String",
+              "Computed": true
+            },
+            "v_patch_status": {
+              "Type": "String",
+              "Computed": true
+            },
+            "vendor_cvss2_score": {
+              "Type": "Float",
+              "Computed": true
+            },
+            "vendor_cvss2_vectors": {
+              "Type": "String",
+              "Computed": true
+            },
+            "vendor_severity": {
+              "Type": "String",
+              "Computed": true
+            },
+            "vendor_statement": {
+              "Type": "String",
+              "Computed": true
+            },
+            "vendor_url": {
+              "Type": "String",
+              "Computed": true
+            }
+          }
+        }
+      },
+      "whitelisted": {
+        "Type": "Bool",
+        "Description": "Whether the image is whitelisted.",
+        "Computed": true
+      }
+    },
+    "aquasec_integration_registry": {
+      "author": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "auto_pull": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "auto_pull_max": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "auto_pull_time": {
+        "Type": "String",
+        "Optional": true
+      },
+      "last_updated": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "password": {
+        "Type": "String",
+        "Optional": true
+      },
+      "prefixes": {
+        "Type": "List",
+        "Required": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "type": {
+        "Type": "String",
+        "Required": true
+      },
+      "url": {
+        "Type": "String",
+        "Optional": true
+      },
+      "username": {
+        "Type": "String",
+        "Optional": true
+      }
+    },
+    "aquasec_notification_slack": {
+      "channel": {
+        "Type": "String",
+        "Required": true
+      },
+      "enabled": {
+        "Type": "Bool",
+        "Required": true
+      },
+      "icon": {
+        "Type": "String",
+        "Optional": true
+      },
+      "main_text": {
+        "Type": "String",
+        "Optional": true
+      },
+      "name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "service_key": {
+        "Type": "String",
+        "Optional": true
+      },
+      "type": {
+        "Type": "String",
+        "Required": true
+      },
+      "user_name": {
+        "Type": "String",
+        "Required": true
+      },
+      "webhook_url": {
+        "Type": "String",
+        "Required": true
+      }
+    },
+    "aquasec_service": {
+      "application_scopes": {
+        "Type": "List",
+        "Required": true,
+        "Description": "Indicates the application scope of the service.",
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "author": {
+        "Type": "String",
+        "Description": "Username of the account that created the service.",
+        "Computed": true
+      },
+      "containers_count": {
+        "Type": "Int",
+        "Description": "The number of containers associated with the service.",
+        "Computed": true
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "A textual description of the service record; maximum 500 characters."
+      },
+      "enforce": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "Enforcement status of the service.",
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "evaluated": {
+        "Type": "Bool",
+        "Description": "Whether the service has been evaluated for security vulnerabilities.",
+        "Computed": true
+      },
+      "is_registered": {
+        "Type": "Bool",
+        "Description": "Indicates if registered or not.",
+        "Computed": true
+      },
+      "lastupdate": {
+        "Type": "Int",
+        "Description": "Timestamp of the last update in Unix time format.",
+        "Computed": true
+      },
+      "monitoring": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "Indicates if monitoring is enabled or not",
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Required": true,
+        "Description": "The name of the service. It is recommended not to use whitespace characters in the name."
+      },
+      "not_evaluated_count": {
+        "Type": "Int",
+        "Description": "The number of container that are not evaluated.",
+        "Computed": true
+      },
+      "policies": {
+        "Type": "List",
+        "Required": true,
+        "Description": "The service's policies; an array of container firewall policy names.",
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "priority": {
+        "Type": "Int",
+        "Optional": true,
+        "Description": "Rules priority, must be between 1-100.",
+        "Default": {
+          "Type": "int",
+          "Value": "100"
+        }
+      },
+      "scope_expression": {
+        "Type": "String",
+        "Required": true,
+        "Description": "Logical expression of how to compute the dependency of the scope variables."
+      },
+      "scope_variables": {
+        "Type": "List",
+        "Required": true,
+        "Description": "List of scope attributes.",
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "attribute": {
+              "Type": "String",
+              "Required": true,
+              "Description": "Class of supported scope."
+            },
+            "value": {
+              "Type": "String",
+              "Required": true,
+              "Description": "Value assigned to the attribute."
+            }
+          }
+        }
+      },
+      "target": {
+        "Type": "String",
+        "Required": true,
+        "Description": "Type of the workload. container or host."
+      },
+      "unregistered_count": {
+        "Type": "Int",
+        "Description": "The number of containers allocated to the service that are not registered.",
+        "Computed": true
+      },
+      "vulnerabilities_high": {
+        "Type": "Int",
+        "Description": "Number of high severity vulnerabilities.",
+        "Computed": true
+      },
+      "vulnerabilities_low": {
+        "Type": "Int",
+        "Description": "Number of low severity vulnerabilities.",
+        "Computed": true
+      },
+      "vulnerabilities_malware": {
+        "Type": "Int",
+        "Description": "Number of malware.",
+        "Computed": true
+      },
+      "vulnerabilities_medium": {
+        "Type": "Int",
+        "Description": "Number of medium severity vulnerabilities.",
+        "Computed": true
+      },
+      "vulnerabilities_negligible": {
+        "Type": "Int",
+        "Description": "Number of negligible vulnerabilities.",
+        "Computed": true
+      },
+      "vulnerabilities_score_average": {
+        "Type": "Int",
+        "Description": "The CVSS average vulnerabilities score.",
+        "Computed": true
+      },
+      "vulnerabilities_sensitive": {
+        "Type": "Int",
+        "Description": "Number of sensitive vulnerabilities.",
+        "Computed": true
+      },
+      "vulnerabilities_total": {
+        "Type": "Int",
+        "Description": "Total number of vulnerabilities.",
+        "Computed": true
+      }
+    },
+    "aquasec_user": {
+      "email": {
+        "Type": "String",
+        "Optional": true
+      },
+      "first_time": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "last_updated": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "password": {
+        "Type": "String",
+        "Required": true
+      },
+      "password_confirm": {
+        "Type": "String",
+        "Optional": true
+      },
+      "roles": {
+        "Type": "List",
+        "Required": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "user_id": {
+        "Type": "String",
+        "Required": true
+      }
+    }
+  },
+  "data-sources": {
+    "aquasec_container_runtime_policy": {
+      "allowed_executables": {
+        "Type": "List",
+        "Description": "List of executables that are allowed for the user.",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "application_scopes": {
+        "Type": "List",
+        "Description": "Indicates the application scope of the service.",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "audit_all_network_activity": {
+        "Type": "Bool",
+        "Description": "If true, all network activity will be audited.",
+        "Computed": true
+      },
+      "audit_all_processes_activity": {
+        "Type": "Bool",
+        "Description": "If true, all process activity will be audited.",
+        "Computed": true
+      },
+      "audit_full_command_arguments": {
+        "Type": "Bool",
+        "Description": "If true, full command arguments will be audited.",
+        "Computed": true
+      },
+      "author": {
+        "Type": "String",
+        "Description": "Username of the account that created the service.",
+        "Computed": true
+      },
+      "block_access_host_network": {
+        "Type": "Bool",
+        "Description": "If true, prevent containers from running with access to host network.",
+        "Computed": true
+      },
+      "block_adding_capabilities": {
+        "Type": "Bool",
+        "Description": "If true, prevent containers from running with adding capabilities with `--cap-add` privilege.",
+        "Computed": true
+      },
+      "block_container_exec": {
+        "Type": "Bool",
+        "Description": "If true, exec into a container is prevented.",
+        "Computed": true
+      },
+      "block_low_port_binding": {
+        "Type": "Bool",
+        "Description": "If true, prevent containers from running with the capability to bind in port lower than 1024.",
+        "Computed": true
+      },
+      "block_non_compliant_images": {
+        "Type": "Bool",
+        "Description": "If true, running non-compliant image in the container is prevented.",
+        "Computed": true
+      },
+      "block_non_compliant_workloads": {
+        "Type": "Bool",
+        "Description": "If true, running containers in non-compliant pods is prevented.",
+        "Computed": true
+      },
+      "block_privileged_containers": {
+        "Type": "Bool",
+        "Description": "If true, prevent containers from running with privileged container capability.",
+        "Computed": true
+      },
+      "block_root_user": {
+        "Type": "Bool",
+        "Description": "If true, prevent containers from running with root user.",
+        "Computed": true
+      },
+      "block_unregistered_images": {
+        "Type": "Bool",
+        "Description": "If true, running images in the container that are not registered in Aqua is prevented.",
+        "Computed": true
+      },
+      "block_use_ipc_namespace": {
+        "Type": "Bool",
+        "Description": "If true, prevent containers from running with the privilege to use the IPC namespace.",
+        "Computed": true
+      },
+      "block_use_pid_namespace": {
+        "Type": "Bool",
+        "Description": "If true, prevent containers from running with the privilege to use the PID namespace.",
+        "Computed": true
+      },
+      "block_use_user_namespace": {
+        "Type": "Bool",
+        "Description": "If true, prevent containers from running with the privilege to use the user namespace.",
+        "Computed": true
+      },
+      "block_use_uts_namespace": {
+        "Type": "Bool",
+        "Description": "If true, prevent containers from running with the privilege to use the UTS namespace.",
+        "Computed": true
+      },
+      "blocked_capabilities": {
+        "Type": "List",
+        "Description": "If true, prevents containers from using specific Unix capabilities.",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "blocked_executables": {
+        "Type": "List",
+        "Description": "List of executables that are prevented from running in containers.",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "blocked_files": {
+        "Type": "List",
+        "Description": "List of files that are prevented from being read, modified and executed in the containers.",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "blocked_inbound_ports": {
+        "Type": "List",
+        "Description": "List of blocked inbound ports.",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "blocked_outbound_ports": {
+        "Type": "List",
+        "Description": "List of blocked outbound ports.",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "blocked_packages": {
+        "Type": "List",
+        "Description": "Prevent containers from reading, writing, or executing all files in the list of packages.",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "blocked_volumes": {
+        "Type": "List",
+        "Description": "List of volumes that are prevented from being mounted in the containers.",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "description": {
+        "Type": "String",
+        "Description": "The description of the container runtime policy",
+        "Computed": true
+      },
+      "enable_drift_prevention": {
+        "Type": "Bool",
+        "Description": "If true, executables that are not in the original image is prevented from running.",
+        "Computed": true
+      },
+      "enable_fork_guard": {
+        "Type": "Bool",
+        "Description": "If true, fork bombs are prevented in the containers.",
+        "Computed": true
+      },
+      "enable_ip_reputation_security": {
+        "Type": "Bool",
+        "Description": "If true, detect and prevent communication from containers to IP addresses known to have a bad reputation.",
+        "Computed": true
+      },
+      "enable_port_scan_detection": {
+        "Type": "Bool",
+        "Description": "If true, detects port scanning behavior in the container.",
+        "Computed": true
+      },
+      "enabled": {
+        "Type": "Bool",
+        "Description": "Indicates if the runtime policy is enabled or not.",
+        "Computed": true
+      },
+      "enforce": {
+        "Type": "Bool",
+        "Description": "Indicates that policy should effect container execution (not just for audit).",
+        "Computed": true
+      },
+      "enforce_after_days": {
+        "Type": "Int",
+        "Description": "Indicates the number of days after which the runtime policy will be changed to enforce mode.",
+        "Computed": true
+      },
+      "exceptional_readonly_files_and_directories": {
+        "Type": "List",
+        "Description": "List of files and directories to be excluded from the read-only list.",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "fork_guard_process_limit": {
+        "Type": "Int",
+        "Description": "Process limit for the fork guard.",
+        "Computed": true
+      },
+      "limit_new_privileges": {
+        "Type": "Bool",
+        "Description": "If true, prevents the container from obtaining new privileges at runtime. (only enabled in enforce mode)",
+        "Computed": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true,
+        "Description": "Name of the container runtime policy"
+      },
+      "readonly_files_and_directories": {
+        "Type": "List",
+        "Description": "List of files and directories to be restricted as read-only",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "scope_expression": {
+        "Type": "String",
+        "Description": "Logical expression of how to compute the dependency of the scope variables.",
+        "Computed": true
+      },
+      "scope_variables": {
+        "Type": "List",
+        "Description": "List of scope attributes.",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "attribute": {
+              "Type": "String",
+              "Description": "Class of supported scope.",
+              "Computed": true
+            },
+            "value": {
+              "Type": "String",
+              "Description": "Value assigned to the attribute.",
+              "Computed": true
+            }
+          }
+        }
+      }
+    },
+    "aquasec_enforcer_groups": {
+      "allowed_applications": {
+        "Type": "Set",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "allowed_labels": {
+        "Type": "Set",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "allowed_registries": {
+        "Type": "Set",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "command": {
+        "Type": "List",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "default": {
+              "Type": "String",
+              "Computed": true
+            },
+            "kubernetes": {
+              "Type": "String",
+              "Computed": true
+            },
+            "swarm": {
+              "Type": "String",
+              "Computed": true
+            },
+            "windows": {
+              "Type": "String",
+              "Computed": true
+            }
+          }
+        }
+      },
+      "description": {
+        "Type": "String",
+        "Computed": true
+      },
+      "enforce": {
+        "Type": "Bool",
+        "Computed": true
+      },
+      "gateway_address": {
+        "Type": "String",
+        "Computed": true
+      },
+      "gateway_name": {
+        "Type": "String",
+        "Computed": true
+      },
+      "gateways": {
+        "Type": "List",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "group_id": {
+        "Type": "String",
+        "Required": true
+      },
+      "logical_name": {
+        "Type": "String",
+        "Computed": true
+      },
+      "orchestrator": {
+        "Type": "List",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "master": {
+              "Type": "Bool",
+              "Computed": true
+            },
+            "namespace": {
+              "Type": "String",
+              "Computed": true
+            },
+            "service_account": {
+              "Type": "String",
+              "Computed": true
+            },
+            "type": {
+              "Type": "String",
+              "Computed": true
+            }
+          }
+        }
+      },
+      "token": {
+        "Type": "String",
+        "Computed": true
+      },
+      "type": {
+        "Type": "String",
+        "Computed": true
+      }
+    },
+    "aquasec_firewall_policy": {
+      "author": {
+        "Type": "String",
+        "Description": "Username of the account that created the policy.",
+        "Computed": true
+      },
+      "block_icmp_ping": {
+        "Type": "Bool",
+        "Description": "Indicates whether policy includes blocking incoming 'ping' requests.",
+        "Computed": true
+      },
+      "block_metadata_service": {
+        "Type": "Bool",
+        "Description": "Indicates whether policy includes blocking metadata services of the cloud.",
+        "Computed": true
+      },
+      "description": {
+        "Type": "String",
+        "Description": "Description of the Firewall Policy.",
+        "Computed": true
+      },
+      "inbound_networks": {
+        "Type": "List",
+        "Description": "Information on network addresses that are allowed to pass in data or requests.",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "allow": {
+              "Type": "Bool",
+              "Description": "Indicates whether the specified resources are allowed to pass in data or requests.",
+              "Computed": true
+            },
+            "port_range": {
+              "Type": "String",
+              "Description": "Range of ports affected by firewall.",
+              "Computed": true
+            },
+            "resource": {
+              "Type": "String",
+              "Description": "Information of the resource.",
+              "Computed": true
+            },
+            "resource_type": {
+              "Type": "String",
+              "Description": "Type of the resource",
+              "Computed": true
+            }
+          }
+        }
+      },
+      "lastupdate": {
+        "Type": "Int",
+        "Description": "Timestamp of the last update in Unix time format.",
+        "Computed": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true,
+        "Description": "Name of the policy, no longer than 128 characters and no slash characters."
+      },
+      "outbound_networks": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "Information on network addresses that are allowed to receive data or requests.",
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "allow": {
+              "Type": "Bool",
+              "Description": "Indicates whether the specified resources are allowed to receive data or requests.",
+              "Computed": true
+            },
+            "port_range": {
+              "Type": "String",
+              "Description": "Range of ports affected by firewall.",
+              "Computed": true
+            },
+            "resource": {
+              "Type": "String",
+              "Description": "Information of the resource.",
+              "Computed": true
+            },
+            "resource_type": {
+              "Type": "String",
+              "Description": "Type of the resource.",
+              "Computed": true
+            }
+          }
+        }
+      },
+      "type": {
+        "Type": "String",
+        "Description": "Indicates the class of protection defined by the firewall.",
+        "Computed": true
+      },
+      "version": {
+        "Type": "String",
+        "Description": "Aqua version functionality supported",
+        "Computed": true
+      }
+    },
+    "aquasec_function_runtime_policy": {
+      "application_scopes": {
+        "Type": "List",
+        "Description": "Indicates the application scope of the service.",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "author": {
+        "Type": "String",
+        "Description": "Username of the account that created the service.",
+        "Computed": true
+      },
+      "block_malicious_executables": {
+        "Type": "Bool",
+        "Description": "If true, prevent creation of malicious executables in functions during their runtime post invocation.",
+        "Computed": true
+      },
+      "blocked_executables": {
+        "Type": "List",
+        "Description": "List of executables that are prevented from running in containers.",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "description": {
+        "Type": "String",
+        "Description": "The description of the container runtime policy",
+        "Computed": true
+      },
+      "enabled": {
+        "Type": "Bool",
+        "Description": "Indicates if the runtime policy is enabled or not.",
+        "Computed": true
+      },
+      "enforce": {
+        "Type": "Bool",
+        "Description": "Indicates that policy should effect container execution (not just for audit).",
+        "Computed": true
+      },
+      "honeypot_access_key": {
+        "Type": "String",
+        "Description": "Honeypot User ID (Access Key)",
+        "Computed": true
+      },
+      "honeypot_apply_on": {
+        "Type": "List",
+        "Description": "List of options to apply the honeypot on (Environment Vairable, Layer, File)",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "honeypot_secret_key": {
+        "Type": "String",
+        "Description": "Honeypot User Password (Secret Key)",
+        "Computed": true
+      },
+      "honeypot_serverless_app_name": {
+        "Type": "String",
+        "Description": "Serverless application name",
+        "Computed": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true,
+        "Description": "Name of the container runtime policy"
+      },
+      "scope_expression": {
+        "Type": "String",
+        "Description": "Logical expression of how to compute the dependency of the scope variables.",
+        "Computed": true
+      },
+      "scope_variables": {
+        "Type": "List",
+        "Description": "List of scope attributes.",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "attribute": {
+              "Type": "String",
+              "Description": "Class of supported scope.",
+              "Computed": true
+            },
+            "value": {
+              "Type": "String",
+              "Description": "Value assigned to the attribute.",
+              "Computed": true
+            }
+          }
+        }
+      }
+    },
+    "aquasec_host_runtime_policy": {
+      "application_scopes": {
+        "Type": "List",
+        "Description": "Indicates the application scope of the service.",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "audit_all_os_user_activity": {
+        "Type": "Bool",
+        "Description": "If true, all process activity will be audited.",
+        "Computed": true
+      },
+      "audit_full_command_arguments": {
+        "Type": "Bool",
+        "Description": "If true, full command arguments will be audited.",
+        "Computed": true
+      },
+      "author": {
+        "Type": "String",
+        "Description": "Username of the account that created the service.",
+        "Computed": true
+      },
+      "blocked_files": {
+        "Type": "List",
+        "Description": "List of files that are prevented from being read, modified and executed in the containers.",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "description": {
+        "Type": "String",
+        "Description": "The description of the host runtime policy",
+        "Computed": true
+      },
+      "enable_ip_reputation_security": {
+        "Type": "Bool",
+        "Description": "If true, detect and prevent communication from containers to IP addresses known to have a bad reputation.",
+        "Computed": true
+      },
+      "enabled": {
+        "Type": "Bool",
+        "Description": "Indicates if the runtime policy is enabled or not.",
+        "Computed": true
+      },
+      "enforce": {
+        "Type": "Bool",
+        "Description": "Indicates that policy should effect container execution (not just for audit).",
+        "Computed": true
+      },
+      "enforce_after_days": {
+        "Type": "Int",
+        "Description": "Indicates the number of days after which the runtime policy will be changed to enforce mode.",
+        "Computed": true
+      },
+      "file_integrity_monitoring": {
+        "Type": "List",
+        "Description": "Configuration for file integrity monitoring.",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "excluded_paths": {
+              "Type": "List",
+              "Description": "List of paths to be excluded from being monitored.",
+              "Computed": true,
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "excluded_processes": {
+              "Type": "List",
+              "Description": "List of processes to be excluded from being monitored.",
+              "Computed": true,
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "excluded_users": {
+              "Type": "List",
+              "Description": "List of users to be excluded from being monitored.",
+              "Computed": true,
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "monitor_attributes": {
+              "Type": "Bool",
+              "Description": "If true, add attributes operations will be monitored.",
+              "Computed": true
+            },
+            "monitor_create": {
+              "Type": "Bool",
+              "Description": "If true, create operations will be monitored.",
+              "Computed": true
+            },
+            "monitor_delete": {
+              "Type": "Bool",
+              "Description": "If true, deletion operations will be monitored.",
+              "Computed": true
+            },
+            "monitor_modify": {
+              "Type": "Bool",
+              "Description": "If true, modification operations will be monitored.",
+              "Computed": true
+            },
+            "monitor_read": {
+              "Type": "Bool",
+              "Description": "If true, read operations will be monitored.",
+              "Computed": true
+            },
+            "monitored_paths": {
+              "Type": "List",
+              "Description": "List of paths to be monitored.",
+              "Computed": true,
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "monitored_processes": {
+              "Type": "List",
+              "Description": "List of processes to be monitored.",
+              "Computed": true,
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "monitored_users": {
+              "Type": "List",
+              "Description": "List of users to be monitored.",
+              "Computed": true,
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            }
+          }
+        }
+      },
+      "monitor_system_time_changes": {
+        "Type": "Bool",
+        "Description": "If true, system time changes will be monitored.",
+        "Computed": true
+      },
+      "monitor_windows_services": {
+        "Type": "Bool",
+        "Description": "If true, windows service operations will be monitored.",
+        "Computed": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true,
+        "Description": "Name of the host runtime policy"
+      },
+      "os_groups_allowed": {
+        "Type": "List",
+        "Description": "List of OS (Linux or Windows) groups that are allowed to authenticate to the host, and block authentication requests from all others. Groups can be either Linux groups or Windows AD groups.",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "os_groups_blocked": {
+        "Type": "List",
+        "Description": "List of OS (Linux or Windows) groups that are not allowed to authenticate to the host, and block authentication requests from all others. Groups can be either Linux groups or Windows AD groups.",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "os_users_allowed": {
+        "Type": "List",
+        "Description": "List of OS (Linux or Windows) users that are allowed to authenticate to the host, and block authentication requests from all others.",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "os_users_blocked": {
+        "Type": "List",
+        "Description": "List of OS (Linux or Windows) users that are not allowed to authenticate to the host, and block authentication requests from all others.",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "scope_expression": {
+        "Type": "String",
+        "Description": "Logical expression of how to compute the dependency of the scope variables.",
+        "Computed": true
+      },
+      "scope_variables": {
+        "Type": "List",
+        "Description": "List of scope attributes.",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "attribute": {
+              "Type": "String",
+              "Description": "Class of supported scope.",
+              "Computed": true
+            },
+            "value": {
+              "Type": "String",
+              "Description": "Value assigned to the attribute.",
+              "Computed": true
+            }
+          }
+        }
+      },
+      "windows_registry_monitoring": {
+        "Type": "List",
+        "Description": "Configuration for windows registry monitoring.",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "excluded_paths": {
+              "Type": "List",
+              "Description": "List of paths to be excluded from being monitored.",
+              "Computed": true,
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "excluded_processes": {
+              "Type": "List",
+              "Description": "List of registry processes to be excluded from being monitored.",
+              "Computed": true,
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "excluded_users": {
+              "Type": "List",
+              "Description": "List of registry users to be excluded from being monitored.",
+              "Computed": true,
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "monitor_attributes": {
+              "Type": "Bool",
+              "Description": "If true, add attributes operations will be monitored.",
+              "Computed": true
+            },
+            "monitor_create": {
+              "Type": "Bool",
+              "Description": "If true, create operations will be monitored.",
+              "Computed": true
+            },
+            "monitor_delete": {
+              "Type": "Bool",
+              "Description": "If true, deletion operations will be monitored.",
+              "Computed": true
+            },
+            "monitor_modify": {
+              "Type": "Bool",
+              "Description": "If true, modification operations will be monitored.",
+              "Computed": true
+            },
+            "monitor_read": {
+              "Type": "Bool",
+              "Description": "If true, read operations will be monitored.",
+              "Computed": true
+            },
+            "monitored_paths": {
+              "Type": "List",
+              "Description": "List of paths to be monitored.",
+              "Computed": true,
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "monitored_processes": {
+              "Type": "List",
+              "Description": "List of registry processes to be monitored.",
+              "Computed": true,
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "monitored_users": {
+              "Type": "List",
+              "Description": "List of registry users to be monitored.",
+              "Computed": true,
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            }
+          }
+        }
+      },
+      "windows_registry_protection": {
+        "Type": "List",
+        "Description": "Configuration for windows registry protection.",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "excluded_paths": {
+              "Type": "List",
+              "Description": "List of registry paths to be excluded from being protected.",
+              "Computed": true,
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "excluded_processes": {
+              "Type": "List",
+              "Description": "List of registry processes to be excluded from being protected.",
+              "Computed": true,
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "excluded_users": {
+              "Type": "List",
+              "Description": "List of registry paths to be users from being protected.",
+              "Computed": true,
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "protected_paths": {
+              "Type": "List",
+              "Description": "List of registry paths to be protected.",
+              "Computed": true,
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "protected_processes": {
+              "Type": "List",
+              "Description": "List of registry processes to be protected.",
+              "Computed": true,
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "protected_users": {
+              "Type": "List",
+              "Description": "List of registry users to be protected.",
+              "Computed": true,
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            }
+          }
+        }
+      }
+    },
+    "aquasec_image": {
+      "architecture": {
+        "Type": "String",
+        "Description": "The image architecture.",
+        "Computed": true
+      },
+      "assurance_checks_performed": {
+        "Type": "List",
+        "Description": "The list of image assurance checks performed on the image.",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "assurance_type": {
+              "Type": "String",
+              "Description": "The type of the Assurance Policy the check originated from.",
+              "Computed": true
+            },
+            "blocking": {
+              "Type": "Bool",
+              "Description": "Whether the check is blocking (i.e. a failure should trigger a disallow).",
+              "Computed": true
+            },
+            "control": {
+              "Type": "String",
+              "Description": "The name of the image assurance control.",
+              "Computed": true
+            },
+            "dta_skipped": {
+              "Type": "Bool",
+              "Description": "If DTA was skipped.",
+              "Computed": true
+            },
+            "dta_skipped_reason": {
+              "Type": "String",
+              "Description": "The reason why DTA was skipped.",
+              "Computed": true
+            },
+            "failed": {
+              "Type": "Bool",
+              "Description": "Whether the image failed the check.",
+              "Computed": true
+            },
+            "policy_name": {
+              "Type": "String",
+              "Description": "The name of the Image Assurance Policy the check originated from.",
+              "Computed": true
+            }
+          }
+        }
+      },
+      "author": {
+        "Type": "String",
+        "Description": "The name of the user who registered the image.",
+        "Computed": true
+      },
+      "blacklisted": {
+        "Type": "Bool",
+        "Description": "Whether the image is blacklisted.",
+        "Computed": true
+      },
+      "comment": {
+        "Type": "String",
+        "Description": "The image creation comment.",
+        "Computed": true
+      },
+      "created": {
+        "Type": "String",
+        "Description": "The date and time when the image was registered.",
+        "Computed": true
+      },
+      "critical_vulnerabilities": {
+        "Type": "Int",
+        "Description": "Number of critical severity vulnerabilities detected in the image.",
+        "Computed": true
+      },
+      "default_user": {
+        "Type": "String",
+        "Description": "The default user of the image.",
+        "Computed": true
+      },
+      "digest": {
+        "Type": "String",
+        "Description": "The content digest of the image.",
+        "Computed": true
+      },
+      "disallowed": {
+        "Type": "Bool",
+        "Description": "Whether the image is disallowed (non-compliant).",
+        "Computed": true
+      },
+      "disallowed_by_assurance_checks": {
+        "Type": "Bool",
+        "Description": "Whether the image was disallowed because of Image Assurance Policies.",
+        "Computed": true
+      },
+      "docker_id": {
+        "Type": "String",
+        "Description": "The Docker image ID.",
+        "Computed": true
+      },
+      "docker_labels": {
+        "Type": "List",
+        "Description": "Docker labels of the image.",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "docker_version": {
+        "Type": "String",
+        "Description": "The Docker version used when building the image.",
+        "Computed": true
+      },
+      "dta_severity_score": {
+        "Type": "String",
+        "Description": "DTA severity score.",
+        "Computed": true
+      },
+      "dta_skipped": {
+        "Type": "Bool",
+        "Description": "If DTA was skipped.",
+        "Computed": true
+      },
+      "dta_skipped_reason": {
+        "Type": "String",
+        "Description": "The reason why DTA was skipped.",
+        "Computed": true
+      },
+      "environment_variables": {
+        "Type": "List",
+        "Description": "Environment variables in the image.",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "high_vulnerabilities": {
+        "Type": "Int",
+        "Description": "Number of high severity vulnerabilities detected in the image.",
+        "Computed": true
+      },
+      "history": {
+        "Type": "List",
+        "Description": "The Docker history of the image.",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "comment": {
+              "Type": "String",
+              "Description": "The commit comment for the image, if any.",
+              "Computed": true
+            },
+            "created": {
+              "Type": "String",
+              "Description": "The date of creation of the layer.",
+              "Computed": true
+            },
+            "created_by": {
+              "Type": "String",
+              "Description": "The command that generated the layer.",
+              "Computed": true
+            },
+            "id": {
+              "Type": "String",
+              "Description": "The image ID of the layer (if any).",
+              "Computed": true
+            },
+            "size": {
+              "Type": "Int",
+              "Description": "The size of the image.",
+              "Computed": true
+            }
+          }
+        }
+      },
+      "image_size": {
+        "Type": "Int",
+        "Description": "The size of the image in bytes.",
+        "Computed": true
+      },
+      "image_type": {
+        "Type": "String",
+        "Description": "The type of the image.",
+        "Computed": true
+      },
+      "labels": {
+        "Type": "List",
+        "Description": "Aqua labels of the image.",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "low_vulnerabilities": {
+        "Type": "Int",
+        "Description": "Number of low severity vulnerabilities detected in the image.",
+        "Computed": true
+      },
+      "malware": {
+        "Type": "Int",
+        "Description": "Number of malware found on the image.",
+        "Computed": true
+      },
+      "medium_vulnerabilities": {
+        "Type": "Int",
+        "Description": "Number of medium severity vulnerabilities detected in the image.",
+        "Computed": true
+      },
+      "name": {
+        "Type": "String",
+        "Description": "The name of the image.",
+        "Computed": true
+      },
+      "negligible_vulnerabilities": {
+        "Type": "Int",
+        "Description": "Number of negligible severity vulnerabilities detected in the image.",
+        "Computed": true
+      },
+      "newer_image_exists": {
+        "Type": "Bool",
+        "Description": "Whether a new version of the image is available in the registry but is not scanned and registered yet.",
+        "Computed": true
+      },
+      "os": {
+        "Type": "String",
+        "Description": "The operating system detected in the image",
+        "Computed": true
+      },
+      "os_version": {
+        "Type": "String",
+        "Description": "The version of the OS detected in the image.",
+        "Computed": true
+      },
+      "parent": {
+        "Type": "String",
+        "Description": "The ID of the parent image.",
+        "Computed": true
+      },
+      "partial_results": {
+        "Type": "Bool",
+        "Description": "Whether the image could only be partially scanned.",
+        "Computed": true
+      },
+      "pending_disallowed": {
+        "Type": "Bool",
+        "Description": "Whether the image is non-compliant, but is pending this status due to running containers.",
+        "Computed": true
+      },
+      "permission": {
+        "Type": "String",
+        "Description": "Permission of the image.",
+        "Computed": true
+      },
+      "permission_author": {
+        "Type": "String",
+        "Description": "The name of the user who last modified the image permissions.",
+        "Computed": true
+      },
+      "permission_comment": {
+        "Type": "String",
+        "Description": "The comment provided when the image permissions were last modified",
+        "Computed": true
+      },
+      "registry": {
+        "Type": "String",
+        "Required": true,
+        "Description": "The name of the registry where the image is stored."
+      },
+      "registry_type": {
+        "Type": "String",
+        "Description": "Type of the registry.",
+        "Computed": true
+      },
+      "repo_digests": {
+        "Type": "List",
+        "Description": "The repository digests.",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "repository": {
+        "Type": "String",
+        "Required": true,
+        "Description": "The name of the image's repository."
+      },
+      "scan_date": {
+        "Type": "String",
+        "Description": "The date and time when the image was last scanned.",
+        "Computed": true
+      },
+      "scan_error": {
+        "Type": "String",
+        "Description": "If the image scan failed, the failure message.",
+        "Computed": true
+      },
+      "scan_status": {
+        "Type": "String",
+        "Description": "The scan status of the image (either 'pending', 'in_progress', 'finished', 'failed' or 'not_started').",
+        "Computed": true
+      },
+      "sensitive_data": {
+        "Type": "Int",
+        "Description": "Number of sensitive data detected in the image.",
+        "Computed": true
+      },
+      "tag": {
+        "Type": "String",
+        "Required": true,
+        "Description": "The tag of the image."
+      },
+      "total_vulnerabilities": {
+        "Type": "Int",
+        "Description": "The total number of vulnerabilities detected in the image.",
+        "Computed": true
+      },
+      "virtual_size": {
+        "Type": "Int",
+        "Description": "The virtual size of the image.",
+        "Computed": true
+      },
+      "vulnerabilities": {
+        "Type": "List",
+        "Description": "A list of all the vulnerabilities found in the image",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "ack_author": {
+              "Type": "String",
+              "Computed": true
+            },
+            "ack_comment": {
+              "Type": "String",
+              "Computed": true
+            },
+            "ack_expiration_configured_at": {
+              "Type": "String",
+              "Computed": true
+            },
+            "ack_expiration_configured_by": {
+              "Type": "String",
+              "Computed": true
+            },
+            "ack_expiration_days": {
+              "Type": "Int",
+              "Computed": true
+            },
+            "ack_scope": {
+              "Type": "String",
+              "Computed": true
+            },
+            "acknowledge_date": {
+              "Type": "String",
+              "Computed": true
+            },
+            "ancestor_pkg": {
+              "Type": "String",
+              "Description": "The ancestor of this package.",
+              "Computed": true
+            },
+            "aqua_score": {
+              "Type": "Float",
+              "Description": "The score generated for the vulnerability by Aqua.",
+              "Computed": true
+            },
+            "aqua_score_classification": {
+              "Type": "String",
+              "Description": "Score classification by Aqua.",
+              "Computed": true
+            },
+            "aqua_scoring_system": {
+              "Type": "String",
+              "Description": "The score system for the vulnerability by Aqua",
+              "Computed": true
+            },
+            "aqua_severity": {
+              "Type": "String",
+              "Description": "The severity generated for the vulnerability by Aqua.",
+              "Computed": true
+            },
+            "aqua_severity_classification": {
+              "Type": "String",
+              "Description": "Classification of the severity defined by Aqua.",
+              "Computed": true
+            },
+            "aqua_vectors": {
+              "Type": "String",
+              "Description": "The vectors generated for the vulnerability by Aqua",
+              "Computed": true
+            },
+            "audit_events_count": {
+              "Type": "Int",
+              "Description": "Number of audit events.",
+              "Computed": true
+            },
+            "block_events_count": {
+              "Type": "Int",
+              "Description": "Number of blocked events.",
+              "Computed": true
+            },
+            "classification": {
+              "Type": "String",
+              "Description": "Classification of the vulnerability.",
+              "Computed": true
+            },
+            "description": {
+              "Type": "String",
+              "Description": "The description of the vulnerability.",
+              "Computed": true
+            },
+            "digest": {
+              "Type": "String",
+              "Description": "The content digest of the image.",
+              "Computed": true
+            },
+            "exploit_reference": {
+              "Type": "String",
+              "Description": "Reference of the exploit.",
+              "Computed": true
+            },
+            "exploit_type": {
+              "Type": "String",
+              "Description": "Type of the exploit.",
+              "Computed": true
+            },
+            "first_found_date": {
+              "Type": "String",
+              "Description": "The date when this vulnerability was first found.",
+              "Computed": true
+            },
+            "fix_version": {
+              "Type": "String",
+              "Description": "Fixed version of the resource.",
+              "Computed": true
+            },
+            "image_name": {
+              "Type": "String",
+              "Description": "Name of the image.",
+              "Computed": true
+            },
+            "last_found_date": {
+              "Type": "String",
+              "Description": "The date when this vulnerability was last found.",
+              "Computed": true
+            },
+            "modification_date": {
+              "Type": "String",
+              "Description": "Thhe date when this vulnerability was modified.",
+              "Computed": true
+            },
+            "name": {
+              "Type": "String",
+              "Description": "The name of the vulnerability.",
+              "Computed": true
+            },
+            "nvd_cvss2_score": {
+              "Type": "Float",
+              "Description": "CVSS2 score by NVD",
+              "Computed": true
+            },
+            "nvd_cvss2_vectors": {
+              "Type": "String",
+              "Description": "CVSS2 vectors by NVD",
+              "Computed": true
+            },
+            "nvd_cvss3_score": {
+              "Type": "Float",
+              "Description": "CVSS3 score by NVD",
+              "Computed": true
+            },
+            "nvd_cvss3_severity": {
+              "Type": "String",
+              "Description": "CVSS3 severity by NVD",
+              "Computed": true
+            },
+            "nvd_cvss3_vectors": {
+              "Type": "String",
+              "Description": "CVSS3 vectors by NVD",
+              "Computed": true
+            },
+            "nvd_severity": {
+              "Type": "String",
+              "Description": "Type of the severity identified by NVD.",
+              "Computed": true
+            },
+            "nvd_url": {
+              "Type": "String",
+              "Description": "URL of the details of this vulnerability by NVD.",
+              "Computed": true
+            },
+            "os": {
+              "Type": "String",
+              "Description": "Name of the Operating System.",
+              "Computed": true
+            },
+            "os_version": {
+              "Type": "String",
+              "Description": "The version of the OS.",
+              "Computed": true
+            },
+            "permission": {
+              "Type": "String",
+              "Description": "permission on the image",
+              "Computed": true
+            },
+            "publish_date": {
+              "Type": "String",
+              "Description": "The date this vulnerability was published.",
+              "Computed": true
+            },
+            "registry": {
+              "Type": "String",
+              "Description": "Registry of the image.",
+              "Computed": true
+            },
+            "repository": {
+              "Type": "String",
+              "Description": "Repository of the image.",
+              "Computed": true
+            },
+            "resource_architecture": {
+              "Type": "String",
+              "Description": "Architecture of the resource.",
+              "Computed": true
+            },
+            "resource_cpe": {
+              "Type": "String",
+              "Description": "Common Platform Enumeration (CPE) of the resource.",
+              "Computed": true
+            },
+            "resource_format": {
+              "Type": "String",
+              "Description": "Code format of the resource (java, apk etc.).",
+              "Computed": true
+            },
+            "resource_hash": {
+              "Type": "String",
+              "Description": "Hash of the resource.",
+              "Computed": true
+            },
+            "resource_licenses": {
+              "Type": "List",
+              "Description": "List of license supported by the resource.",
+              "Computed": true,
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "resource_name": {
+              "Type": "String",
+              "Description": "Name of the resource.",
+              "Computed": true
+            },
+            "resource_path": {
+              "Type": "String",
+              "Description": "Path of the resource.",
+              "Computed": true
+            },
+            "resource_type": {
+              "Type": "String",
+              "Description": "Type of the resource",
+              "Computed": true
+            },
+            "resource_version": {
+              "Type": "String",
+              "Description": "Version of the resource.",
+              "Computed": true
+            },
+            "severity_classification": {
+              "Type": "String",
+              "Description": "Classification of the severity.",
+              "Computed": true
+            },
+            "solution": {
+              "Type": "String",
+              "Description": "Solution for the vulnerability.",
+              "Computed": true
+            },
+            "temporal_vector": {
+              "Type": "String",
+              "Computed": true
+            },
+            "v_patch_applied_by": {
+              "Type": "String",
+              "Computed": true
+            },
+            "v_patch_applied_on": {
+              "Type": "String",
+              "Computed": true
+            },
+            "v_patch_enforced_by": {
+              "Type": "String",
+              "Computed": true
+            },
+            "v_patch_enforced_on": {
+              "Type": "String",
+              "Computed": true
+            },
+            "v_patch_policy_enforce": {
+              "Type": "Bool",
+              "Computed": true
+            },
+            "v_patch_policy_name": {
+              "Type": "String",
+              "Computed": true
+            },
+            "v_patch_reverted_by": {
+              "Type": "String",
+              "Computed": true
+            },
+            "v_patch_reverted_on": {
+              "Type": "String",
+              "Computed": true
+            },
+            "v_patch_status": {
+              "Type": "String",
+              "Computed": true
+            },
+            "vendor_cvss2_score": {
+              "Type": "Float",
+              "Computed": true
+            },
+            "vendor_cvss2_vectors": {
+              "Type": "String",
+              "Computed": true
+            },
+            "vendor_severity": {
+              "Type": "String",
+              "Computed": true
+            },
+            "vendor_statement": {
+              "Type": "String",
+              "Computed": true
+            },
+            "vendor_url": {
+              "Type": "String",
+              "Computed": true
+            }
+          }
+        }
+      },
+      "whitelisted": {
+        "Type": "Bool",
+        "Description": "Whether the image is whitelisted.",
+        "Computed": true
+      }
+    },
+    "aquasec_integration_registries": {
+      "auto_pull": {
+        "Type": "Bool",
+        "Computed": true
+      },
+      "auto_pull_max": {
+        "Type": "Int",
+        "Computed": true
+      },
+      "auto_pull_time": {
+        "Type": "String",
+        "Computed": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "password": {
+        "Type": "String",
+        "Computed": true
+      },
+      "prefixes": {
+        "Type": "List",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "type": {
+        "Type": "String",
+        "Computed": true
+      },
+      "url": {
+        "Type": "String",
+        "Computed": true
+      },
+      "username": {
+        "Type": "String",
+        "Computed": true
+      }
+    },
+    "aquasec_service": {
+      "application_scopes": {
+        "Type": "List",
+        "Description": "Indicates the application scope of the service.",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "author": {
+        "Type": "String",
+        "Description": "Username of the account that created the service.",
+        "Computed": true
+      },
+      "containers_count": {
+        "Type": "Int",
+        "Description": "The number of containers associated with the service.",
+        "Computed": true
+      },
+      "description": {
+        "Type": "String",
+        "Description": "A textual description of the service record; maximum 500 characters.",
+        "Computed": true
+      },
+      "enforce": {
+        "Type": "Bool",
+        "Description": "Enforcement status of the service.",
+        "Computed": true
+      },
+      "evaluated": {
+        "Type": "Bool",
+        "Description": "Whether the service has been evaluated for security vulnerabilities.",
+        "Computed": true
+      },
+      "is_registered": {
+        "Type": "Bool",
+        "Description": "Indicates if registered or not.",
+        "Computed": true
+      },
+      "lastupdate": {
+        "Type": "Int",
+        "Description": "Timestamp of the last update in Unix time format.",
+        "Computed": true
+      },
+      "monitoring": {
+        "Type": "Bool",
+        "Description": "Indicates if monitoring is enabled or not",
+        "Computed": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true,
+        "Description": "The name of the service. It is recommended not to use whitespace characters in the name."
+      },
+      "not_evaluated_count": {
+        "Type": "Int",
+        "Description": "The number of container that are not evaluated.",
+        "Computed": true
+      },
+      "policies": {
+        "Type": "List",
+        "Description": "The service's policies; an array of container firewall policy names.",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "priority": {
+        "Type": "Int",
+        "Description": "Rules priority, must be between 1-100.",
+        "Computed": true
+      },
+      "scope_expression": {
+        "Type": "String",
+        "Description": "Logical expression of how to compute the dependency of the scope variables.",
+        "Computed": true
+      },
+      "scope_variables": {
+        "Type": "List",
+        "Description": "List of scope attributes.",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "attribute": {
+              "Type": "String",
+              "Description": "Class of supported scope.",
+              "Computed": true
+            },
+            "value": {
+              "Type": "String",
+              "Description": "Value assigned to the attribute.",
+              "Computed": true
+            }
+          }
+        }
+      },
+      "target": {
+        "Type": "String",
+        "Description": "Type of the workload. container or host.",
+        "Computed": true
+      },
+      "unregistered_count": {
+        "Type": "Int",
+        "Description": "The number of containers allocated to the service that are not registered.",
+        "Computed": true
+      },
+      "vulnerabilities_high": {
+        "Type": "Int",
+        "Description": "Number of high severity vulnerabilities.",
+        "Computed": true
+      },
+      "vulnerabilities_low": {
+        "Type": "Int",
+        "Description": "Number of low severity vulnerabilities.",
+        "Computed": true
+      },
+      "vulnerabilities_malware": {
+        "Type": "Int",
+        "Description": "Number of malware.",
+        "Computed": true
+      },
+      "vulnerabilities_medium": {
+        "Type": "Int",
+        "Description": "Number of medium severity vulnerabilities.",
+        "Computed": true
+      },
+      "vulnerabilities_negligible": {
+        "Type": "Int",
+        "Description": "Number of negligible vulnerabilities.",
+        "Computed": true
+      },
+      "vulnerabilities_score_average": {
+        "Type": "Int",
+        "Description": "The CVSS average vulnerabilities score.",
+        "Computed": true
+      },
+      "vulnerabilities_sensitive": {
+        "Type": "Int",
+        "Description": "Number of sensitive vulnerabilities.",
+        "Computed": true
+      },
+      "vulnerabilities_total": {
+        "Type": "Int",
+        "Description": "Total number of vulnerabilities.",
+        "Computed": true
+      }
+    },
+    "aquasec_users": {
+      "users": {
+        "Type": "List",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "email": {
+              "Type": "String",
+              "Computed": true
+            },
+            "first_time": {
+              "Type": "Bool",
+              "Computed": true
+            },
+            "name": {
+              "Type": "String",
+              "Computed": true
+            },
+            "roles": {
+              "Type": "Set",
+              "Computed": true,
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "user_id": {
+              "Type": "String",
+              "Computed": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

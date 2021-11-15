@@ -1,0 +1,299 @@
+{
+  ".schema_version": "2",
+  ".sdk_type": "terraform-plugin-sdk-v2",
+  "name": "iterative",
+  "type": "provider",
+  "version": "v0.8.0",
+  "provider": {},
+  "resources": {
+    "iterative_cml_runner": {
+      "__timeouts__": [
+        "create",
+        "update",
+        "delete"
+      ],
+      "aws_security_group": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string"
+        }
+      },
+      "cloud": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string"
+        }
+      },
+      "driver": {
+        "Type": "String",
+        "Required": true
+      },
+      "idle_timeout": {
+        "Type": "Int",
+        "Optional": true,
+        "Default": {
+          "Type": "int",
+          "Value": "300"
+        }
+      },
+      "image": {
+        "Type": "String",
+        "Computed": true
+      },
+      "instance_gpu": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string"
+        }
+      },
+      "instance_hdd_size": {
+        "Type": "Int",
+        "Optional": true,
+        "Default": {
+          "Type": "int",
+          "Value": "35"
+        }
+      },
+      "instance_ip": {
+        "Type": "String",
+        "Computed": true
+      },
+      "instance_launch_time": {
+        "Type": "String",
+        "Computed": true
+      },
+      "instance_permission_set": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string"
+        }
+      },
+      "instance_type": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string",
+          "Value": "m"
+        }
+      },
+      "labels": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string",
+          "Value": "cml"
+        }
+      },
+      "metadata": {
+        "Type": "Map",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string"
+        }
+      },
+      "region": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string",
+          "Value": "us-west"
+        }
+      },
+      "repo": {
+        "Type": "String",
+        "Required": true
+      },
+      "single": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "spot": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "spot_price": {
+        "Type": "Float",
+        "Optional": true,
+        "Default": {
+          "Type": "int",
+          "Value": "-1"
+        }
+      },
+      "ssh_private": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string"
+        }
+      },
+      "ssh_public": {
+        "Type": "String",
+        "Computed": true
+      },
+      "startup_script": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string"
+        }
+      },
+      "token": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string"
+        }
+      }
+    },
+    "iterative_machine": {
+      "__timeouts__": [
+        "create",
+        "delete"
+      ],
+      "aws_security_group": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string"
+        }
+      },
+      "cloud": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string"
+        }
+      },
+      "image": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string"
+        }
+      },
+      "instance_gpu": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string"
+        }
+      },
+      "instance_hdd_size": {
+        "Type": "Int",
+        "Optional": true,
+        "Default": {
+          "Type": "int",
+          "Value": "35"
+        }
+      },
+      "instance_ip": {
+        "Type": "String",
+        "Computed": true
+      },
+      "instance_launch_time": {
+        "Type": "String",
+        "Computed": true
+      },
+      "instance_permission_set": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string"
+        }
+      },
+      "instance_type": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string",
+          "Value": "m"
+        }
+      },
+      "metadata": {
+        "Type": "Map",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string"
+        }
+      },
+      "region": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string",
+          "Value": "us-west"
+        }
+      },
+      "spot": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "spot_price": {
+        "Type": "Float",
+        "Optional": true,
+        "Default": {
+          "Type": "int",
+          "Value": "-1"
+        }
+      },
+      "ssh_name": {
+        "Type": "String",
+        "Computed": true
+      },
+      "ssh_private": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string"
+        }
+      },
+      "ssh_public": {
+        "Type": "String",
+        "Computed": true
+      },
+      "startup_script": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string",
+          "Value": "#!/bin/bash"
+        }
+      }
+    }
+  },
+  "data-sources": {}
+}

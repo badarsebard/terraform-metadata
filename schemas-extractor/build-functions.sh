@@ -25,6 +25,7 @@ function process_functions() {
     return 0
   fi
   repository="$(jq_get "$name" 'repository')"
+  repository="${repository#https://}"
   use_master="$(jq_get "$name" 'use_master')"
   location="$GOPATH/src/$repository"
 

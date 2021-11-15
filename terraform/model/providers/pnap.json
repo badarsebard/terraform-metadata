@@ -1,0 +1,214 @@
+{
+  ".schema_version": "2",
+  ".sdk_type": "terraform-plugin-sdk-v2",
+  "name": "pnap",
+  "type": "provider",
+  "version": "v0.8.0",
+  "provider": {
+    "client_id": {
+      "Type": "String",
+      "Optional": true,
+      "DefaultFunc": "ENV(PNAP_CLIENT_ID)"
+    },
+    "client_secret": {
+      "Type": "String",
+      "Optional": true,
+      "DefaultFunc": "ENV(PNAP_CLIENT_SECRET)"
+    },
+    "config_file_path": {
+      "Type": "String",
+      "Optional": true,
+      "Default": {
+        "Type": "string"
+      }
+    }
+  },
+  "resources": {
+    "pnap_server": {
+      "__timeouts__": [
+        "create",
+        "update",
+        "delete"
+      ],
+      "action": {
+        "Type": "String",
+        "Optional": true
+      },
+      "cluster_id": {
+        "Type": "String",
+        "Computed": true
+      },
+      "cores_per_cpu": {
+        "Type": "Int",
+        "Computed": true
+      },
+      "cpu": {
+        "Type": "String",
+        "Computed": true
+      },
+      "cpu_count": {
+        "Type": "Int",
+        "Computed": true
+      },
+      "cpu_frequency_in_ghz": {
+        "Type": "Int",
+        "Computed": true
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true
+      },
+      "hostname": {
+        "Type": "String",
+        "Required": true
+      },
+      "install_default_ssh_keys": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "location": {
+        "Type": "String",
+        "Required": true
+      },
+      "management_access_allowed_ips": {
+        "Type": "Set",
+        "Optional": true,
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "management_ui_url": {
+        "Type": "String",
+        "Computed": true
+      },
+      "network_type": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "os": {
+        "Type": "String",
+        "Required": true
+      },
+      "password": {
+        "Type": "String",
+        "Computed": true
+      },
+      "pricing_model": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "private_ip_addresses": {
+        "Type": "Set",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "provisioned_on": {
+        "Type": "String",
+        "Computed": true
+      },
+      "public_ip_addresses": {
+        "Type": "Set",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "ram": {
+        "Type": "String",
+        "Computed": true
+      },
+      "rdp_allowed_ips": {
+        "Type": "Set",
+        "Optional": true,
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "reservation_id": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "root_password": {
+        "Type": "String",
+        "Computed": true
+      },
+      "ssh_key_ids": {
+        "Type": "Set",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "ssh_keys": {
+        "Type": "Set",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "status": {
+        "Type": "String",
+        "Computed": true
+      },
+      "storage": {
+        "Type": "String",
+        "Computed": true
+      },
+      "type": {
+        "Type": "String",
+        "Required": true
+      }
+    },
+    "pnap_ssh_key": {
+      "__timeouts__": [
+        "create",
+        "update",
+        "delete"
+      ],
+      "created_on": {
+        "Type": "String",
+        "Computed": true
+      },
+      "default": {
+        "Type": "Bool",
+        "Required": true
+      },
+      "fingerprint": {
+        "Type": "String",
+        "Computed": true
+      },
+      "key": {
+        "Type": "String",
+        "Required": true
+      },
+      "last_updated_on": {
+        "Type": "String",
+        "Computed": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      }
+    }
+  },
+  "data-sources": {}
+}

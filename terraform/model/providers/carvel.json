@@ -1,0 +1,395 @@
+{
+  ".schema_version": "2",
+  ".sdk_type": "terraform",
+  "name": "carvel",
+  "type": "provider",
+  "version": "v0.10.0",
+  "provider": {
+    "kapp": {
+      "Type": "List",
+      "Optional": true,
+      "Description": "Kapp options",
+      "MaxItems": 1,
+      "IsBlock": true,
+      "ConfigImplicitMode": "Block",
+      "Elem": {
+        "Type": "SchemaInfo",
+        "Info": {
+          "diff_output_file": {
+            "Type": "String",
+            "Optional": true,
+            "Description": "Generate diff and write them to a file"
+          },
+          "kubeconfig": {
+            "Type": "List",
+            "Optional": true,
+            "Description": "kubeconfig used by kapp",
+            "MaxItems": 1,
+            "IsBlock": true,
+            "ConfigImplicitMode": "Block",
+            "Elem": {
+              "Type": "SchemaInfo",
+              "Info": {
+                "ca_cert": {
+                  "Type": "String",
+                  "Optional": true,
+                  "Description": "CA certificate in PEM format"
+                },
+                "client_cert": {
+                  "Type": "String",
+                  "Optional": true,
+                  "Description": "Client certificate in PEM format"
+                },
+                "client_key": {
+                  "Type": "String",
+                  "Optional": true,
+                  "Description": "Client key in PEM format"
+                },
+                "context": {
+                  "Type": "String",
+                  "Optional": true,
+                  "Description": "Use particular context"
+                },
+                "from_env": {
+                  "Type": "Bool",
+                  "Optional": true,
+                  "Description": "Pull configuration from environment (typically found in ~/.kube/config or via $KUBECONFIG)"
+                },
+                "password": {
+                  "Type": "String",
+                  "Optional": true,
+                  "Description": "Password"
+                },
+                "server": {
+                  "Type": "String",
+                  "Optional": true,
+                  "Description": "Address of API server"
+                },
+                "token": {
+                  "Type": "String",
+                  "Optional": true,
+                  "Description": "Auth token"
+                },
+                "username": {
+                  "Type": "String",
+                  "Optional": true,
+                  "Description": "Username"
+                }
+              }
+            }
+          },
+          "kubeconfig_yaml": {
+            "Type": "String",
+            "Optional": true,
+            "Description": "kubeconfig as YAML"
+          }
+        }
+      }
+    }
+  },
+  "resources": {
+    "carvel_kapp": {
+      "app": {
+        "Type": "String",
+        "Required": true,
+        "Description": "App name"
+      },
+      "cluster_drift_detected": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "Internal (forces resource update when detected cluster drift)",
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "config_yaml": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "Configuration as YAML"
+      },
+      "debug_logs": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "Enable debug logging",
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "delete": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "Delete options",
+        "MaxItems": 1,
+        "MinItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "raw_options": {
+              "Type": "List",
+              "Optional": true,
+              "Description": "Raw options given to kapp",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            }
+          }
+        }
+      },
+      "deploy": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "Deploy options",
+        "MaxItems": 1,
+        "MinItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "raw_options": {
+              "Type": "List",
+              "Optional": true,
+              "Description": "Raw options given to kapp",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            }
+          }
+        }
+      },
+      "diff_changes": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "Show changes"
+      },
+      "diff_context": {
+        "Type": "Int",
+        "Optional": true,
+        "Description": "Show number of lines around changed lines"
+      },
+      "files": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "Files",
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "namespace": {
+        "Type": "String",
+        "Required": true,
+        "Description": "Namespace name"
+      }
+    },
+    "carvel_kbld": {
+      "config_yaml": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "Configuration as YAML"
+      },
+      "debug_logs": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "Enable debug logging",
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "files": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "Files",
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "result": {
+        "Type": "String",
+        "Description": "Result",
+        "Computed": true
+      }
+    },
+    "carvel_ytt": {
+      "config_yaml": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "Configuration YAML"
+      },
+      "debug_logs": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "Enable debug logging",
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "files": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "Files",
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "ignore_unknown_comments": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "Set to ignore unknown comments",
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "result": {
+        "Type": "String",
+        "Description": "Result",
+        "Computed": true
+      },
+      "values": {
+        "Type": "Map",
+        "Optional": true,
+        "Description": "Data values as strings",
+        "ConfigImplicitMode": "Attr",
+        "Default": {
+          "Type": "map[string]interface {}",
+          "Value": "map[]"
+        },
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "values_yaml": {
+        "Type": "Map",
+        "Optional": true,
+        "Description": "Data values as YAML",
+        "ConfigImplicitMode": "Attr",
+        "Default": {
+          "Type": "map[string]interface {}",
+          "Value": "map[]"
+        },
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      }
+    }
+  },
+  "data-sources": {
+    "carvel_kbld": {
+      "config_yaml": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "Configuration as YAML"
+      },
+      "debug_logs": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "Enable debug logging",
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "files": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "Files",
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "result": {
+        "Type": "String",
+        "Description": "Result",
+        "Computed": true
+      }
+    },
+    "carvel_ytt": {
+      "config_yaml": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "Configuration YAML"
+      },
+      "debug_logs": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "Enable debug logging",
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "files": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "Files",
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "ignore_unknown_comments": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "Set to ignore unknown comments",
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "result": {
+        "Type": "String",
+        "Description": "Result",
+        "Computed": true
+      },
+      "values": {
+        "Type": "Map",
+        "Optional": true,
+        "Description": "Data values as strings",
+        "ConfigImplicitMode": "Attr",
+        "Default": {
+          "Type": "map[string]interface {}",
+          "Value": "map[]"
+        },
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "values_yaml": {
+        "Type": "Map",
+        "Optional": true,
+        "Description": "Data values as YAML",
+        "ConfigImplicitMode": "Attr",
+        "Default": {
+          "Type": "map[string]interface {}",
+          "Value": "map[]"
+        },
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      }
+    }
+  }
+}

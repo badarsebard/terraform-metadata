@@ -3,7 +3,7 @@
   ".sdk_type": "terraform-plugin-sdk-v1",
   "name": "alicloud",
   "type": "provider",
-  "version": "v1.142.0",
+  "version": "v1.143.0",
   "provider": {
     "access_key": {
       "Type": "String",
@@ -4234,6 +4234,11 @@
       "description": {
         "Type": "String",
         "Required": true
+      },
+      "enable_public_access": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
       },
       "license_code": {
         "Type": "String",
@@ -16462,7 +16467,7 @@
         "Optional": true,
         "Default": {
           "Type": "string",
-          "Value": "1636816236"
+          "Value": "1636942032"
         }
       },
       "post_start": {
@@ -17622,6 +17627,10 @@
           "Type": "bool",
           "Value": "false"
         }
+      },
+      "host_name": {
+        "Type": "String",
+        "Optional": true
       },
       "image_id": {
         "Type": "String",
@@ -22662,7 +22671,7 @@
         "Optional": true,
         "Default": {
           "Type": "int64",
-          "Value": "1636816236"
+          "Value": "1636942032"
         }
       },
       "notification_list": {
@@ -25368,7 +25377,7 @@
         "Optional": true,
         "Default": {
           "Type": "string",
-          "Value": "tf-oss-bucket-20211113151036873300000001"
+          "Value": "tf-oss-bucket-20211115020712755500000001"
         }
       },
       "cors_rule": {
@@ -26505,6 +26514,123 @@
         "Type": "String",
         "Optional": true,
         "Computed": true
+      }
+    },
+    "alicloud_pvtz_endpoint": {
+      "__timeouts__": [
+        "create",
+        "update"
+      ],
+      "endpoint_name": {
+        "Type": "String",
+        "Required": true
+      },
+      "ip_configs": {
+        "Type": "Set",
+        "Required": true,
+        "MaxItems": 6,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "cidr_block": {
+              "Type": "String",
+              "Required": true
+            },
+            "ip": {
+              "Type": "String",
+              "Optional": true,
+              "Computed": true
+            },
+            "vswitch_id": {
+              "Type": "String",
+              "Required": true
+            },
+            "zone_id": {
+              "Type": "String",
+              "Required": true
+            }
+          }
+        }
+      },
+      "security_group_id": {
+        "Type": "String",
+        "Required": true
+      },
+      "status": {
+        "Type": "String",
+        "Computed": true
+      },
+      "vpc_id": {
+        "Type": "String",
+        "Required": true
+      },
+      "vpc_region_id": {
+        "Type": "String",
+        "Required": true
+      }
+    },
+    "alicloud_pvtz_rule": {
+      "endpoint_id": {
+        "Type": "String",
+        "Required": true
+      },
+      "forward_ips": {
+        "Type": "Set",
+        "Required": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "ip": {
+              "Type": "String",
+              "Required": true
+            },
+            "port": {
+              "Type": "Int",
+              "Required": true
+            }
+          }
+        }
+      },
+      "rule_name": {
+        "Type": "String",
+        "Required": true
+      },
+      "type": {
+        "Type": "String",
+        "Optional": true
+      },
+      "zone_name": {
+        "Type": "String",
+        "Required": true
+      }
+    },
+    "alicloud_pvtz_rule_attachment": {
+      "rule_id": {
+        "Type": "String",
+        "Required": true
+      },
+      "vpcs": {
+        "Type": "Set",
+        "Required": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "region_id": {
+              "Type": "String",
+              "Required": true
+            },
+            "vpc_id": {
+              "Type": "String",
+              "Required": true
+            }
+          }
+        }
       }
     },
     "alicloud_pvtz_user_vpc_authorization": {
@@ -29981,6 +30107,50 @@
         "Computed": true
       }
     },
+    "alicloud_simple_application_server_custom_image": {
+      "custom_image_name": {
+        "Type": "String",
+        "Required": true
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true
+      },
+      "instance_id": {
+        "Type": "String",
+        "Required": true
+      },
+      "status": {
+        "Type": "String",
+        "Optional": true
+      },
+      "system_snapshot_id": {
+        "Type": "String",
+        "Required": true
+      }
+    },
+    "alicloud_simple_application_server_firewall_rule": {
+      "firewall_rule_id": {
+        "Type": "String",
+        "Computed": true
+      },
+      "instance_id": {
+        "Type": "String",
+        "Required": true
+      },
+      "port": {
+        "Type": "String",
+        "Required": true
+      },
+      "remark": {
+        "Type": "String",
+        "Optional": true
+      },
+      "rule_protocol": {
+        "Type": "String",
+        "Required": true
+      }
+    },
     "alicloud_simple_application_server_instance": {
       "__timeouts__": [
         "create",
@@ -30026,6 +30196,23 @@
       "status": {
         "Type": "String",
         "Optional": true,
+        "Computed": true
+      }
+    },
+    "alicloud_simple_application_server_snapshot": {
+      "__timeouts__": [
+        "create"
+      ],
+      "disk_id": {
+        "Type": "String",
+        "Required": true
+      },
+      "snapshot_name": {
+        "Type": "String",
+        "Required": true
+      },
+      "status": {
+        "Type": "String",
         "Computed": true
       }
     },
@@ -31966,6 +32153,29 @@
         "Required": true
       }
     },
+    "alicloud_vpc_ipv6_internet_bandwidth": {
+      "bandwidth": {
+        "Type": "Int",
+        "Required": true
+      },
+      "internet_charge_type": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "ipv6_address_id": {
+        "Type": "String",
+        "Required": true
+      },
+      "ipv6_gateway_id": {
+        "Type": "String",
+        "Required": true
+      },
+      "status": {
+        "Type": "String",
+        "Computed": true
+      }
+    },
     "alicloud_vpc_nat_ip": {
       "__timeouts__": [
         "create",
@@ -32841,6 +33051,11 @@
       "description": {
         "Type": "String",
         "Required": true
+      },
+      "enable_public_access": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
       },
       "license_code": {
         "Type": "String",
@@ -35378,6 +35593,10 @@
                   }
                 }
               }
+            },
+            "tags": {
+              "Type": "Map",
+              "Computed": true
             },
             "vpc_id": {
               "Type": "String",
@@ -49588,6 +49807,138 @@
         "Optional": true
       }
     },
+    "alicloud_ecd_bundles": {
+      "bundle_id": {
+        "Type": "List",
+        "Optional": true,
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "bundle_type": {
+        "Type": "String",
+        "Optional": true
+      },
+      "bundles": {
+        "Type": "List",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "bundle_id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "bundle_name": {
+              "Type": "String",
+              "Computed": true
+            },
+            "bundle_type": {
+              "Type": "String",
+              "Computed": true
+            },
+            "description": {
+              "Type": "String",
+              "Computed": true
+            },
+            "desktop_type": {
+              "Type": "String",
+              "Computed": true
+            },
+            "desktop_type_attribute": {
+              "Type": "List",
+              "Computed": true,
+              "IsBlock": true,
+              "ConfigImplicitMode": "ComputedBlock",
+              "Elem": {
+                "Type": "SchemaInfo",
+                "Info": {
+                  "cpu_count": {
+                    "Type": "Int",
+                    "Computed": true
+                  },
+                  "gpu_count": {
+                    "Type": "String",
+                    "Computed": true
+                  },
+                  "gpu_spec": {
+                    "Type": "String",
+                    "Computed": true
+                  },
+                  "memory_size": {
+                    "Type": "String",
+                    "Computed": true
+                  }
+                }
+              }
+            },
+            "disks": {
+              "Type": "List",
+              "Computed": true,
+              "IsBlock": true,
+              "ConfigImplicitMode": "ComputedBlock",
+              "Elem": {
+                "Type": "SchemaInfo",
+                "Info": {
+                  "disk_size": {
+                    "Type": "String",
+                    "Computed": true
+                  },
+                  "disk_type": {
+                    "Type": "String",
+                    "Computed": true
+                  }
+                }
+              }
+            },
+            "id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "image_id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "os_type": {
+              "Type": "String",
+              "Computed": true
+            }
+          }
+        }
+      },
+      "ids": {
+        "Type": "List",
+        "Optional": true,
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "name_regex": {
+        "Type": "String",
+        "Optional": true
+      },
+      "names": {
+        "Type": "List",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "output_file": {
+        "Type": "String",
+        "Optional": true
+      }
+    },
     "alicloud_ecd_nas_file_systems": {
       "ids": {
         "Type": "List",
@@ -54807,11 +55158,19 @@
                 }
               }
             },
+            "host_name": {
+              "Type": "String",
+              "Computed": true
+            },
             "id": {
               "Type": "String",
               "Computed": true
             },
             "image_id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "instance_name": {
               "Type": "String",
               "Computed": true
             },
@@ -67159,6 +67518,233 @@
         "Optional": true
       }
     },
+    "alicloud_pvtz_endpoints": {
+      "endpoints": {
+        "Type": "List",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "create_time": {
+              "Type": "String",
+              "Computed": true
+            },
+            "endpoint_name": {
+              "Type": "String",
+              "Computed": true
+            },
+            "id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "ip_configs": {
+              "Type": "List",
+              "Computed": true,
+              "IsBlock": true,
+              "ConfigImplicitMode": "ComputedBlock",
+              "Elem": {
+                "Type": "SchemaInfo",
+                "Info": {
+                  "cidr_block": {
+                    "Type": "String",
+                    "Computed": true
+                  },
+                  "ip": {
+                    "Type": "String",
+                    "Computed": true
+                  },
+                  "vswitch_id": {
+                    "Type": "String",
+                    "Computed": true
+                  },
+                  "zone_id": {
+                    "Type": "String",
+                    "Computed": true
+                  }
+                }
+              }
+            },
+            "security_group_id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "status": {
+              "Type": "String",
+              "Computed": true
+            },
+            "vpc_id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "vpc_name": {
+              "Type": "String",
+              "Computed": true
+            },
+            "vpc_region_id": {
+              "Type": "String",
+              "Computed": true
+            }
+          }
+        }
+      },
+      "ids": {
+        "Type": "List",
+        "Optional": true,
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "name_regex": {
+        "Type": "String",
+        "Optional": true
+      },
+      "names": {
+        "Type": "List",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "output_file": {
+        "Type": "String",
+        "Optional": true
+      },
+      "status": {
+        "Type": "String",
+        "Optional": true
+      }
+    },
+    "alicloud_pvtz_resolver_zones": {
+      "output_file": {
+        "Type": "String",
+        "Optional": true
+      },
+      "status": {
+        "Type": "String",
+        "Optional": true
+      },
+      "zones": {
+        "Type": "List",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "status": {
+              "Type": "String",
+              "Computed": true
+            },
+            "zone_id": {
+              "Type": "String",
+              "Computed": true
+            }
+          }
+        }
+      }
+    },
+    "alicloud_pvtz_rules": {
+      "endpoint_id": {
+        "Type": "String",
+        "Optional": true
+      },
+      "ids": {
+        "Type": "List",
+        "Optional": true,
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "name_regex": {
+        "Type": "String",
+        "Optional": true
+      },
+      "names": {
+        "Type": "List",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "output_file": {
+        "Type": "String",
+        "Optional": true
+      },
+      "rules": {
+        "Type": "List",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "create_time": {
+              "Type": "String",
+              "Computed": true
+            },
+            "endpoint_id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "endpoint_name": {
+              "Type": "String",
+              "Computed": true
+            },
+            "forward_ips": {
+              "Type": "List",
+              "Computed": true,
+              "IsBlock": true,
+              "ConfigImplicitMode": "ComputedBlock",
+              "Elem": {
+                "Type": "SchemaInfo",
+                "Info": {
+                  "ip": {
+                    "Type": "String",
+                    "Computed": true
+                  },
+                  "port": {
+                    "Type": "Int",
+                    "Computed": true
+                  }
+                }
+              }
+            },
+            "id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "rule_id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "rule_name": {
+              "Type": "String",
+              "Computed": true
+            },
+            "type": {
+              "Type": "String",
+              "Computed": true
+            },
+            "zone_name": {
+              "Type": "String",
+              "Computed": true
+            }
+          }
+        }
+      }
+    },
     "alicloud_pvtz_service": {
       "enable": {
         "Type": "String",
@@ -72297,6 +72883,217 @@
         "Optional": true
       }
     },
+    "alicloud_simple_application_server_custom_images": {
+      "ids": {
+        "Type": "List",
+        "Optional": true,
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "images": {
+        "Type": "List",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "custom_image_id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "custom_image_name": {
+              "Type": "String",
+              "Computed": true
+            },
+            "description": {
+              "Type": "String",
+              "Computed": true
+            },
+            "id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "platform": {
+              "Type": "String",
+              "Computed": true
+            }
+          }
+        }
+      },
+      "name_regex": {
+        "Type": "String",
+        "Optional": true
+      },
+      "names": {
+        "Type": "List",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "output_file": {
+        "Type": "String",
+        "Optional": true
+      }
+    },
+    "alicloud_simple_application_server_disks": {
+      "disk_type": {
+        "Type": "String",
+        "Optional": true
+      },
+      "disks": {
+        "Type": "List",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "category": {
+              "Type": "String",
+              "Computed": true
+            },
+            "create_time": {
+              "Type": "String",
+              "Computed": true
+            },
+            "device": {
+              "Type": "String",
+              "Computed": true
+            },
+            "disk_id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "disk_name": {
+              "Type": "String",
+              "Computed": true
+            },
+            "disk_type": {
+              "Type": "String",
+              "Computed": true
+            },
+            "id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "instance_id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "payment_type": {
+              "Type": "String",
+              "Computed": true
+            },
+            "size": {
+              "Type": "Int",
+              "Computed": true
+            },
+            "status": {
+              "Type": "String",
+              "Computed": true
+            }
+          }
+        }
+      },
+      "ids": {
+        "Type": "List",
+        "Optional": true,
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "instance_id": {
+        "Type": "String",
+        "Optional": true
+      },
+      "name_regex": {
+        "Type": "String",
+        "Optional": true
+      },
+      "names": {
+        "Type": "List",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "output_file": {
+        "Type": "String",
+        "Optional": true
+      },
+      "status": {
+        "Type": "String",
+        "Optional": true
+      }
+    },
+    "alicloud_simple_application_server_firewall_rules": {
+      "ids": {
+        "Type": "List",
+        "Optional": true,
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "instance_id": {
+        "Type": "String",
+        "Required": true
+      },
+      "output_file": {
+        "Type": "String",
+        "Optional": true
+      },
+      "rules": {
+        "Type": "List",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "firewall_rule_id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "instance_id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "port": {
+              "Type": "String",
+              "Computed": true
+            },
+            "remark": {
+              "Type": "String",
+              "Computed": true
+            },
+            "rule_protocol": {
+              "Type": "String",
+              "Computed": true
+            }
+          }
+        }
+      }
+    },
     "alicloud_simple_application_server_images": {
       "ids": {
         "Type": "List",
@@ -72538,6 +73335,94 @@
             }
           }
         }
+      }
+    },
+    "alicloud_simple_application_server_snapshots": {
+      "disk_id": {
+        "Type": "String",
+        "Optional": true
+      },
+      "ids": {
+        "Type": "List",
+        "Optional": true,
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "instance_id": {
+        "Type": "String",
+        "Optional": true
+      },
+      "name_regex": {
+        "Type": "String",
+        "Optional": true
+      },
+      "names": {
+        "Type": "List",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "output_file": {
+        "Type": "String",
+        "Optional": true
+      },
+      "snapshots": {
+        "Type": "List",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "create_time": {
+              "Type": "String",
+              "Computed": true
+            },
+            "disk_id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "progress": {
+              "Type": "String",
+              "Computed": true
+            },
+            "remark": {
+              "Type": "String",
+              "Computed": true
+            },
+            "snapshot_id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "snapshot_name": {
+              "Type": "String",
+              "Computed": true
+            },
+            "source_disk_type": {
+              "Type": "String",
+              "Computed": true
+            },
+            "status": {
+              "Type": "String",
+              "Computed": true
+            }
+          }
+        }
+      },
+      "status": {
+        "Type": "String",
+        "Optional": true
       }
     },
     "alicloud_slb_acls": {
@@ -75826,6 +76711,77 @@
         "Optional": true
       },
       "vpc_id": {
+        "Type": "String",
+        "Optional": true
+      }
+    },
+    "alicloud_vpc_ipv6_internet_bandwidths": {
+      "bandwidths": {
+        "Type": "List",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "bandwidth": {
+              "Type": "Int",
+              "Computed": true
+            },
+            "id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "internet_charge_type": {
+              "Type": "String",
+              "Computed": true
+            },
+            "ipv6_address_id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "ipv6_gateway_id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "ipv6_internet_bandwidth_id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "payment_type": {
+              "Type": "String",
+              "Computed": true
+            },
+            "status": {
+              "Type": "String",
+              "Computed": true
+            }
+          }
+        }
+      },
+      "ids": {
+        "Type": "List",
+        "Optional": true,
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "ipv6_address_id": {
+        "Type": "String",
+        "Optional": true
+      },
+      "ipv6_internet_bandwidth_id": {
+        "Type": "String",
+        "Optional": true
+      },
+      "output_file": {
+        "Type": "String",
+        "Optional": true
+      },
+      "status": {
         "Type": "String",
         "Optional": true
       }

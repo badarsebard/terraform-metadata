@@ -30,6 +30,7 @@ function process_provider() {
     return 0
   fi
   repository="$(jq_get "$name" 'repository')"
+  repository="${repository#https://}"
   pkg_prefix="$(jq_get "$name" 'pkg_prefix' | sed -e "s~__REPOSITORY__~$repository~g")"
   pkg_name="$(jq_get "$name" 'pkg_name')"
   provider_constr="$(jq_get "$name" 'provider_constr')"

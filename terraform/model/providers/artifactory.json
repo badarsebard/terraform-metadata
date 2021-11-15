@@ -1,0 +1,3598 @@
+{
+  ".schema_version": "2",
+  ".sdk_type": "terraform-plugin-sdk-v2",
+  "name": "artifactory",
+  "type": "provider",
+  "version": "v2.6.18",
+  "provider": {
+    "access_token": {
+      "Type": "String",
+      "Optional": true,
+      "Description": "This is a bearer token that can be given to you by your admin under `Identity and Access`",
+      "DefaultFunc": "ENV(ARTIFACTORY_ACCESS_TOKEN)",
+      "ConflictsWith": [
+        "api_key",
+        "password"
+      ]
+    },
+    "api_key": {
+      "Type": "String",
+      "Optional": true,
+      "DefaultFunc": "ENV(ARTIFACTORY_API_KEY)",
+      "ConflictsWith": [
+        "username",
+        "access_token",
+        "password"
+      ],
+      "Deprecated": "Xray and projects functionality will not work with any auth method other than access tokens (Bearer)"
+    },
+    "password": {
+      "Type": "String",
+      "Optional": true,
+      "Description": "Insider note: You may actually use an api_key as the password. This will get your around xray limitations instead of a bearer token",
+      "DefaultFunc": "ENV(ARTIFACTORY_PASSWORD)",
+      "ConflictsWith": [
+        "access_token",
+        "api_key"
+      ],
+      "Deprecated": "Xray and projects functionality will not work with any auth method other than access tokens (Bearer)"
+    },
+    "url": {
+      "Type": "String",
+      "Optional": true,
+      "DefaultFunc": "ENV(ARTIFACTORY_URL)"
+    },
+    "username": {
+      "Type": "String",
+      "Optional": true,
+      "DefaultFunc": "ENV(ARTIFACTORY_USERNAME)",
+      "ConflictsWith": [
+        "access_token",
+        "api_key"
+      ],
+      "Deprecated": "Xray and projects functionality will not work with any auth method other than access tokens (Bearer)"
+    }
+  },
+  "resources": {
+    "artifactory_access_token": {
+      "access_token": {
+        "Type": "String",
+        "Computed": true
+      },
+      "admin_token": {
+        "Type": "Set",
+        "Optional": true,
+        "MaxItems": 1,
+        "MinItems": 1,
+        "ConflictsWith": [
+          "groups"
+        ],
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "instance_id": {
+              "Type": "String",
+              "Required": true
+            }
+          }
+        }
+      },
+      "audience": {
+        "Type": "String",
+        "Optional": true
+      },
+      "end_date": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true,
+        "ConflictsWith": [
+          "end_date_relative"
+        ]
+      },
+      "end_date_relative": {
+        "Type": "String",
+        "Optional": true,
+        "ConflictsWith": [
+          "end_date"
+        ]
+      },
+      "groups": {
+        "Type": "List",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "refresh_token": {
+        "Type": "String",
+        "Computed": true
+      },
+      "refreshable": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "username": {
+        "Type": "String",
+        "Required": true
+      }
+    },
+    "artifactory_api_key": {
+      "api_key": {
+        "Type": "String",
+        "Computed": true
+      }
+    },
+    "artifactory_certificate": {
+      "alias": {
+        "Type": "String",
+        "Required": true
+      },
+      "content": {
+        "Type": "String",
+        "Optional": true
+      },
+      "file": {
+        "Type": "String",
+        "Optional": true
+      },
+      "fingerprint": {
+        "Type": "String",
+        "Computed": true
+      },
+      "issued_by": {
+        "Type": "String",
+        "Computed": true
+      },
+      "issued_on": {
+        "Type": "String",
+        "Computed": true
+      },
+      "issued_to": {
+        "Type": "String",
+        "Computed": true
+      },
+      "valid_until": {
+        "Type": "String",
+        "Computed": true
+      }
+    },
+    "artifactory_general_security": {
+      "enable_anonymous_access": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      }
+    },
+    "artifactory_group": {
+      "admin_privileges": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "auto_join": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true
+      },
+      "detach_all_users": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "realm": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "realm_attributes": {
+        "Type": "String",
+        "Optional": true
+      },
+      "users_names": {
+        "Type": "Set",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      }
+    },
+    "artifactory_keypair": {
+      "alias": {
+        "Type": "String",
+        "Required": true,
+        "Description": "Will be used as a filename when retrieving the public key via REST API"
+      },
+      "pair_name": {
+        "Type": "String",
+        "Required": true
+      },
+      "pair_type": {
+        "Type": "String",
+        "Required": true,
+        "Description": "Let's RT know what kind of key pair you're supplying. RT also supports GPG, but that's for a later day"
+      },
+      "passphrase": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "Used to decrypt the private key (if applicable). Will be verified server side"
+      },
+      "private_key": {
+        "Type": "String",
+        "Required": true
+      },
+      "public_key": {
+        "Type": "String",
+        "Required": true
+      },
+      "unavailable": {
+        "Type": "Bool",
+        "Description": "Unknown usage. Returned in the json payload and cannot be set.",
+        "Computed": true
+      }
+    },
+    "artifactory_local_alpine_repository": {
+      "archive_browsing_enabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "When set, you may view content such as HTML or Javadoc files directly from Artifactory.\nThis may not be safe and therefore requires strict content moderation to prevent malicious users from uploading content that may compromise security (e.g., cross-site scripting attacks)."
+      },
+      "blacked_out": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true
+      },
+      "download_direct": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "excludes_pattern": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "includes_pattern": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "index_compression_formats": {
+        "Type": "List",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "key": {
+        "Type": "String",
+        "Required": true
+      },
+      "notes": {
+        "Type": "String",
+        "Optional": true
+      },
+      "package_type": {
+        "Type": "String",
+        "Computed": true
+      },
+      "primary_keypair_ref": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "Used to sign index files in Alpine Linux repositories. See: https://www.jfrog.com/confluence/display/JFROG/Alpine+Linux+Repositories#AlpineLinuxRepositories-SigningAlpineLinuxIndex"
+      },
+      "property_sets": {
+        "Type": "Set",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "repo_layout_ref": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "xray_index": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      }
+    },
+    "artifactory_local_debian_repository": {
+      "archive_browsing_enabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "When set, you may view content such as HTML or Javadoc files directly from Artifactory.\nThis may not be safe and therefore requires strict content moderation to prevent malicious users from uploading content that may compromise security (e.g., cross-site scripting attacks)."
+      },
+      "blacked_out": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true
+      },
+      "download_direct": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "excludes_pattern": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "includes_pattern": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "index_compression_formats": {
+        "Type": "Set",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "key": {
+        "Type": "String",
+        "Required": true
+      },
+      "notes": {
+        "Type": "String",
+        "Optional": true
+      },
+      "package_type": {
+        "Type": "String",
+        "Computed": true
+      },
+      "primary_keypair_ref": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "Used to sign index files in Debian artifacts. "
+      },
+      "property_sets": {
+        "Type": "Set",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "repo_layout_ref": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "secondary_keypair_ref": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "Used to sign index files in Debian artifacts. "
+      },
+      "trivial_layout": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "When set, the repository will use the deprecated trivial layout.",
+        "Deprecated": "You shouldn't be using this"
+      },
+      "xray_index": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      }
+    },
+    "artifactory_local_docker_v1_repository": {
+      "api_version": {
+        "Type": "String",
+        "Description": "The Docker API version to use. This cannot be set",
+        "Computed": true
+      },
+      "archive_browsing_enabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "When set, you may view content such as HTML or Javadoc files directly from Artifactory.\nThis may not be safe and therefore requires strict content moderation to prevent malicious users from uploading content that may compromise security (e.g., cross-site scripting attacks)."
+      },
+      "blacked_out": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "block_pushing_schema1": {
+        "Type": "Bool",
+        "Description": "When set, Artifactory will block the pushing of Docker images with manifest v2 schema 1 to this repository.",
+        "Computed": true
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true
+      },
+      "download_direct": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "excludes_pattern": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "includes_pattern": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "index_compression_formats": {
+        "Type": "Set",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "key": {
+        "Type": "String",
+        "Required": true
+      },
+      "max_unique_tags": {
+        "Type": "Int",
+        "Optional": true,
+        "Description": "The maximum number of unique tags of a single Docker image to store in this repository.\nOnce the number tags for an image exceeds this setting, older tags are removed. A value of 0 (default) indicates there is no limit.\nThis only applies to manifest v2",
+        "Computed": true
+      },
+      "notes": {
+        "Type": "String",
+        "Optional": true
+      },
+      "package_type": {
+        "Type": "String",
+        "Computed": true
+      },
+      "property_sets": {
+        "Type": "Set",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "repo_layout_ref": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "tag_retention": {
+        "Type": "Int",
+        "Description": "If greater than 1, overwritten tags will be saved by their digest, up to the set up number. This only applies to manifest V2",
+        "Computed": true
+      },
+      "xray_index": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      }
+    },
+    "artifactory_local_docker_v2_repository": {
+      "api_version": {
+        "Type": "String",
+        "Description": "The Docker API version to use. This cannot be set",
+        "Computed": true
+      },
+      "archive_browsing_enabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "When set, you may view content such as HTML or Javadoc files directly from Artifactory.\nThis may not be safe and therefore requires strict content moderation to prevent malicious users from uploading content that may compromise security (e.g., cross-site scripting attacks)."
+      },
+      "blacked_out": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "block_pushing_schema1": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "When set, Artifactory will block the pushing of Docker images with manifest v2 schema 1 to this repository.",
+        "Computed": true
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true
+      },
+      "download_direct": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "excludes_pattern": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "includes_pattern": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "index_compression_formats": {
+        "Type": "Set",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "key": {
+        "Type": "String",
+        "Required": true
+      },
+      "max_unique_tags": {
+        "Type": "Int",
+        "Optional": true,
+        "Description": "The maximum number of unique tags of a single Docker image to store in this repository.\nOnce the number tags for an image exceeds this setting, older tags are removed. A value of 0 (default) indicates there is no limit.\nThis only applies to manifest v2"
+      },
+      "notes": {
+        "Type": "String",
+        "Optional": true
+      },
+      "package_type": {
+        "Type": "String",
+        "Computed": true
+      },
+      "property_sets": {
+        "Type": "Set",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "repo_layout_ref": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "tag_retention": {
+        "Type": "Int",
+        "Optional": true,
+        "Description": "If greater than 1, overwritten tags will be saved by their digest, up to the set up number. This only applies to manifest V2"
+      },
+      "xray_index": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      }
+    },
+    "artifactory_local_gradle_repository": {
+      "archive_browsing_enabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "When set, you may view content such as HTML or Javadoc files directly from Artifactory.\nThis may not be safe and therefore requires strict content moderation to prevent malicious users from uploading content that may compromise security (e.g., cross-site scripting attacks)."
+      },
+      "blacked_out": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "checksum_policy_type": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "Checksum policy determines how Artifactory behaves when a client checksum for a deployed resource is missing or conflicts with the locally calculated checksum (bad checksum).\nFor more details, please refer to Checksum Policy - https://www.jfrog.com/confluence/display/JFROG/Local+Repositories#LocalRepositories-ChecksumPolicy",
+        "Default": {
+          "Type": "string",
+          "Value": "client-checksums"
+        }
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true
+      },
+      "download_direct": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "excludes_pattern": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "handle_releases": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "If set, Artifactory allows you to deploy release artifacts into this repository.",
+        "Default": {
+          "Type": "bool",
+          "Value": "true"
+        }
+      },
+      "handle_snapshots": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "If set, Artifactory allows you to deploy snapshot artifacts into this repository.",
+        "Default": {
+          "Type": "bool",
+          "Value": "true"
+        }
+      },
+      "includes_pattern": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "index_compression_formats": {
+        "Type": "Set",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "key": {
+        "Type": "String",
+        "Required": true
+      },
+      "max_unique_snapshots": {
+        "Type": "Int",
+        "Optional": true,
+        "Description": "The maximum number of unique snapshots of a single artifact to store.\nOnce the number of snapshots exceeds this setting, older versions are removed.\nA value of 0 (default) indicates there is no limit, and unique snapshots are not cleaned up.",
+        "Default": {
+          "Type": "int",
+          "Value": "0"
+        }
+      },
+      "notes": {
+        "Type": "String",
+        "Optional": true
+      },
+      "package_type": {
+        "Type": "String",
+        "Computed": true
+      },
+      "property_sets": {
+        "Type": "Set",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "repo_layout_ref": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "snapshot_version_behavior": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "Specifies the naming convention for Maven SNAPSHOT versions.\nThe options are -\nUnique: Version number is based on a time-stamp (default)\nNon-unique: Version number uses a self-overriding naming pattern of artifactId-version-SNAPSHOT.type\nDeployer: Respects the settings in the Maven client that is deploying the artifact.",
+        "Default": {
+          "Type": "string",
+          "Value": "unique"
+        }
+      },
+      "suppress_pom_consistency_checks": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "By default, Artifactory keeps your repositories healthy by refusing POMs with incorrect coordinates (path).\n  If the groupId:artifactId:version information inside the POM does not match the deployed path, Artifactory rejects the deployment with a \"409 Conflict\" error.\n  You can disable this behavior by setting the Suppress POM Consistency Checks checkbox.",
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "xray_index": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      }
+    },
+    "artifactory_local_maven_repository": {
+      "archive_browsing_enabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "When set, you may view content such as HTML or Javadoc files directly from Artifactory.\nThis may not be safe and therefore requires strict content moderation to prevent malicious users from uploading content that may compromise security (e.g., cross-site scripting attacks)."
+      },
+      "blacked_out": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "checksum_policy_type": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "Checksum policy determines how Artifactory behaves when a client checksum for a deployed resource is missing or conflicts with the locally calculated checksum (bad checksum).\nFor more details, please refer to Checksum Policy - https://www.jfrog.com/confluence/display/JFROG/Local+Repositories#LocalRepositories-ChecksumPolicy",
+        "Default": {
+          "Type": "string",
+          "Value": "client-checksums"
+        }
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true
+      },
+      "download_direct": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "excludes_pattern": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "handle_releases": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "If set, Artifactory allows you to deploy release artifacts into this repository.",
+        "Default": {
+          "Type": "bool",
+          "Value": "true"
+        }
+      },
+      "handle_snapshots": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "If set, Artifactory allows you to deploy snapshot artifacts into this repository.",
+        "Default": {
+          "Type": "bool",
+          "Value": "true"
+        }
+      },
+      "includes_pattern": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "index_compression_formats": {
+        "Type": "Set",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "key": {
+        "Type": "String",
+        "Required": true
+      },
+      "max_unique_snapshots": {
+        "Type": "Int",
+        "Optional": true,
+        "Description": "The maximum number of unique snapshots of a single artifact to store.\nOnce the number of snapshots exceeds this setting, older versions are removed.\nA value of 0 (default) indicates there is no limit, and unique snapshots are not cleaned up.",
+        "Default": {
+          "Type": "int",
+          "Value": "0"
+        }
+      },
+      "notes": {
+        "Type": "String",
+        "Optional": true
+      },
+      "package_type": {
+        "Type": "String",
+        "Computed": true
+      },
+      "property_sets": {
+        "Type": "Set",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "repo_layout_ref": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "snapshot_version_behavior": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "Specifies the naming convention for Maven SNAPSHOT versions.\nThe options are -\nUnique: Version number is based on a time-stamp (default)\nNon-unique: Version number uses a self-overriding naming pattern of artifactId-version-SNAPSHOT.type\nDeployer: Respects the settings in the Maven client that is deploying the artifact.",
+        "Default": {
+          "Type": "string",
+          "Value": "unique"
+        }
+      },
+      "suppress_pom_consistency_checks": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "By default, Artifactory keeps your repositories healthy by refusing POMs with incorrect coordinates (path).\n  If the groupId:artifactId:version information inside the POM does not match the deployed path, Artifactory rejects the deployment with a \"409 Conflict\" error.\n  You can disable this behavior by setting the Suppress POM Consistency Checks checkbox.",
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "xray_index": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      }
+    },
+    "artifactory_local_nuget_repository": {
+      "archive_browsing_enabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "When set, you may view content such as HTML or Javadoc files directly from Artifactory.\nThis may not be safe and therefore requires strict content moderation to prevent malicious users from uploading content that may compromise security (e.g., cross-site scripting attacks)."
+      },
+      "blacked_out": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true
+      },
+      "download_direct": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "excludes_pattern": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "force_nuget_authentication": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "Force basic authentication credentials in order to use this repository.",
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "includes_pattern": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "index_compression_formats": {
+        "Type": "Set",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "key": {
+        "Type": "String",
+        "Required": true
+      },
+      "max_unique_snapshots": {
+        "Type": "Int",
+        "Optional": true,
+        "Description": "The maximum number of unique snapshots of a single artifact to store.\nOnce the number of snapshots exceeds this setting, older versions are removed.\nA value of 0 (default) indicates there is no limit, and unique snapshots are not cleaned up.",
+        "Default": {
+          "Type": "int",
+          "Value": "0"
+        }
+      },
+      "notes": {
+        "Type": "String",
+        "Optional": true
+      },
+      "package_type": {
+        "Type": "String",
+        "Computed": true
+      },
+      "property_sets": {
+        "Type": "Set",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "repo_layout_ref": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "xray_index": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      }
+    },
+    "artifactory_local_repository": {
+      "archive_browsing_enabled": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "blacked_out": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "calculate_yum_metadata": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "checksum_policy_type": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "debian_trivial_layout": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true
+      },
+      "docker_api_version": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "enable_file_lists_indexing": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "excludes_pattern": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "force_nuget_authentication": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "handle_releases": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "handle_snapshots": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "includes_pattern": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "key": {
+        "Type": "String",
+        "Required": true
+      },
+      "max_unique_snapshots": {
+        "Type": "Int",
+        "Optional": true,
+        "Computed": true
+      },
+      "max_unique_tags": {
+        "Type": "Int",
+        "Optional": true,
+        "Computed": true
+      },
+      "notes": {
+        "Type": "String",
+        "Optional": true
+      },
+      "package_type": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "property_sets": {
+        "Type": "Set",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "repo_layout_ref": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "snapshot_version_behavior": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "suppress_pom_consistency_checks": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "xray_index": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "yum_root_depth": {
+        "Type": "Int",
+        "Optional": true
+      }
+    },
+    "artifactory_local_rpm_repository": {
+      "archive_browsing_enabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "When set, you may view content such as HTML or Javadoc files directly from Artifactory.\nThis may not be safe and therefore requires strict content moderation to prevent malicious users from uploading content that may compromise security (e.g., cross-site scripting attacks)."
+      },
+      "blacked_out": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "calculate_yum_metadata": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true
+      },
+      "download_direct": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "enable_file_lists_indexing": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "excludes_pattern": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "includes_pattern": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "index_compression_formats": {
+        "Type": "Set",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "key": {
+        "Type": "String",
+        "Required": true
+      },
+      "notes": {
+        "Type": "String",
+        "Optional": true
+      },
+      "package_type": {
+        "Type": "String",
+        "Computed": true
+      },
+      "property_sets": {
+        "Type": "Set",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "repo_layout_ref": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "xray_index": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "yum_group_file_names": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "A list of XML file names containing RPM group component definitions. Artifactory includes the group definitions as part of the calculated RPM metadata, as well as automatically generating a gzipped version of the group files, if required.",
+        "Default": {
+          "Type": "string"
+        }
+      },
+      "yum_root_depth": {
+        "Type": "Int",
+        "Optional": true,
+        "Description": "The depth, relative to the repository's root folder, where RPM metadata is created. This is useful when your repository contains multiple RPM repositories under parallel hierarchies. For example, if your RPMs are stored under 'fedora/linux/$releasever/$basearch', specify a depth of 4.",
+        "Default": {
+          "Type": "int",
+          "Value": "0"
+        }
+      }
+    },
+    "artifactory_oauth_settings": {
+      "allow_user_to_access_profile": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "enable": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "true"
+        }
+      },
+      "oauth_provider": {
+        "Type": "Set",
+        "Required": true,
+        "MinItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "api_url": {
+              "Type": "String",
+              "Required": true
+            },
+            "auth_url": {
+              "Type": "String",
+              "Required": true
+            },
+            "client_id": {
+              "Type": "String",
+              "Required": true
+            },
+            "client_secret": {
+              "Type": "String",
+              "Required": true
+            },
+            "enabled": {
+              "Type": "Bool",
+              "Optional": true,
+              "Default": {
+                "Type": "bool",
+                "Value": "true"
+              }
+            },
+            "name": {
+              "Type": "String",
+              "Required": true
+            },
+            "token_url": {
+              "Type": "String",
+              "Required": true
+            },
+            "type": {
+              "Type": "String",
+              "Required": true
+            }
+          }
+        }
+      },
+      "persist_users": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      }
+    },
+    "artifactory_permission_target": {
+      "build": {
+        "Type": "List",
+        "Optional": true,
+        "MaxItems": 1,
+        "MinItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "actions": {
+              "Type": "List",
+              "Optional": true,
+              "MaxItems": 1,
+              "MinItems": 1,
+              "IsBlock": true,
+              "ConfigImplicitMode": "Block",
+              "Elem": {
+                "Type": "SchemaInfo",
+                "Info": {
+                  "groups": {
+                    "Type": "Set",
+                    "Optional": true,
+                    "IsBlock": true,
+                    "ConfigImplicitMode": "Block",
+                    "Elem": {
+                      "Type": "SchemaInfo",
+                      "Info": {
+                        "name": {
+                          "Type": "String",
+                          "Required": true
+                        },
+                        "permissions": {
+                          "Type": "Set",
+                          "Required": true,
+                          "ConfigImplicitMode": "Attr",
+                          "Elem": {
+                            "Type": "SchemaElements",
+                            "ElementsType": "String"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "users": {
+                    "Type": "Set",
+                    "Optional": true,
+                    "IsBlock": true,
+                    "ConfigImplicitMode": "Block",
+                    "Elem": {
+                      "Type": "SchemaInfo",
+                      "Info": {
+                        "name": {
+                          "Type": "String",
+                          "Required": true
+                        },
+                        "permissions": {
+                          "Type": "Set",
+                          "Required": true,
+                          "ConfigImplicitMode": "Attr",
+                          "Elem": {
+                            "Type": "SchemaElements",
+                            "ElementsType": "String"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "excludes_pattern": {
+              "Type": "Set",
+              "Optional": true,
+              "Description": "The default value will be [] if nothing is supplied",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "includes_pattern": {
+              "Type": "Set",
+              "Optional": true,
+              "Description": "The default value will be [\"\"] if nothing is supplied",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "repositories": {
+              "Type": "Set",
+              "Required": true,
+              "Description": "This can only be 1 value: \"artifactory-build-info\", and currently, validation of sets/lists is not allowed. Artifactory will reject the request if you change this",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            }
+          }
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "release_bundle": {
+        "Type": "List",
+        "Optional": true,
+        "MaxItems": 1,
+        "MinItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "actions": {
+              "Type": "List",
+              "Optional": true,
+              "MaxItems": 1,
+              "MinItems": 1,
+              "IsBlock": true,
+              "ConfigImplicitMode": "Block",
+              "Elem": {
+                "Type": "SchemaInfo",
+                "Info": {
+                  "groups": {
+                    "Type": "Set",
+                    "Optional": true,
+                    "IsBlock": true,
+                    "ConfigImplicitMode": "Block",
+                    "Elem": {
+                      "Type": "SchemaInfo",
+                      "Info": {
+                        "name": {
+                          "Type": "String",
+                          "Required": true
+                        },
+                        "permissions": {
+                          "Type": "Set",
+                          "Required": true,
+                          "ConfigImplicitMode": "Attr",
+                          "Elem": {
+                            "Type": "SchemaElements",
+                            "ElementsType": "String"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "users": {
+                    "Type": "Set",
+                    "Optional": true,
+                    "IsBlock": true,
+                    "ConfigImplicitMode": "Block",
+                    "Elem": {
+                      "Type": "SchemaInfo",
+                      "Info": {
+                        "name": {
+                          "Type": "String",
+                          "Required": true
+                        },
+                        "permissions": {
+                          "Type": "Set",
+                          "Required": true,
+                          "ConfigImplicitMode": "Attr",
+                          "Elem": {
+                            "Type": "SchemaElements",
+                            "ElementsType": "String"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "excludes_pattern": {
+              "Type": "Set",
+              "Optional": true,
+              "Description": "The default value will be [] if nothing is supplied",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "includes_pattern": {
+              "Type": "Set",
+              "Optional": true,
+              "Description": "The default value will be [\"\"] if nothing is supplied",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "repositories": {
+              "Type": "Set",
+              "Required": true,
+              "Description": "This can only be 1 value: \"artifactory-build-info\", and currently, validation of sets/lists is not allowed. Artifactory will reject the request if you change this",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            }
+          }
+        }
+      },
+      "repo": {
+        "Type": "List",
+        "Optional": true,
+        "MaxItems": 1,
+        "MinItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "actions": {
+              "Type": "List",
+              "Optional": true,
+              "MaxItems": 1,
+              "MinItems": 1,
+              "IsBlock": true,
+              "ConfigImplicitMode": "Block",
+              "Elem": {
+                "Type": "SchemaInfo",
+                "Info": {
+                  "groups": {
+                    "Type": "Set",
+                    "Optional": true,
+                    "IsBlock": true,
+                    "ConfigImplicitMode": "Block",
+                    "Elem": {
+                      "Type": "SchemaInfo",
+                      "Info": {
+                        "name": {
+                          "Type": "String",
+                          "Required": true
+                        },
+                        "permissions": {
+                          "Type": "Set",
+                          "Required": true,
+                          "ConfigImplicitMode": "Attr",
+                          "Elem": {
+                            "Type": "SchemaElements",
+                            "ElementsType": "String"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "users": {
+                    "Type": "Set",
+                    "Optional": true,
+                    "IsBlock": true,
+                    "ConfigImplicitMode": "Block",
+                    "Elem": {
+                      "Type": "SchemaInfo",
+                      "Info": {
+                        "name": {
+                          "Type": "String",
+                          "Required": true
+                        },
+                        "permissions": {
+                          "Type": "Set",
+                          "Required": true,
+                          "ConfigImplicitMode": "Attr",
+                          "Elem": {
+                            "Type": "SchemaElements",
+                            "ElementsType": "String"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "excludes_pattern": {
+              "Type": "Set",
+              "Optional": true,
+              "Description": "The default value will be [] if nothing is supplied",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "includes_pattern": {
+              "Type": "Set",
+              "Optional": true,
+              "Description": "The default value will be [\"\"] if nothing is supplied",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "repositories": {
+              "Type": "Set",
+              "Required": true,
+              "Description": "This can only be 1 value: \"artifactory-build-info\", and currently, validation of sets/lists is not allowed. Artifactory will reject the request if you change this",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            }
+          }
+        }
+      }
+    },
+    "artifactory_permission_targets": {
+      "build": {
+        "Type": "List",
+        "Optional": true,
+        "MaxItems": 1,
+        "MinItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "actions": {
+              "Type": "List",
+              "Optional": true,
+              "MaxItems": 1,
+              "MinItems": 1,
+              "IsBlock": true,
+              "ConfigImplicitMode": "Block",
+              "Elem": {
+                "Type": "SchemaInfo",
+                "Info": {
+                  "groups": {
+                    "Type": "Set",
+                    "Optional": true,
+                    "IsBlock": true,
+                    "ConfigImplicitMode": "Block",
+                    "Elem": {
+                      "Type": "SchemaInfo",
+                      "Info": {
+                        "name": {
+                          "Type": "String",
+                          "Required": true
+                        },
+                        "permissions": {
+                          "Type": "Set",
+                          "Required": true,
+                          "ConfigImplicitMode": "Attr",
+                          "Elem": {
+                            "Type": "SchemaElements",
+                            "ElementsType": "String"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "users": {
+                    "Type": "Set",
+                    "Optional": true,
+                    "IsBlock": true,
+                    "ConfigImplicitMode": "Block",
+                    "Elem": {
+                      "Type": "SchemaInfo",
+                      "Info": {
+                        "name": {
+                          "Type": "String",
+                          "Required": true
+                        },
+                        "permissions": {
+                          "Type": "Set",
+                          "Required": true,
+                          "ConfigImplicitMode": "Attr",
+                          "Elem": {
+                            "Type": "SchemaElements",
+                            "ElementsType": "String"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "excludes_pattern": {
+              "Type": "Set",
+              "Optional": true,
+              "Description": "The default value will be [] if nothing is supplied",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "includes_pattern": {
+              "Type": "Set",
+              "Optional": true,
+              "Description": "The default value will be [\"\"] if nothing is supplied",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "repositories": {
+              "Type": "Set",
+              "Required": true,
+              "Description": "This can only be 1 value: \"artifactory-build-info\", and currently, validation of sets/lists is not allowed. Artifactory will reject the request if you change this",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            }
+          }
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "release_bundle": {
+        "Type": "List",
+        "Optional": true,
+        "MaxItems": 1,
+        "MinItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "actions": {
+              "Type": "List",
+              "Optional": true,
+              "MaxItems": 1,
+              "MinItems": 1,
+              "IsBlock": true,
+              "ConfigImplicitMode": "Block",
+              "Elem": {
+                "Type": "SchemaInfo",
+                "Info": {
+                  "groups": {
+                    "Type": "Set",
+                    "Optional": true,
+                    "IsBlock": true,
+                    "ConfigImplicitMode": "Block",
+                    "Elem": {
+                      "Type": "SchemaInfo",
+                      "Info": {
+                        "name": {
+                          "Type": "String",
+                          "Required": true
+                        },
+                        "permissions": {
+                          "Type": "Set",
+                          "Required": true,
+                          "ConfigImplicitMode": "Attr",
+                          "Elem": {
+                            "Type": "SchemaElements",
+                            "ElementsType": "String"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "users": {
+                    "Type": "Set",
+                    "Optional": true,
+                    "IsBlock": true,
+                    "ConfigImplicitMode": "Block",
+                    "Elem": {
+                      "Type": "SchemaInfo",
+                      "Info": {
+                        "name": {
+                          "Type": "String",
+                          "Required": true
+                        },
+                        "permissions": {
+                          "Type": "Set",
+                          "Required": true,
+                          "ConfigImplicitMode": "Attr",
+                          "Elem": {
+                            "Type": "SchemaElements",
+                            "ElementsType": "String"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "excludes_pattern": {
+              "Type": "Set",
+              "Optional": true,
+              "Description": "The default value will be [] if nothing is supplied",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "includes_pattern": {
+              "Type": "Set",
+              "Optional": true,
+              "Description": "The default value will be [\"\"] if nothing is supplied",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "repositories": {
+              "Type": "Set",
+              "Required": true,
+              "Description": "This can only be 1 value: \"artifactory-build-info\", and currently, validation of sets/lists is not allowed. Artifactory will reject the request if you change this",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            }
+          }
+        }
+      },
+      "repo": {
+        "Type": "List",
+        "Optional": true,
+        "MaxItems": 1,
+        "MinItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "actions": {
+              "Type": "List",
+              "Optional": true,
+              "MaxItems": 1,
+              "MinItems": 1,
+              "IsBlock": true,
+              "ConfigImplicitMode": "Block",
+              "Elem": {
+                "Type": "SchemaInfo",
+                "Info": {
+                  "groups": {
+                    "Type": "Set",
+                    "Optional": true,
+                    "IsBlock": true,
+                    "ConfigImplicitMode": "Block",
+                    "Elem": {
+                      "Type": "SchemaInfo",
+                      "Info": {
+                        "name": {
+                          "Type": "String",
+                          "Required": true
+                        },
+                        "permissions": {
+                          "Type": "Set",
+                          "Required": true,
+                          "ConfigImplicitMode": "Attr",
+                          "Elem": {
+                            "Type": "SchemaElements",
+                            "ElementsType": "String"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "users": {
+                    "Type": "Set",
+                    "Optional": true,
+                    "IsBlock": true,
+                    "ConfigImplicitMode": "Block",
+                    "Elem": {
+                      "Type": "SchemaInfo",
+                      "Info": {
+                        "name": {
+                          "Type": "String",
+                          "Required": true
+                        },
+                        "permissions": {
+                          "Type": "Set",
+                          "Required": true,
+                          "ConfigImplicitMode": "Attr",
+                          "Elem": {
+                            "Type": "SchemaElements",
+                            "ElementsType": "String"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "excludes_pattern": {
+              "Type": "Set",
+              "Optional": true,
+              "Description": "The default value will be [] if nothing is supplied",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "includes_pattern": {
+              "Type": "Set",
+              "Optional": true,
+              "Description": "The default value will be [\"\"] if nothing is supplied",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "repositories": {
+              "Type": "Set",
+              "Required": true,
+              "Description": "This can only be 1 value: \"artifactory-build-info\", and currently, validation of sets/lists is not allowed. Artifactory will reject the request if you change this",
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            }
+          }
+        }
+      }
+    },
+    "artifactory_remote_cargo_repository": {
+      "allow_any_host_auth": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "Also known as 'Lenient Host Authentication', Allow credentials of this repository to be used on requests redirected to any other host.",
+        "Computed": true
+      },
+      "anonymous_access": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "(On the UI: Anonymous download and search) Cargo client does not send credentials when performing download and search for crates. Enable this to allow anonymous access to these resources (only), note that this will override the security anonymous access option."
+      },
+      "assumed_offline_period_secs": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "blacked_out": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "(A.K.A 'Ignore Repository' on the UI) When set, the repository or its local cache do not participate in artifact resolution.",
+        "Computed": true
+      },
+      "block_mismatching_mime_types": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "Before caching an artifact, Artifactory first sends a HEAD request to the remote resource. In some remote resources, HEAD requests are disallowed and therefore rejected, even though downloading the artifact is allowed. When checked, Artifactory will bypass the HEAD request and cache the artifact directly using a GET request.",
+        "Computed": true
+      },
+      "bypass_head_requests": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "Before caching an artifact, Artifactory first sends a HEAD request to the remote resource. In some remote resources, HEAD requests are disallowed and therefore rejected, even though downloading the artifact is allowed. When checked, Artifactory will bypass the HEAD request and cache the artifact directly using a GET request.",
+        "Computed": true
+      },
+      "client_tls_certificate": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "content_synchronisation": {
+        "Type": "List",
+        "Optional": true,
+        "Computed": true,
+        "MaxItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "enabled": {
+              "Type": "Bool",
+              "Optional": true
+            }
+          }
+        }
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "enable_cookie_management": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "Enables cookie management if the remote repository uses cookies to manage client state.",
+        "Computed": true
+      },
+      "excludes_pattern": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "failed_retrieval_cache_period_secs": {
+        "Type": "Int",
+        "Optional": true,
+        "Computed": true,
+        "Deprecated": "This field is not returned in a get payload but is offered on the UI. It's inserted here for inclusive and informational reasons. It does not function"
+      },
+      "git_registry_url": {
+        "Type": "String",
+        "Required": true,
+        "Description": "This is the index url, expected to be a git repository. for remote artifactory use \"arturl/git/repokey.git\""
+      },
+      "hard_fail": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "includes_pattern": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "key": {
+        "Type": "String",
+        "Required": true
+      },
+      "local_address": {
+        "Type": "String",
+        "Optional": true
+      },
+      "missed_cache_period_seconds": {
+        "Type": "Int",
+        "Optional": true,
+        "Description": "This is actually the missedRetrievalCachePeriodSecs in the API",
+        "Computed": true
+      },
+      "notes": {
+        "Type": "String",
+        "Optional": true
+      },
+      "offline": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "If set, Artifactory does not try to fetch remote artifacts. Only locally-cached artifacts are retrieved.",
+        "Computed": true
+      },
+      "package_type": {
+        "Type": "String",
+        "Computed": true
+      },
+      "password": {
+        "Type": "String",
+        "Optional": true
+      },
+      "propagate_query_params": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "property_sets": {
+        "Type": "Set",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "proxy": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "repo_layout_ref": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "retrieval_cache_period_seconds": {
+        "Type": "Int",
+        "Optional": true,
+        "Description": "The metadataRetrievalTimeoutSecs field not allowed to be bigger then retrievalCachePeriodSecs field.",
+        "Computed": true,
+        "DefaultFunc": "UNKNOWN"
+      },
+      "share_configuration": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "socket_timeout_millis": {
+        "Type": "Int",
+        "Optional": true,
+        "Computed": true
+      },
+      "store_artifacts_locally": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "When set, the repository should store cached artifacts locally. When not set, artifacts are not stored locally, and direct repository-to-client streaming is used. This can be useful for multi-server setups over a high-speed LAN, with one Artifactory caching certain data on central storage, and streaming it directly to satellite pass-though Artifactory servers.",
+        "Computed": true
+      },
+      "synchronize_properties": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "When set, remote artifacts are fetched along with their properties.",
+        "Computed": true
+      },
+      "unused_artifacts_cleanup_period_enabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "unused_artifacts_cleanup_period_hours": {
+        "Type": "Int",
+        "Optional": true,
+        "Computed": true
+      },
+      "url": {
+        "Type": "String",
+        "Required": true
+      },
+      "username": {
+        "Type": "String",
+        "Optional": true
+      },
+      "xray_index": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      }
+    },
+    "artifactory_remote_docker_repository": {
+      "allow_any_host_auth": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "Also known as 'Lenient Host Authentication', Allow credentials of this repository to be used on requests redirected to any other host.",
+        "Computed": true
+      },
+      "assumed_offline_period_secs": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "blacked_out": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "(A.K.A 'Ignore Repository' on the UI) When set, the repository or its local cache do not participate in artifact resolution.",
+        "Computed": true
+      },
+      "block_mismatching_mime_types": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "Before caching an artifact, Artifactory first sends a HEAD request to the remote resource. In some remote resources, HEAD requests are disallowed and therefore rejected, even though downloading the artifact is allowed. When checked, Artifactory will bypass the HEAD request and cache the artifact directly using a GET request.",
+        "Computed": true
+      },
+      "block_pushing_schema1": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "When set, Artifactory will block the pulling of Docker images with manifest v2 schema 1 from the remote repository (i.e. the upstream). It will be possible to pull images with manifest v2 schema 1 that exist in the cache.",
+        "Computed": true
+      },
+      "bypass_head_requests": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "Before caching an artifact, Artifactory first sends a HEAD request to the remote resource. In some remote resources, HEAD requests are disallowed and therefore rejected, even though downloading the artifact is allowed. When checked, Artifactory will bypass the HEAD request and cache the artifact directly using a GET request.",
+        "Computed": true
+      },
+      "client_tls_certificate": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "content_synchronisation": {
+        "Type": "List",
+        "Optional": true,
+        "Computed": true,
+        "MaxItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "enabled": {
+              "Type": "Bool",
+              "Optional": true
+            }
+          }
+        }
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "enable_cookie_management": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "Enables cookie management if the remote repository uses cookies to manage client state.",
+        "Computed": true
+      },
+      "enable_token_authentication": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "Enable token (Bearer) based authentication.",
+        "Computed": true
+      },
+      "excludes_pattern": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "external_dependencies_enabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "Also known as 'Foreign Layers Caching' on the UI",
+        "Computed": true
+      },
+      "external_dependencies_patterns": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "An allow list of Ant-style path patterns that determine which remote VCS roots Artifactory will follow to download remote modules from, when presented with 'go-import' meta tags in the remote repository response. By default, this is set to '**', which means that remote modules may be downloaded from any external VCS source.",
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "failed_retrieval_cache_period_secs": {
+        "Type": "Int",
+        "Optional": true,
+        "Computed": true,
+        "Deprecated": "This field is not returned in a get payload but is offered on the UI. It's inserted here for inclusive and informational reasons. It does not function"
+      },
+      "hard_fail": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "includes_pattern": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "key": {
+        "Type": "String",
+        "Required": true
+      },
+      "local_address": {
+        "Type": "String",
+        "Optional": true
+      },
+      "missed_cache_period_seconds": {
+        "Type": "Int",
+        "Optional": true,
+        "Description": "This is actually the missedRetrievalCachePeriodSecs in the API",
+        "Computed": true
+      },
+      "notes": {
+        "Type": "String",
+        "Optional": true
+      },
+      "offline": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "If set, Artifactory does not try to fetch remote artifacts. Only locally-cached artifacts are retrieved.",
+        "Computed": true
+      },
+      "package_type": {
+        "Type": "String",
+        "Computed": true
+      },
+      "password": {
+        "Type": "String",
+        "Optional": true
+      },
+      "propagate_query_params": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "property_sets": {
+        "Type": "Set",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "proxy": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "repo_layout_ref": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "retrieval_cache_period_seconds": {
+        "Type": "Int",
+        "Optional": true,
+        "Description": "The metadataRetrievalTimeoutSecs field not allowed to be bigger then retrievalCachePeriodSecs field.",
+        "Computed": true,
+        "DefaultFunc": "UNKNOWN"
+      },
+      "share_configuration": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "socket_timeout_millis": {
+        "Type": "Int",
+        "Optional": true,
+        "Computed": true
+      },
+      "store_artifacts_locally": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "When set, the repository should store cached artifacts locally. When not set, artifacts are not stored locally, and direct repository-to-client streaming is used. This can be useful for multi-server setups over a high-speed LAN, with one Artifactory caching certain data on central storage, and streaming it directly to satellite pass-though Artifactory servers.",
+        "Computed": true
+      },
+      "synchronize_properties": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "When set, remote artifacts are fetched along with their properties.",
+        "Computed": true
+      },
+      "unused_artifacts_cleanup_period_enabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "unused_artifacts_cleanup_period_hours": {
+        "Type": "Int",
+        "Optional": true,
+        "Computed": true
+      },
+      "url": {
+        "Type": "String",
+        "Required": true
+      },
+      "username": {
+        "Type": "String",
+        "Optional": true
+      },
+      "xray_index": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      }
+    },
+    "artifactory_remote_helm_repository": {
+      "allow_any_host_auth": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "Also known as 'Lenient Host Authentication', Allow credentials of this repository to be used on requests redirected to any other host.",
+        "Computed": true
+      },
+      "assumed_offline_period_secs": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "blacked_out": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "(A.K.A 'Ignore Repository' on the UI) When set, the repository or its local cache do not participate in artifact resolution.",
+        "Computed": true
+      },
+      "block_mismatching_mime_types": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "Before caching an artifact, Artifactory first sends a HEAD request to the remote resource. In some remote resources, HEAD requests are disallowed and therefore rejected, even though downloading the artifact is allowed. When checked, Artifactory will bypass the HEAD request and cache the artifact directly using a GET request.",
+        "Computed": true
+      },
+      "bypass_head_requests": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "Before caching an artifact, Artifactory first sends a HEAD request to the remote resource. In some remote resources, HEAD requests are disallowed and therefore rejected, even though downloading the artifact is allowed. When checked, Artifactory will bypass the HEAD request and cache the artifact directly using a GET request.",
+        "Computed": true
+      },
+      "client_tls_certificate": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "content_synchronisation": {
+        "Type": "List",
+        "Optional": true,
+        "Computed": true,
+        "MaxItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "enabled": {
+              "Type": "Bool",
+              "Optional": true
+            }
+          }
+        }
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "enable_cookie_management": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "Enables cookie management if the remote repository uses cookies to manage client state.",
+        "Computed": true
+      },
+      "excludes_pattern": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "failed_retrieval_cache_period_secs": {
+        "Type": "Int",
+        "Optional": true,
+        "Computed": true,
+        "Deprecated": "This field is not returned in a get payload but is offered on the UI. It's inserted here for inclusive and informational reasons. It does not function"
+      },
+      "hard_fail": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "helm_charts_base_url": {
+        "Type": "String",
+        "Required": true,
+        "Description": "Base URL for the translation of chart source URLs in the index.yaml of virtual repos. Artifactory will only translate URLs matching the index.yamls hostname or URLs starting with this base url."
+      },
+      "includes_pattern": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "key": {
+        "Type": "String",
+        "Required": true
+      },
+      "local_address": {
+        "Type": "String",
+        "Optional": true
+      },
+      "missed_cache_period_seconds": {
+        "Type": "Int",
+        "Optional": true,
+        "Description": "This is actually the missedRetrievalCachePeriodSecs in the API",
+        "Computed": true
+      },
+      "notes": {
+        "Type": "String",
+        "Optional": true
+      },
+      "offline": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "If set, Artifactory does not try to fetch remote artifacts. Only locally-cached artifacts are retrieved.",
+        "Computed": true
+      },
+      "package_type": {
+        "Type": "String",
+        "Computed": true
+      },
+      "password": {
+        "Type": "String",
+        "Optional": true
+      },
+      "propagate_query_params": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "property_sets": {
+        "Type": "Set",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "proxy": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "repo_layout_ref": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "retrieval_cache_period_seconds": {
+        "Type": "Int",
+        "Optional": true,
+        "Description": "The metadataRetrievalTimeoutSecs field not allowed to be bigger then retrievalCachePeriodSecs field.",
+        "Computed": true,
+        "DefaultFunc": "UNKNOWN"
+      },
+      "share_configuration": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "socket_timeout_millis": {
+        "Type": "Int",
+        "Optional": true,
+        "Computed": true
+      },
+      "store_artifacts_locally": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "When set, the repository should store cached artifacts locally. When not set, artifacts are not stored locally, and direct repository-to-client streaming is used. This can be useful for multi-server setups over a high-speed LAN, with one Artifactory caching certain data on central storage, and streaming it directly to satellite pass-though Artifactory servers.",
+        "Computed": true
+      },
+      "synchronize_properties": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "When set, remote artifacts are fetched along with their properties.",
+        "Computed": true
+      },
+      "unused_artifacts_cleanup_period_enabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "unused_artifacts_cleanup_period_hours": {
+        "Type": "Int",
+        "Optional": true,
+        "Computed": true
+      },
+      "url": {
+        "Type": "String",
+        "Required": true
+      },
+      "username": {
+        "Type": "String",
+        "Optional": true
+      },
+      "xray_index": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      }
+    },
+    "artifactory_remote_repository": {
+      "allow_any_host_auth": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "blacked_out": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "block_mismatching_mime_types": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "bower_registry_url": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "bypass_head_requests": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "client_tls_certificate": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "content_synchronisation": {
+        "Type": "List",
+        "Optional": true,
+        "Computed": true,
+        "MaxItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "enabled": {
+              "Type": "Bool",
+              "Optional": true
+            }
+          }
+        }
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true
+      },
+      "download_context_path": {
+        "Type": "String",
+        "Optional": true
+      },
+      "enable_cookie_management": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "enable_token_authentication": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "excludes_pattern": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "feed_context_path": {
+        "Type": "String",
+        "Optional": true
+      },
+      "fetch_jars_eagerly": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "fetch_sources_eagerly": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "force_nuget_authentication": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "handle_releases": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "handle_snapshots": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "hard_fail": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "includes_pattern": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "key": {
+        "Type": "String",
+        "Required": true
+      },
+      "local_address": {
+        "Type": "String",
+        "Optional": true
+      },
+      "max_unique_snapshots": {
+        "Type": "Int",
+        "Optional": true,
+        "Computed": true
+      },
+      "missed_cache_period_seconds": {
+        "Type": "Int",
+        "Optional": true,
+        "Computed": true
+      },
+      "notes": {
+        "Type": "String",
+        "Optional": true
+      },
+      "offline": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "package_type": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string",
+          "Value": "generic"
+        }
+      },
+      "password": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "This field can only be used if encryption has been turned off. TF will track the field, but it will be encrypted"
+      },
+      "propagate_query_params": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true,
+        "DefaultFunc": "UNKNOWN"
+      },
+      "property_sets": {
+        "Type": "Set",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "proxy": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "pypi_registry_url": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "remote_repo_checksum_policy_type": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "repo_layout_ref": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "retrieval_cache_period_seconds": {
+        "Type": "Int",
+        "Optional": true,
+        "Description": "The metadataRetrievalTimeoutSecs field not allowed to be bigger then retrievalCachePeriodSecs field.",
+        "Computed": true,
+        "DefaultFunc": "UNKNOWN"
+      },
+      "share_configuration": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "socket_timeout_millis": {
+        "Type": "Int",
+        "Optional": true,
+        "Computed": true
+      },
+      "store_artifacts_locally": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "suppress_pom_consistency_checks": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "synchronize_properties": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "unused_artifacts_cleanup_period_hours": {
+        "Type": "Int",
+        "Optional": true,
+        "Computed": true
+      },
+      "url": {
+        "Type": "String",
+        "Required": true
+      },
+      "username": {
+        "Type": "String",
+        "Optional": true
+      },
+      "v3_feed_url": {
+        "Type": "String",
+        "Optional": true
+      },
+      "vcs_git_download_url": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "vcs_git_provider": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "vcs_type": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "xray_index": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      }
+    },
+    "artifactory_replication_config": {
+      "cron_exp": {
+        "Type": "String",
+        "Required": true
+      },
+      "enable_event_replication": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "replications": {
+        "Type": "List",
+        "Optional": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "enabled": {
+              "Type": "Bool",
+              "Optional": true,
+              "Computed": true
+            },
+            "password": {
+              "Type": "String",
+              "Description": "If a password is used to create the resource, it will be returned as encrypted and this will become the new state.Practically speaking, what this means is that, the password can only be set, not gotten. ",
+              "Computed": true
+            },
+            "path_prefix": {
+              "Type": "String",
+              "Optional": true
+            },
+            "socket_timeout_millis": {
+              "Type": "Int",
+              "Optional": true,
+              "Computed": true
+            },
+            "sync_deletes": {
+              "Type": "Bool",
+              "Optional": true,
+              "Computed": true
+            },
+            "sync_properties": {
+              "Type": "Bool",
+              "Optional": true,
+              "Computed": true
+            },
+            "sync_statistics": {
+              "Type": "Bool",
+              "Optional": true,
+              "Computed": true
+            },
+            "url": {
+              "Type": "String",
+              "Optional": true
+            },
+            "username": {
+              "Type": "String",
+              "Optional": true
+            }
+          }
+        }
+      },
+      "repo_key": {
+        "Type": "String",
+        "Required": true
+      }
+    },
+    "artifactory_saml_settings": {
+      "allow_user_to_access_profile": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "true"
+        }
+      },
+      "auto_redirect": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "certificate": {
+        "Type": "String",
+        "Optional": true
+      },
+      "email_attribute": {
+        "Type": "String",
+        "Optional": true
+      },
+      "enable": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "true"
+        }
+      },
+      "group_attribute": {
+        "Type": "String",
+        "Optional": true
+      },
+      "login_url": {
+        "Type": "String",
+        "Required": true
+      },
+      "logout_url": {
+        "Type": "String",
+        "Required": true
+      },
+      "no_auto_user_creation": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "service_provider_name": {
+        "Type": "String",
+        "Required": true
+      },
+      "sync_groups": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "verify_audience_restriction": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "true"
+        }
+      }
+    },
+    "artifactory_single_replication_config": {
+      "cron_exp": {
+        "Type": "String",
+        "Required": true
+      },
+      "enable_event_replication": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "enabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "password": {
+        "Type": "String",
+        "Description": "If a password is used to create the resource, it will be returned as encrypted and this will become the new state.Practically speaking, what this means is that, the password can only be set, not gotten. ",
+        "Computed": true
+      },
+      "path_prefix": {
+        "Type": "String",
+        "Optional": true
+      },
+      "repo_key": {
+        "Type": "String",
+        "Required": true
+      },
+      "socket_timeout_millis": {
+        "Type": "Int",
+        "Optional": true,
+        "Computed": true
+      },
+      "sync_deletes": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "sync_properties": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "sync_statistics": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "url": {
+        "Type": "String",
+        "Optional": true
+      },
+      "username": {
+        "Type": "String",
+        "Optional": true
+      }
+    },
+    "artifactory_user": {
+      "admin": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "disable_ui_access": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "email": {
+        "Type": "String",
+        "Required": true
+      },
+      "groups": {
+        "Type": "Set",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "internal_password_disabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "password": {
+        "Type": "String",
+        "Optional": true
+      },
+      "profile_updatable": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      }
+    },
+    "artifactory_virtual_go_repository": {
+      "artifactory_requests_can_retrieve_remote_artifacts": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "default_deployment_repo": {
+        "Type": "String",
+        "Optional": true
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true
+      },
+      "excludes_pattern": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "List of artifact patterns to exclude when evaluating artifact requests, in the form of x/y/**/z/*.By default no artifacts are excluded."
+      },
+      "external_dependencies_enabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "When set (default), Artifactory will automatically follow remote VCS roots in 'go-import' meta tags to download remote modules.",
+        "Computed": true
+      },
+      "external_dependencies_patterns": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "An allow list of Ant-style path patterns that determine which remote VCS roots Artifactory will follow to download remote modules from, when presented with 'go-import' meta tags in the remote repository response. By default, this is set to '**', which means that remote modules may be downloaded from any external VCS source.",
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "includes_pattern": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "List of artifact patterns to include when evaluating artifact requests in the form of x/y/**/z/*. When used, only artifacts matching one of the include patterns are served. By default, all artifacts are included (**/*).",
+        "Default": {
+          "Type": "string",
+          "Value": "**/*"
+        }
+      },
+      "key": {
+        "Type": "String",
+        "Required": true
+      },
+      "notes": {
+        "Type": "String",
+        "Optional": true
+      },
+      "package_type": {
+        "Type": "String",
+        "Computed": true
+      },
+      "repo_layout_ref": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "repositories": {
+        "Type": "List",
+        "Required": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      }
+    },
+    "artifactory_virtual_maven_repository": {
+      "artifactory_requests_can_retrieve_remote_artifacts": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "default_deployment_repo": {
+        "Type": "String",
+        "Optional": true
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true
+      },
+      "excludes_pattern": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "List of artifact patterns to exclude when evaluating artifact requests, in the form of x/y/**/z/*.By default no artifacts are excluded."
+      },
+      "force_maven_authentication": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "User authentication is required when accessing the repository. An anonymous request will display an HTTP 401 error. This is also enforced when aggregated repositories support anonymous requests.",
+        "Computed": true
+      },
+      "includes_pattern": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "List of artifact patterns to include when evaluating artifact requests in the form of x/y/**/z/*. When used, only artifacts matching one of the include patterns are served. By default, all artifacts are included (**/*).",
+        "Default": {
+          "Type": "string",
+          "Value": "**/*"
+        }
+      },
+      "key": {
+        "Type": "String",
+        "Required": true
+      },
+      "key_pair": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "The keypair used to sign artifacts"
+      },
+      "notes": {
+        "Type": "String",
+        "Optional": true
+      },
+      "package_type": {
+        "Type": "String",
+        "Computed": true
+      },
+      "pom_repository_references_cleanup_policy": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "(1: discard_active_reference) Discard Active References - Removes repository elements that are declared directly under project or under a profile in the same POM that is activeByDefault.\n(2: discard_any_reference) Discard Any References - Removes all repository elements regardless of whether they are included in an active profile or not.\n(3: nothing) Nothing - Does not remove any repository elements declared in the POM.",
+        "Computed": true
+      },
+      "repo_layout_ref": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "repositories": {
+        "Type": "List",
+        "Required": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      }
+    },
+    "artifactory_virtual_repository": {
+      "artifactory_requests_can_retrieve_remote_artifacts": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "debian_trivial_layout": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "default_deployment_repo": {
+        "Type": "String",
+        "Optional": true
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true
+      },
+      "excludes_pattern": {
+        "Type": "String",
+        "Optional": true
+      },
+      "force_nuget_authentication": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "includes_pattern": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string",
+          "Value": "**/*"
+        }
+      },
+      "key": {
+        "Type": "String",
+        "Required": true
+      },
+      "key_pair": {
+        "Type": "String",
+        "Optional": true
+      },
+      "notes": {
+        "Type": "String",
+        "Optional": true
+      },
+      "package_type": {
+        "Type": "String",
+        "Required": true
+      },
+      "pom_repository_references_cleanup_policy": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "repo_layout_ref": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "repositories": {
+        "Type": "List",
+        "Required": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      }
+    },
+    "artifactory_xray_policy": {
+      "author": {
+        "Type": "String",
+        "Computed": true
+      },
+      "created": {
+        "Type": "String",
+        "Computed": true
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true
+      },
+      "modified": {
+        "Type": "String",
+        "Computed": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "rules": {
+        "Type": "List",
+        "Required": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "actions": {
+              "Type": "List",
+              "Optional": true,
+              "MaxItems": 1,
+              "IsBlock": true,
+              "ConfigImplicitMode": "Block",
+              "Elem": {
+                "Type": "SchemaInfo",
+                "Info": {
+                  "block_download": {
+                    "Type": "List",
+                    "Required": true,
+                    "MaxItems": 1,
+                    "IsBlock": true,
+                    "ConfigImplicitMode": "Block",
+                    "Elem": {
+                      "Type": "SchemaInfo",
+                      "Info": {
+                        "active": {
+                          "Type": "Bool",
+                          "Required": true
+                        },
+                        "unscanned": {
+                          "Type": "Bool",
+                          "Required": true
+                        }
+                      }
+                    }
+                  },
+                  "custom_severity": {
+                    "Type": "String",
+                    "Optional": true
+                  },
+                  "fail_build": {
+                    "Type": "Bool",
+                    "Optional": true
+                  },
+                  "mails": {
+                    "Type": "List",
+                    "Optional": true,
+                    "ConfigImplicitMode": "Attr",
+                    "Elem": {
+                      "Type": "SchemaElements",
+                      "ElementsType": "String"
+                    }
+                  },
+                  "webhooks": {
+                    "Type": "List",
+                    "Optional": true,
+                    "ConfigImplicitMode": "Attr",
+                    "Elem": {
+                      "Type": "SchemaElements",
+                      "ElementsType": "String"
+                    }
+                  }
+                }
+              }
+            },
+            "criteria": {
+              "Type": "List",
+              "Required": true,
+              "MaxItems": 1,
+              "MinItems": 1,
+              "IsBlock": true,
+              "ConfigImplicitMode": "Block",
+              "Elem": {
+                "Type": "SchemaInfo",
+                "Info": {
+                  "allow_unknown": {
+                    "Type": "Bool",
+                    "Optional": true
+                  },
+                  "allowed_licenses": {
+                    "Type": "List",
+                    "Optional": true,
+                    "ConfigImplicitMode": "Attr",
+                    "Elem": {
+                      "Type": "SchemaElements",
+                      "ElementsType": "String"
+                    }
+                  },
+                  "banned_licenses": {
+                    "Type": "List",
+                    "Optional": true,
+                    "ConfigImplicitMode": "Attr",
+                    "Elem": {
+                      "Type": "SchemaElements",
+                      "ElementsType": "String"
+                    }
+                  },
+                  "cvss_range": {
+                    "Type": "List",
+                    "Optional": true,
+                    "MaxItems": 1,
+                    "IsBlock": true,
+                    "ConfigImplicitMode": "Block",
+                    "Elem": {
+                      "Type": "SchemaInfo",
+                      "Info": {
+                        "from": {
+                          "Type": "Int",
+                          "Required": true
+                        },
+                        "to": {
+                          "Type": "Int",
+                          "Required": true
+                        }
+                      }
+                    }
+                  },
+                  "min_severity": {
+                    "Type": "String",
+                    "Optional": true
+                  }
+                }
+              }
+            },
+            "name": {
+              "Type": "String",
+              "Required": true
+            },
+            "priority": {
+              "Type": "Int",
+              "Required": true
+            }
+          }
+        }
+      },
+      "type": {
+        "Type": "String",
+        "Required": true
+      }
+    },
+    "artifactory_xray_watch": {
+      "active": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "assigned_policies": {
+        "Type": "List",
+        "Required": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "name": {
+              "Type": "String",
+              "Required": true
+            },
+            "type": {
+              "Type": "String",
+              "Required": true
+            }
+          }
+        }
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "resources": {
+        "Type": "List",
+        "Required": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "bin_mgr_id": {
+              "Type": "String",
+              "Optional": true
+            },
+            "filters": {
+              "Type": "List",
+              "Optional": true,
+              "IsBlock": true,
+              "ConfigImplicitMode": "Block",
+              "Elem": {
+                "Type": "SchemaInfo",
+                "Info": {
+                  "type": {
+                    "Type": "String",
+                    "Required": true
+                  },
+                  "value": {
+                    "Type": "String",
+                    "Required": true
+                  }
+                }
+              }
+            },
+            "name": {
+              "Type": "String",
+              "Required": true
+            },
+            "repo_type": {
+              "Type": "String",
+              "Optional": true,
+              "Computed": true
+            },
+            "type": {
+              "Type": "String",
+              "Required": true
+            }
+          }
+        }
+      },
+      "watch_recipients": {
+        "Type": "List",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      }
+    }
+  },
+  "data-sources": {
+    "artifactory_file": {
+      "created": {
+        "Type": "String",
+        "Computed": true
+      },
+      "created_by": {
+        "Type": "String",
+        "Computed": true
+      },
+      "download_uri": {
+        "Type": "String",
+        "Computed": true
+      },
+      "force_overwrite": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "last_modified": {
+        "Type": "String",
+        "Computed": true
+      },
+      "last_updated": {
+        "Type": "String",
+        "Computed": true
+      },
+      "md5": {
+        "Type": "String",
+        "Computed": true
+      },
+      "mimetype": {
+        "Type": "String",
+        "Computed": true
+      },
+      "modified_by": {
+        "Type": "String",
+        "Computed": true
+      },
+      "output_path": {
+        "Type": "String",
+        "Required": true
+      },
+      "path": {
+        "Type": "String",
+        "Required": true
+      },
+      "repository": {
+        "Type": "String",
+        "Required": true
+      },
+      "sha1": {
+        "Type": "String",
+        "Computed": true
+      },
+      "sha256": {
+        "Type": "String",
+        "Computed": true
+      },
+      "size": {
+        "Type": "Int",
+        "Computed": true
+      }
+    },
+    "artifactory_fileinfo": {
+      "created": {
+        "Type": "String",
+        "Computed": true
+      },
+      "created_by": {
+        "Type": "String",
+        "Computed": true
+      },
+      "download_uri": {
+        "Type": "String",
+        "Computed": true
+      },
+      "last_modified": {
+        "Type": "String",
+        "Computed": true
+      },
+      "last_updated": {
+        "Type": "String",
+        "Computed": true
+      },
+      "md5": {
+        "Type": "String",
+        "Computed": true
+      },
+      "mimetype": {
+        "Type": "String",
+        "Computed": true
+      },
+      "modified_by": {
+        "Type": "String",
+        "Computed": true
+      },
+      "path": {
+        "Type": "String",
+        "Required": true
+      },
+      "repository": {
+        "Type": "String",
+        "Required": true
+      },
+      "sha1": {
+        "Type": "String",
+        "Computed": true
+      },
+      "sha256": {
+        "Type": "String",
+        "Computed": true
+      },
+      "size": {
+        "Type": "Int",
+        "Computed": true
+      }
+    }
+  }
+}

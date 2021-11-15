@@ -7,4 +7,4 @@ providers.official.json
 providers.partner.json
 providers.registry.json
 providers.base.new.json
-failure.txt
+*failure.txt

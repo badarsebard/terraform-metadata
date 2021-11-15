@@ -1,10 +1,38 @@
 {
   ".schema_version": "2",
+  ".sdk_type": "terraform",
   "name": "terraform",
   "type": "provider",
-  "version": "v0.12.25",
+  "version": "v1.0.2",
   "provider": {},
-  "resources": {},
+  "resources": {
+    "terraform_remote_state": {
+      "__has_dynamic_attributes": {
+        "Type": "String",
+        "Optional": true
+      },
+      "backend": {
+        "Type": "String",
+        "Required": true
+      },
+      "config": {
+        "Type": "Map",
+        "Optional": true
+      },
+      "defaults": {
+        "Type": "Map",
+        "Optional": true
+      },
+      "environment": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string",
+          "Value": "default"
+        }
+      }
+    }
+  },
   "data-sources": {
     "terraform_remote_state": {
       "__has_dynamic_attributes": {
@@ -13,32 +41,23 @@
       },
       "backend": {
         "Type": "String",
-        "Required": true,
-        "ConfigImplicitMode": "Attr"
+        "Required": true
       },
       "config": {
         "Type": "Map",
-        "Optional": true,
-        "ConfigImplicitMode": "Block"
+        "Optional": true
       },
       "defaults": {
         "Type": "Map",
-        "Optional": true,
-        "ConfigImplicitMode": "Block"
+        "Optional": true
       },
-      "outputs": {
-        "__has_dynamic_attributes": {
-          "Type": "String",
-          "Optional": true
-        },
-        "Type": "Map",
-        "Computed": true,
-        "ConfigImplicitMode": "Attr"
-      },
-      "workspace": {
+      "environment": {
         "Type": "String",
         "Optional": true,
-        "ConfigImplicitMode": "Attr"
+        "Default": {
+          "Type": "string",
+          "Value": "default"
+        }
       }
     }
   }

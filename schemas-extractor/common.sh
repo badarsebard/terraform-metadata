@@ -31,6 +31,7 @@ function trim() {
 
 function update_or_clone() {
   repository="$1"
+  repository="${repository#https://}"
   location="$GOPATH/src/$repository"
   if [[ -d "$location" ]]; then
     echo "Updating $repository"
@@ -53,6 +54,7 @@ function update_all() {
       return
     fi
     repository="$(jq_get "$p" 'repository')"
+    repository="${repository#https://}"
     repositories+=("$repository")
   else
     while IFS= read -r p; do
@@ -64,6 +66,7 @@ function update_all() {
         continue
       fi
       repository="$(jq_get "$p" 'repository')"
+      repository="${repository#https://}"
       repositories+=("$repository")
     done < <(jq -r 'keys[]' <"$CUR/$config_file")
   fi

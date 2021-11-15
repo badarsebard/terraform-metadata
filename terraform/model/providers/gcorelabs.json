@@ -1,0 +1,3867 @@
+{
+  ".schema_version": "2",
+  ".sdk_type": "terraform-plugin-sdk-v2",
+  "name": "gcorelabs",
+  "type": "provider",
+  "version": "v0.2.22",
+  "provider": {
+    "gcore_api": {
+      "Type": "String",
+      "Optional": true,
+      "Description": "Region API",
+      "DefaultFunc": "ENV(GCORE_API)"
+    },
+    "gcore_cdn_api": {
+      "Type": "String",
+      "Optional": true,
+      "Description": "CDN API",
+      "DefaultFunc": "ENV(GCORE_CDN_API)"
+    },
+    "gcore_client_id": {
+      "Type": "String",
+      "Optional": true,
+      "Description": "Client id",
+      "DefaultFunc": "ENV(GCORE_CLIENT_ID)"
+    },
+    "gcore_dns_api": {
+      "Type": "String",
+      "Optional": true,
+      "Description": "DNS API",
+      "DefaultFunc": "ENV(GCORE_DNS_API)"
+    },
+    "gcore_platform": {
+      "Type": "String",
+      "Optional": true,
+      "Description": "Platform ulr is used for generate jwt",
+      "DefaultFunc": "ENV(GCORE_PLATFORM)"
+    },
+    "gcore_storage_api": {
+      "Type": "String",
+      "Optional": true,
+      "Description": "Storage API",
+      "DefaultFunc": "ENV(GCORE_STORAGE_API)"
+    },
+    "ignore_creds_auth_error": {
+      "Type": "Bool",
+      "Optional": true,
+      "Description": "Should be set to true when you are gonna to use storage resource with permanent API-token only.",
+      "DefaultFunc": "ENV(GCORE_PERMANENT_TOKEN)"
+    },
+    "password": {
+      "Type": "String",
+      "Optional": true,
+      "DefaultFunc": "ENV(GCORE_PASSWORD)"
+    },
+    "permanent_api_token": {
+      "Type": "String",
+      "Optional": true,
+      "Description": "A permanent API-token. Implemented for Storage and Cloud Terraform Resources only. https://support.gcorelabs.com/hc/en-us/articles/360018625617-API-tokens",
+      "DefaultFunc": "ENV(GCORE_PERMANENT_TOKEN)"
+    },
+    "user_name": {
+      "Type": "String",
+      "Optional": true,
+      "DefaultFunc": "ENV(GCORE_USERNAME)"
+    }
+  },
+  "resources": {
+    "gcore_baremetal": {
+      "__timeouts__": [
+        "create"
+      ],
+      "addresses": {
+        "Type": "List",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "net": {
+              "Type": "List",
+              "Required": true,
+              "IsBlock": true,
+              "ConfigImplicitMode": "Block",
+              "Elem": {
+                "Type": "SchemaInfo",
+                "Info": {
+                  "addr": {
+                    "Type": "String",
+                    "Required": true
+                  },
+                  "type": {
+                    "Type": "String",
+                    "Required": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "app_config": {
+        "Type": "Map",
+        "Optional": true
+      },
+      "apptemplate_id": {
+        "Type": "String",
+        "Optional": true
+      },
+      "flavor": {
+        "Type": "Map",
+        "Computed": true
+      },
+      "flavor_id": {
+        "Type": "String",
+        "Required": true
+      },
+      "image_id": {
+        "Type": "String",
+        "Optional": true
+      },
+      "interface": {
+        "Type": "Set",
+        "Optional": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "existing_fip_id": {
+              "Type": "String",
+              "Optional": true
+            },
+            "fip_source": {
+              "Type": "String",
+              "Optional": true
+            },
+            "ip_address": {
+              "Type": "String",
+              "Computed": true
+            },
+            "network_id": {
+              "Type": "String",
+              "Optional": true,
+              "Description": "required if type is 'subnet' or 'any_subnet'",
+              "Computed": true
+            },
+            "port_id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "subnet_id": {
+              "Type": "String",
+              "Optional": true,
+              "Description": "required if type is 'subnet'",
+              "Computed": true
+            },
+            "type": {
+              "Type": "String",
+              "Required": true,
+              "Description": "Avalilable value is 'subnet', 'external'"
+            }
+          }
+        }
+      },
+      "keypair_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "last_updated": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "metadata": {
+        "Type": "List",
+        "Optional": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "key": {
+              "Type": "String",
+              "Required": true
+            },
+            "value": {
+              "Type": "String",
+              "Required": true
+            }
+          }
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "name_templates": {
+        "Type": "String",
+        "Optional": true
+      },
+      "password": {
+        "Type": "String",
+        "Optional": true
+      },
+      "project_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "project_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "region_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "region_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "status": {
+        "Type": "String",
+        "Computed": true
+      },
+      "user_data": {
+        "Type": "String",
+        "Optional": true
+      },
+      "username": {
+        "Type": "String",
+        "Optional": true
+      },
+      "vm_state": {
+        "Type": "String",
+        "Computed": true
+      }
+    },
+    "gcore_cdn_origingroup": {
+      "name": {
+        "Type": "String",
+        "Required": true,
+        "Description": "Name of the origin group"
+      },
+      "origin": {
+        "Type": "Set",
+        "Required": true,
+        "Description": "Contains information about all IP address or Domain names of your origin and the port if custom",
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "backup": {
+              "Type": "Bool",
+              "Optional": true,
+              "Description": "true — The option is active. The origin will not be used until one of active origins become unavailable. false — The option is disabled.",
+              "Computed": true
+            },
+            "enabled": {
+              "Type": "Bool",
+              "Optional": true,
+              "Description": "The setting allows to enable or disable an Origin source in the Origins group",
+              "Computed": true
+            },
+            "id": {
+              "Type": "Int",
+              "Computed": true
+            },
+            "source": {
+              "Type": "String",
+              "Required": true,
+              "Description": "IP address or Domain name of your origin and the port if custom"
+            }
+          }
+        }
+      },
+      "use_next": {
+        "Type": "Bool",
+        "Required": true,
+        "Description": "This options have two possible values: true — The option is active. In case the origin responds with 4XX or 5XX codes, use the next origin from the list. false — The option is disabled."
+      }
+    },
+    "gcore_cdn_resource": {
+      "active": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "The setting allows to enable or disable a CDN Resource",
+        "Computed": true
+      },
+      "cname": {
+        "Type": "String",
+        "Required": true,
+        "Description": "A CNAME that will be used to deliver content though a CDN"
+      },
+      "options": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "Each option in CDN resource settings. Each option added to CDN resource settings should have the following mandatory request fields: enabled, value.",
+        "Computed": true,
+        "MaxItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "edge_cache_settings": {
+              "Type": "List",
+              "Optional": true,
+              "Description": "The cache expiration time for CDN servers.",
+              "Computed": true,
+              "MaxItems": 1,
+              "IsBlock": true,
+              "ConfigImplicitMode": "Block",
+              "Elem": {
+                "Type": "SchemaInfo",
+                "Info": {
+                  "custom_values": {
+                    "Type": "Map",
+                    "Optional": true,
+                    "Description": "Caching time for a response with specific codes. These settings have a higher priority than the value field. Response code ('304', '404' for example). Use 'any' to specify caching time for all response codes. Caching time in seconds ('0s', '600s' for example). Use '0s' to disable caching for a specific response code.",
+                    "ConfigImplicitMode": "Attr",
+                    "Elem": {
+                      "Value": "String"
+                    }
+                  },
+                  "default": {
+                    "Type": "String",
+                    "Optional": true,
+                    "Description": "Content will be cached according to origin cache settings. The value applies for a response with codes 200, 201, 204, 206, 301, 302, 303, 304, 307, 308 if an origin server does not have caching HTTP headers. Responses with other codes will not be cached."
+                  },
+                  "enabled": {
+                    "Type": "Bool",
+                    "Required": true
+                  },
+                  "value": {
+                    "Type": "String",
+                    "Optional": true,
+                    "Description": "Caching time for a response with codes 200, 206, 301, 302. Responses with codes 4xx, 5xx will not be cached. Use '0s' disable to caching. Use custom_values field to specify a custom caching time for a response with specific codes."
+                  }
+                }
+              }
+            },
+            "host_header": {
+              "Type": "List",
+              "Optional": true,
+              "Description": "Specify the Host header that CDN servers use when request content from an origin server. Your server must be able to process requests with the chosen header. If the option is in NULL state Host Header value is taken from the CNAME field.",
+              "MaxItems": 1,
+              "IsBlock": true,
+              "ConfigImplicitMode": "Block",
+              "Elem": {
+                "Type": "SchemaInfo",
+                "Info": {
+                  "enabled": {
+                    "Type": "Bool",
+                    "Required": true
+                  },
+                  "value": {
+                    "Type": "String",
+                    "Required": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "origin": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "A domain name or IP of your origin source. Specify a port if custom. You can use either 'origin' parameter or 'originGroup' in the resource definition.",
+        "Computed": true
+      },
+      "origin_group": {
+        "Type": "Int",
+        "Optional": true,
+        "Description": "ID of the Origins Group. Use one of your Origins Group or create a new one. You can use either 'origin' parameter or 'originGroup' in the resource definition.",
+        "Computed": true
+      },
+      "origin_protocol": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "This option defines the protocol that will be used by CDN servers to request content from an origin source. If not specified, we will use HTTP to connect to an origin server. Possible values are: HTTPS, HTTP, MATCH.",
+        "Computed": true
+      },
+      "secondary_hostnames": {
+        "Type": "Set",
+        "Optional": true,
+        "Description": "List of additional CNAMEs.",
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "ssl_data": {
+        "Type": "Int",
+        "Optional": true,
+        "Description": "Specify the SSL Certificate ID which should be used for the CDN Resource."
+      },
+      "ssl_enabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "Use HTTPS protocol for content delivery."
+      },
+      "status": {
+        "Type": "String",
+        "Description": "Status of a CDN resource content availability. Possible values are: Active, Suspended, Processed.",
+        "Computed": true
+      }
+    },
+    "gcore_cdn_rule": {
+      "name": {
+        "Type": "String",
+        "Required": true,
+        "Description": "Rule name"
+      },
+      "options": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "Each option in CDN resource settings. Each option added to CDN resource settings should have the following mandatory request fields: enabled, value.",
+        "Computed": true,
+        "MaxItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "edge_cache_settings": {
+              "Type": "List",
+              "Optional": true,
+              "Description": "The cache expiration time for CDN servers.",
+              "Computed": true,
+              "MaxItems": 1,
+              "IsBlock": true,
+              "ConfigImplicitMode": "Block",
+              "Elem": {
+                "Type": "SchemaInfo",
+                "Info": {
+                  "custom_values": {
+                    "Type": "Map",
+                    "Optional": true,
+                    "Description": "Caching time for a response with specific codes. These settings have a higher priority than the value field. Response code ('304', '404' for example). Use 'any' to specify caching time for all response codes. Caching time in seconds ('0s', '600s' for example). Use '0s' to disable caching for a specific response code.",
+                    "ConfigImplicitMode": "Attr",
+                    "Elem": {
+                      "Value": "String"
+                    }
+                  },
+                  "default": {
+                    "Type": "String",
+                    "Optional": true,
+                    "Description": "Content will be cached according to origin cache settings. The value applies for a response with codes 200, 201, 204, 206, 301, 302, 303, 304, 307, 308 if an origin server does not have caching HTTP headers. Responses with other codes will not be cached."
+                  },
+                  "enabled": {
+                    "Type": "Bool",
+                    "Required": true
+                  },
+                  "value": {
+                    "Type": "String",
+                    "Optional": true,
+                    "Description": "Caching time for a response with codes 200, 206, 301, 302. Responses with codes 4xx, 5xx will not be cached. Use '0s' disable to caching. Use custom_values field to specify a custom caching time for a response with specific codes."
+                  }
+                }
+              }
+            },
+            "host_header": {
+              "Type": "List",
+              "Optional": true,
+              "Description": "Specify the Host header that CDN servers use when request content from an origin server. Your server must be able to process requests with the chosen header. If the option is in NULL state Host Header value is taken from the CNAME field.",
+              "MaxItems": 1,
+              "IsBlock": true,
+              "ConfigImplicitMode": "Block",
+              "Elem": {
+                "Type": "SchemaInfo",
+                "Info": {
+                  "enabled": {
+                    "Type": "Bool",
+                    "Required": true
+                  },
+                  "value": {
+                    "Type": "String",
+                    "Required": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "resource_id": {
+        "Type": "Int",
+        "Required": true
+      },
+      "rule": {
+        "Type": "String",
+        "Required": true,
+        "Description": "A pattern that defines when the rule is triggered. By default, we add a leading forward slash to any rule pattern. Specify a pattern without a forward slash."
+      },
+      "rule_type": {
+        "Type": "Int",
+        "Required": true,
+        "Description": "Type of rule. The rule is applied if the requested URI matches the rule pattern. It has two possible values: Type 0 — RegEx. Must start with '^/' or '/'. Type 1 — RegEx. Legacy type. Note that for this rule type we automatically add / to each rule pattern before your regular expression. Please use Type 0."
+      }
+    },
+    "gcore_cdn_sslcert": {
+      "automated": {
+        "Type": "Bool",
+        "Description": "The way SSL certificate was issued.",
+        "Computed": true
+      },
+      "cert": {
+        "Type": "String",
+        "Required": true,
+        "Description": "The public part of the SSL certificate. All chain of the SSL certificate should be added."
+      },
+      "has_related_resources": {
+        "Type": "Bool",
+        "Description": "It shows if the SSL certificate is used by a CDN resource.",
+        "Computed": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true,
+        "Description": "Name of the SSL certificate. Must be unique."
+      },
+      "private_key": {
+        "Type": "String",
+        "Required": true,
+        "Description": "The private key of the SSL certificate."
+      }
+    },
+    "gcore_dns_zone": {
+      "name": {
+        "Type": "String",
+        "Required": true,
+        "Description": "A name of DNS Zone resource."
+      }
+    },
+    "gcore_dns_zone_record": {
+      "domain": {
+        "Type": "String",
+        "Required": true,
+        "Description": "A domain of DNS Zone Record resource."
+      },
+      "filter": {
+        "Type": "Set",
+        "Optional": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "limit": {
+              "Type": "Int",
+              "Optional": true,
+              "Description": "A DNS Zone Record filter option that describe how many records will be percolated."
+            },
+            "strict": {
+              "Type": "Bool",
+              "Optional": true,
+              "Description": "A DNS Zone Record filter option that describe possibility to return answers if no records were percolated through filter."
+            },
+            "type": {
+              "Type": "String",
+              "Required": true,
+              "Description": "A DNS Zone Record filter option that describe a name of filter."
+            }
+          }
+        }
+      },
+      "resource_record": {
+        "Type": "Set",
+        "Required": true,
+        "Description": "An array of contents with meta of DNS Zone Record resource.",
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "content": {
+              "Type": "String",
+              "Required": true,
+              "Description": "A content of DNS Zone Record resource."
+            },
+            "enabled": {
+              "Type": "Bool",
+              "Optional": true,
+              "Description": "Manage of public appearing of DNS Zone Record resource."
+            },
+            "meta": {
+              "Type": "Set",
+              "Optional": true,
+              "MaxItems": 1,
+              "IsBlock": true,
+              "ConfigImplicitMode": "Block",
+              "Elem": {
+                "Type": "SchemaInfo",
+                "Info": {
+                  "asn": {
+                    "Type": "List",
+                    "Optional": true,
+                    "Description": "An asn meta (e.g. 12345) of DNS Zone Record resource.",
+                    "ConfigImplicitMode": "Attr",
+                    "Elem": {
+                      "Type": "SchemaElements",
+                      "ElementsType": "Int"
+                    }
+                  },
+                  "continents": {
+                    "Type": "List",
+                    "Optional": true,
+                    "Description": "Continents meta (e.g. Asia) of DNS Zone Record resource.",
+                    "ConfigImplicitMode": "Attr",
+                    "Elem": {
+                      "Type": "SchemaElements",
+                      "ElementsType": "String"
+                    }
+                  },
+                  "countries": {
+                    "Type": "List",
+                    "Optional": true,
+                    "Description": "Countries meta (e.g. USA) of DNS Zone Record resource.",
+                    "ConfigImplicitMode": "Attr",
+                    "Elem": {
+                      "Type": "SchemaElements",
+                      "ElementsType": "String"
+                    }
+                  },
+                  "default": {
+                    "Type": "Bool",
+                    "Optional": true,
+                    "Description": "Fallback meta equals true marks records which are used as a default answer (when nothing was selected by specified meta fields)."
+                  },
+                  "ip": {
+                    "Type": "List",
+                    "Optional": true,
+                    "Description": "An ip meta (e.g. 127.0.0.0) of DNS Zone Record resource.",
+                    "ConfigImplicitMode": "Attr",
+                    "Elem": {
+                      "Type": "SchemaElements",
+                      "ElementsType": "String"
+                    }
+                  },
+                  "latlong": {
+                    "Type": "List",
+                    "Optional": true,
+                    "Description": "A latlong meta (e.g. 27.988056, 86.925278) of DNS Zone Record resource.",
+                    "MaxItems": 2,
+                    "MinItems": 2,
+                    "ConfigImplicitMode": "Attr",
+                    "Elem": {
+                      "Type": "SchemaElements",
+                      "ElementsType": "Float"
+                    }
+                  },
+                  "notes": {
+                    "Type": "List",
+                    "Optional": true,
+                    "Description": "A notes meta (e.g. Miami DC) of DNS Zone Record resource.",
+                    "ConfigImplicitMode": "Attr",
+                    "Elem": {
+                      "Type": "SchemaElements",
+                      "ElementsType": "String"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "ttl": {
+        "Type": "Int",
+        "Optional": true,
+        "Description": "A ttl of DNS Zone Record resource."
+      },
+      "type": {
+        "Type": "String",
+        "Required": true,
+        "Description": "A type of DNS Zone Record resource."
+      },
+      "zone": {
+        "Type": "String",
+        "Required": true,
+        "Description": "A zone of DNS Zone Record resource."
+      }
+    },
+    "gcore_floatingip": {
+      "created_at": {
+        "Type": "String",
+        "Computed": true
+      },
+      "fixed_ip_address": {
+        "Type": "String",
+        "Optional": true
+      },
+      "floating_ip_address": {
+        "Type": "String",
+        "Computed": true
+      },
+      "last_updated": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "port_id": {
+        "Type": "String",
+        "Optional": true
+      },
+      "project_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "project_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "region_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "region_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "router_id": {
+        "Type": "String",
+        "Computed": true
+      },
+      "status": {
+        "Type": "String",
+        "Computed": true
+      },
+      "updated_at": {
+        "Type": "String",
+        "Computed": true
+      }
+    },
+    "gcore_instance": {
+      "addresses": {
+        "Type": "List",
+        "Optional": true,
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "net": {
+              "Type": "List",
+              "Required": true,
+              "IsBlock": true,
+              "ConfigImplicitMode": "Block",
+              "Elem": {
+                "Type": "SchemaInfo",
+                "Info": {
+                  "addr": {
+                    "Type": "String",
+                    "Required": true
+                  },
+                  "type": {
+                    "Type": "String",
+                    "Required": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "allow_app_ports": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "configuration": {
+        "Type": "List",
+        "Optional": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "key": {
+              "Type": "String",
+              "Required": true
+            },
+            "value": {
+              "Type": "String",
+              "Required": true
+            }
+          }
+        }
+      },
+      "flavor": {
+        "Type": "Map",
+        "Optional": true,
+        "Computed": true
+      },
+      "flavor_id": {
+        "Type": "String",
+        "Required": true
+      },
+      "interface": {
+        "Type": "Set",
+        "Required": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "existing_fip_id": {
+              "Type": "String",
+              "Optional": true
+            },
+            "fip_source": {
+              "Type": "String",
+              "Optional": true
+            },
+            "ip_address": {
+              "Type": "String",
+              "Optional": true,
+              "Computed": true
+            },
+            "network_id": {
+              "Type": "String",
+              "Optional": true,
+              "Description": "required if type is 'subnet' or 'any_subnet'"
+            },
+            "order": {
+              "Type": "Int",
+              "Optional": true,
+              "Description": "Order of attaching interface"
+            },
+            "port_id": {
+              "Type": "String",
+              "Optional": true,
+              "Description": "required if type is  'reserved_fixed_ip'",
+              "Computed": true
+            },
+            "subnet_id": {
+              "Type": "String",
+              "Optional": true,
+              "Description": "required if type is 'subnet'",
+              "Computed": true
+            },
+            "type": {
+              "Type": "String",
+              "Optional": true,
+              "Description": "Avalilable value is 'subnet', 'any_subnet', 'external', 'reserved_fixed_ip'"
+            }
+          }
+        }
+      },
+      "keypair_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "last_updated": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "metadata": {
+        "Type": "List",
+        "Optional": true,
+        "ConflictsWith": [
+          "metadata_map"
+        ],
+        "Deprecated": "Use metadata_map instead",
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "key": {
+              "Type": "String",
+              "Required": true
+            },
+            "value": {
+              "Type": "String",
+              "Required": true
+            }
+          }
+        }
+      },
+      "metadata_map": {
+        "Type": "Map",
+        "Optional": true,
+        "ConflictsWith": [
+          "metadata"
+        ],
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "name_templates": {
+        "Type": "List",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "password": {
+        "Type": "String",
+        "Optional": true
+      },
+      "project_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "project_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "region_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "region_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "security_group": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "Firewalls list",
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "id": {
+              "Type": "String",
+              "Required": true,
+              "Description": "Firewall unique id"
+            },
+            "name": {
+              "Type": "String",
+              "Required": true
+            }
+          }
+        }
+      },
+      "server_group": {
+        "Type": "String",
+        "Optional": true
+      },
+      "status": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "userdata": {
+        "Type": "String",
+        "Optional": true
+      },
+      "username": {
+        "Type": "String",
+        "Optional": true
+      },
+      "vm_state": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "Current vm state, use stopped to stop vm and active to start",
+        "Computed": true
+      },
+      "volume": {
+        "Type": "Set",
+        "Required": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "attachment_tag": {
+              "Type": "String",
+              "Optional": true
+            },
+            "boot_index": {
+              "Type": "Int",
+              "Optional": true,
+              "Description": "If boot_index==0 volumes can not detached"
+            },
+            "delete_on_termination": {
+              "Type": "Bool",
+              "Optional": true,
+              "Computed": true
+            },
+            "id": {
+              "Type": "String",
+              "Optional": true,
+              "Computed": true
+            },
+            "image_id": {
+              "Type": "String",
+              "Optional": true
+            },
+            "name": {
+              "Type": "String",
+              "Optional": true
+            },
+            "size": {
+              "Type": "Int",
+              "Optional": true,
+              "Computed": true
+            },
+            "source": {
+              "Type": "String",
+              "Required": true,
+              "Description": "Currently available only 'existing-volume' value"
+            },
+            "type_name": {
+              "Type": "String",
+              "Optional": true
+            },
+            "volume_id": {
+              "Type": "String",
+              "Optional": true
+            }
+          }
+        }
+      }
+    },
+    "gcore_k8s": {
+      "__timeouts__": [
+        "create",
+        "update"
+      ],
+      "api_address": {
+        "Type": "String",
+        "Computed": true
+      },
+      "auto_healing_enabled": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "cluster_template_id": {
+        "Type": "String",
+        "Computed": true
+      },
+      "container_version": {
+        "Type": "String",
+        "Computed": true
+      },
+      "created_at": {
+        "Type": "String",
+        "Computed": true
+      },
+      "discovery_url": {
+        "Type": "String",
+        "Computed": true
+      },
+      "faults": {
+        "Type": "Map",
+        "Computed": true
+      },
+      "fixed_network": {
+        "Type": "String",
+        "Required": true
+      },
+      "fixed_subnet": {
+        "Type": "String",
+        "Required": true,
+        "Description": "Subnet should has router"
+      },
+      "health_status": {
+        "Type": "String",
+        "Computed": true
+      },
+      "health_status_reason": {
+        "Type": "Map",
+        "Computed": true
+      },
+      "keypair": {
+        "Type": "String",
+        "Optional": true
+      },
+      "last_updated": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "master_addresses": {
+        "Type": "List",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "master_flavor_id": {
+        "Type": "String",
+        "Computed": true
+      },
+      "master_lb_floating_ip_enabled": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "node_addresses": {
+        "Type": "List",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "node_count": {
+        "Type": "Int",
+        "Computed": true
+      },
+      "pods_ip_pool": {
+        "Type": "String",
+        "Optional": true
+      },
+      "pool": {
+        "Type": "List",
+        "Required": true,
+        "MaxItems": 1,
+        "MinItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "created_at": {
+              "Type": "String",
+              "Computed": true
+            },
+            "docker_volume_size": {
+              "Type": "Int",
+              "Optional": true
+            },
+            "docker_volume_type": {
+              "Type": "String",
+              "Optional": true,
+              "Description": "Available value is 'standard', 'ssd_hiiops', 'cold', 'ultra'.",
+              "Computed": true
+            },
+            "flavor_id": {
+              "Type": "String",
+              "Required": true
+            },
+            "max_node_count": {
+              "Type": "Int",
+              "Required": true
+            },
+            "min_node_count": {
+              "Type": "Int",
+              "Required": true
+            },
+            "name": {
+              "Type": "String",
+              "Required": true
+            },
+            "node_count": {
+              "Type": "Int",
+              "Required": true
+            },
+            "stack_id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "uuid": {
+              "Type": "String",
+              "Computed": true
+            }
+          }
+        }
+      },
+      "project_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "project_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "region_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "region_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "services_ip_pool": {
+        "Type": "String",
+        "Optional": true
+      },
+      "status": {
+        "Type": "String",
+        "Computed": true
+      },
+      "status_reason": {
+        "Type": "String",
+        "Computed": true
+      },
+      "updated_at": {
+        "Type": "String",
+        "Computed": true
+      },
+      "user_id": {
+        "Type": "String",
+        "Computed": true
+      },
+      "version": {
+        "Type": "String",
+        "Computed": true
+      }
+    },
+    "gcore_k8s_pool": {
+      "__timeouts__": [
+        "create",
+        "update"
+      ],
+      "cluster_id": {
+        "Type": "String",
+        "Required": true
+      },
+      "created_at": {
+        "Type": "String",
+        "Computed": true
+      },
+      "docker_volume_size": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "docker_volume_type": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "Available value is 'standard', 'ssd_hiiops', 'cold', 'ultra'.",
+        "Computed": true
+      },
+      "flavor_id": {
+        "Type": "String",
+        "Required": true
+      },
+      "last_updated": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "max_node_count": {
+        "Type": "Int",
+        "Required": true
+      },
+      "min_node_count": {
+        "Type": "Int",
+        "Required": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "node_count": {
+        "Type": "Int",
+        "Required": true
+      },
+      "project_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "project_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "region_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "region_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "stack_id": {
+        "Type": "String",
+        "Computed": true
+      }
+    },
+    "gcore_keypair": {
+      "fingerprint": {
+        "Type": "String",
+        "Computed": true
+      },
+      "project_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "project_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "public_key": {
+        "Type": "String",
+        "Required": true
+      },
+      "sshkey_id": {
+        "Type": "String",
+        "Computed": true
+      },
+      "sshkey_name": {
+        "Type": "String",
+        "Required": true
+      }
+    },
+    "gcore_lblistener": {
+      "__timeouts__": [
+        "create",
+        "delete"
+      ],
+      "insert_x_forwarded": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "Insert *-forwarded headers"
+      },
+      "last_updated": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "loadbalancer_id": {
+        "Type": "String",
+        "Required": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "operating_status": {
+        "Type": "String",
+        "Computed": true
+      },
+      "pool_count": {
+        "Type": "Int",
+        "Computed": true
+      },
+      "project_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "project_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "protocol": {
+        "Type": "String",
+        "Required": true,
+        "Description": "Available values is 'HTTP', 'HTTPS', 'TCP', 'UDP'"
+      },
+      "protocol_port": {
+        "Type": "Int",
+        "Required": true
+      },
+      "provisioning_status": {
+        "Type": "String",
+        "Computed": true
+      },
+      "region_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "region_name": {
+        "Type": "String",
+        "Optional": true
+      }
+    },
+    "gcore_lbmember": {
+      "__timeouts__": [
+        "create",
+        "delete"
+      ],
+      "address": {
+        "Type": "String",
+        "Required": true
+      },
+      "instance_id": {
+        "Type": "String",
+        "Optional": true
+      },
+      "last_updated": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "operating_status": {
+        "Type": "String",
+        "Computed": true
+      },
+      "pool_id": {
+        "Type": "String",
+        "Required": true
+      },
+      "project_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "project_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "protocol_port": {
+        "Type": "Int",
+        "Required": true
+      },
+      "region_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "region_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "subnet_id": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "weight": {
+        "Type": "Int",
+        "Optional": true,
+        "Description": "Value between 0 and 256"
+      }
+    },
+    "gcore_lbpool": {
+      "__timeouts__": [
+        "create",
+        "delete"
+      ],
+      "health_monitor": {
+        "Type": "List",
+        "Optional": true,
+        "Computed": true,
+        "MaxItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "delay": {
+              "Type": "Int",
+              "Required": true
+            },
+            "expected_codes": {
+              "Type": "String",
+              "Optional": true,
+              "Computed": true
+            },
+            "http_method": {
+              "Type": "String",
+              "Optional": true,
+              "Computed": true
+            },
+            "id": {
+              "Type": "String",
+              "Optional": true,
+              "Computed": true
+            },
+            "max_retries": {
+              "Type": "Int",
+              "Required": true
+            },
+            "max_retries_down": {
+              "Type": "Int",
+              "Optional": true,
+              "Computed": true
+            },
+            "timeout": {
+              "Type": "Int",
+              "Required": true
+            },
+            "type": {
+              "Type": "String",
+              "Required": true,
+              "Description": "Available values is 'HTTP', 'HTTPS', 'PING', 'TCP', 'TLS-HELLO', 'UDP-CONNECT"
+            },
+            "url_path": {
+              "Type": "String",
+              "Optional": true,
+              "Computed": true
+            }
+          }
+        }
+      },
+      "last_updated": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "lb_algorithm": {
+        "Type": "String",
+        "Required": true,
+        "Description": "Available values is 'ROUND_ROBIN', 'LEAST_CONNECTIONS', 'SOURCE_IP', 'SOURCE_IP_PORT'"
+      },
+      "listener_id": {
+        "Type": "String",
+        "Optional": true
+      },
+      "loadbalancer_id": {
+        "Type": "String",
+        "Optional": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "project_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "project_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "protocol": {
+        "Type": "String",
+        "Required": true,
+        "Description": "Available values is 'HTTP' (currently work, other do not work on ed-8), 'HTTPS', 'TCP', 'UDP'"
+      },
+      "region_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "region_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "session_persistence": {
+        "Type": "List",
+        "Optional": true,
+        "Computed": true,
+        "MaxItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "cookie_name": {
+              "Type": "String",
+              "Optional": true,
+              "Computed": true
+            },
+            "persistence_granularity": {
+              "Type": "String",
+              "Optional": true,
+              "Computed": true
+            },
+            "persistence_timeout": {
+              "Type": "Int",
+              "Optional": true,
+              "Computed": true
+            },
+            "type": {
+              "Type": "String",
+              "Required": true
+            }
+          }
+        }
+      }
+    },
+    "gcore_lifecyclepolicy": {
+      "action": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string",
+          "Value": "volume_snapshot"
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "project_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "project_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "region_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "region_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "schedule": {
+        "Type": "List",
+        "Optional": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "cron": {
+              "Type": "List",
+              "Optional": true,
+              "Description": "Use for taking actions at specified moments of time. Exactly one of interval and cron blocks should be provided",
+              "MaxItems": 1,
+              "MinItems": 1,
+              "IsBlock": true,
+              "ConfigImplicitMode": "Block",
+              "Elem": {
+                "Type": "SchemaInfo",
+                "Info": {
+                  "day": {
+                    "Type": "String",
+                    "Optional": true,
+                    "Description": "Either single asterisk or comma-separated list of integers (1-31)",
+                    "Default": {
+                      "Type": "string",
+                      "Value": "*"
+                    }
+                  },
+                  "day_of_week": {
+                    "Type": "String",
+                    "Optional": true,
+                    "Description": "Either single asterisk or comma-separated list of integers (0-6)",
+                    "Default": {
+                      "Type": "string",
+                      "Value": "*"
+                    }
+                  },
+                  "hour": {
+                    "Type": "String",
+                    "Optional": true,
+                    "Description": "Either single asterisk or comma-separated list of integers (0-23)",
+                    "Default": {
+                      "Type": "string",
+                      "Value": "*"
+                    }
+                  },
+                  "minute": {
+                    "Type": "String",
+                    "Optional": true,
+                    "Description": "Either single asterisk or comma-separated list of integers (0-59)",
+                    "Default": {
+                      "Type": "string",
+                      "Value": "0"
+                    }
+                  },
+                  "month": {
+                    "Type": "String",
+                    "Optional": true,
+                    "Description": "Either single asterisk or comma-separated list of integers (1-12)",
+                    "Default": {
+                      "Type": "string",
+                      "Value": "*"
+                    }
+                  },
+                  "timezone": {
+                    "Type": "String",
+                    "Optional": true,
+                    "Default": {
+                      "Type": "string",
+                      "Value": "UTC"
+                    }
+                  },
+                  "week": {
+                    "Type": "String",
+                    "Optional": true,
+                    "Description": "Either single asterisk or comma-separated list of integers (1-53)",
+                    "Default": {
+                      "Type": "string",
+                      "Value": "*"
+                    }
+                  }
+                }
+              }
+            },
+            "id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "interval": {
+              "Type": "List",
+              "Optional": true,
+              "Description": "Use for taking actions with equal time intervals between them. Exactly one of interval and cron blocks should be provided",
+              "MaxItems": 1,
+              "MinItems": 1,
+              "IsBlock": true,
+              "ConfigImplicitMode": "Block",
+              "Elem": {
+                "Type": "SchemaInfo",
+                "Info": {
+                  "days": {
+                    "Type": "Int",
+                    "Optional": true,
+                    "Description": "Number of days to wait between actions",
+                    "Default": {
+                      "Type": "int",
+                      "Value": "0"
+                    }
+                  },
+                  "hours": {
+                    "Type": "Int",
+                    "Optional": true,
+                    "Description": "Number of hours to wait between actions",
+                    "Default": {
+                      "Type": "int",
+                      "Value": "0"
+                    }
+                  },
+                  "minutes": {
+                    "Type": "Int",
+                    "Optional": true,
+                    "Description": "Number of minutes to wait between actions",
+                    "Default": {
+                      "Type": "int",
+                      "Value": "0"
+                    }
+                  },
+                  "weeks": {
+                    "Type": "Int",
+                    "Optional": true,
+                    "Description": "Number of weeks to wait between actions",
+                    "Default": {
+                      "Type": "int",
+                      "Value": "0"
+                    }
+                  }
+                }
+              }
+            },
+            "max_quantity": {
+              "Type": "Int",
+              "Required": true,
+              "Description": "Maximum number of stored resources"
+            },
+            "resource_name_template": {
+              "Type": "String",
+              "Optional": true,
+              "Description": "Used to name snapshots. {volume_id} is substituted with volume.id on creation",
+              "Default": {
+                "Type": "string",
+                "Value": "reserve snap of the volume {volume_id}"
+              }
+            },
+            "retention_time": {
+              "Type": "List",
+              "Optional": true,
+              "Description": "If it is set, new resource will be deleted after time",
+              "MaxItems": 1,
+              "MinItems": 1,
+              "IsBlock": true,
+              "ConfigImplicitMode": "Block",
+              "Elem": {
+                "Type": "SchemaInfo",
+                "Info": {
+                  "days": {
+                    "Type": "Int",
+                    "Optional": true,
+                    "Description": "Number of days to wait before deleting snapshot",
+                    "Default": {
+                      "Type": "int",
+                      "Value": "0"
+                    }
+                  },
+                  "hours": {
+                    "Type": "Int",
+                    "Optional": true,
+                    "Description": "Number of hours to wait before deleting snapshot",
+                    "Default": {
+                      "Type": "int",
+                      "Value": "0"
+                    }
+                  },
+                  "minutes": {
+                    "Type": "Int",
+                    "Optional": true,
+                    "Description": "Number of minutes to wait before deleting snapshot",
+                    "Default": {
+                      "Type": "int",
+                      "Value": "0"
+                    }
+                  },
+                  "weeks": {
+                    "Type": "Int",
+                    "Optional": true,
+                    "Description": "Number of weeks to wait before deleting snapshot",
+                    "Default": {
+                      "Type": "int",
+                      "Value": "0"
+                    }
+                  }
+                }
+              }
+            },
+            "type": {
+              "Type": "String",
+              "Computed": true
+            }
+          }
+        }
+      },
+      "status": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string",
+          "Value": "active"
+        }
+      },
+      "user_id": {
+        "Type": "Int",
+        "Computed": true
+      },
+      "volume": {
+        "Type": "Set",
+        "Optional": true,
+        "Description": "List of managed volumes",
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "id": {
+              "Type": "String",
+              "Required": true
+            },
+            "name": {
+              "Type": "String",
+              "Computed": true
+            }
+          }
+        }
+      }
+    },
+    "gcore_loadbalancer": {
+      "__timeouts__": [
+        "create",
+        "delete"
+      ],
+      "flavor": {
+        "Type": "String",
+        "Optional": true
+      },
+      "last_updated": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "listener": {
+        "Type": "List",
+        "Required": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "certificate": {
+              "Type": "String",
+              "Optional": true
+            },
+            "certificate_chain": {
+              "Type": "String",
+              "Optional": true
+            },
+            "id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "name": {
+              "Type": "String",
+              "Required": true
+            },
+            "private_key": {
+              "Type": "String",
+              "Optional": true
+            },
+            "protocol": {
+              "Type": "String",
+              "Required": true,
+              "Description": "Available values is 'HTTP' (currently work, other do not work on ed-8), 'HTTPS', 'TCP', 'UDP'"
+            },
+            "protocol_port": {
+              "Type": "Int",
+              "Required": true
+            }
+          }
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "project_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "project_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "region_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "region_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "vip_address": {
+        "Type": "String",
+        "Description": "Load balancer IP address",
+        "Computed": true
+      },
+      "vip_network_id": {
+        "Type": "String",
+        "Optional": true
+      },
+      "vip_subnet_id": {
+        "Type": "String",
+        "Optional": true
+      }
+    },
+    "gcore_network": {
+      "last_updated": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "mtu": {
+        "Type": "Int",
+        "Optional": true,
+        "Computed": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "project_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "project_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "region_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "region_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "type": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "'vlan' or 'vxlan' network type is allowed. Default value is 'vxlan'",
+        "Computed": true
+      }
+    },
+    "gcore_reservedfixedip": {
+      "allowed_address_pairs": {
+        "Type": "List",
+        "Description": "Group of IP addresses that share the current IP as VIP",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "ip_address": {
+              "Type": "String",
+              "Computed": true
+            },
+            "mac_address": {
+              "Type": "String",
+              "Computed": true
+            }
+          }
+        }
+      },
+      "fixed_ip_address": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "is_vip": {
+        "Type": "Bool",
+        "Required": true
+      },
+      "last_updated": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "network_id": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "port_id": {
+        "Type": "String",
+        "Description": "ID of the port_id underlying the reserved fixed IP",
+        "Computed": true
+      },
+      "project_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "project_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "region_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "region_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "status": {
+        "Type": "String",
+        "Computed": true
+      },
+      "subnet_id": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "type": {
+        "Type": "String",
+        "Required": true,
+        "Description": "Available values is 'external', 'subnet', 'any_subnet', 'ip_address'"
+      }
+    },
+    "gcore_router": {
+      "external_gateway_info": {
+        "Type": "List",
+        "Optional": true,
+        "Computed": true,
+        "MaxItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "enable_snat": {
+              "Type": "Bool",
+              "Optional": true,
+              "Computed": true
+            },
+            "external_fixed_ips": {
+              "Type": "List",
+              "Computed": true,
+              "IsBlock": true,
+              "ConfigImplicitMode": "ComputedBlock",
+              "Elem": {
+                "Type": "SchemaInfo",
+                "Info": {
+                  "ip_address": {
+                    "Type": "String",
+                    "Required": true
+                  },
+                  "subnet_id": {
+                    "Type": "String",
+                    "Required": true
+                  }
+                }
+              }
+            },
+            "network_id": {
+              "Type": "String",
+              "Required": true,
+              "Description": "Id of the external network"
+            },
+            "type": {
+              "Type": "String",
+              "Optional": true,
+              "Description": "Must be 'manual'",
+              "Computed": true
+            }
+          }
+        }
+      },
+      "interfaces": {
+        "Type": "List",
+        "Optional": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "subnet_id": {
+              "Type": "String",
+              "Required": true,
+              "Description": "Subnet for router interface must have a gateway IP"
+            },
+            "type": {
+              "Type": "String",
+              "Required": true,
+              "Description": "must be 'subnet'"
+            }
+          }
+        }
+      },
+      "last_updated": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "project_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "project_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "region_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "region_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "routes": {
+        "Type": "List",
+        "Optional": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "destination": {
+              "Type": "String",
+              "Required": true
+            },
+            "nexthop": {
+              "Type": "String",
+              "Required": true,
+              "Description": "IPv4 address to forward traffic to if it's destination IP matches 'destination' CIDR"
+            }
+          }
+        }
+      }
+    },
+    "gcore_securitygroup": {
+      "description": {
+        "Type": "String",
+        "Optional": true
+      },
+      "last_updated": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "project_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "project_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "region_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "region_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "security_group_rules": {
+        "Type": "Set",
+        "Required": true,
+        "Description": "Firewall rules control what inbound(ingress) and outbound(egress) traffic is allowed to enter or leave a Instance. At least one 'egress' rule should be set",
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "created_at": {
+              "Type": "String",
+              "Computed": true
+            },
+            "description": {
+              "Type": "String",
+              "Optional": true
+            },
+            "direction": {
+              "Type": "String",
+              "Required": true,
+              "Description": "Available value is 'ingress', 'egress'"
+            },
+            "ethertype": {
+              "Type": "String",
+              "Required": true,
+              "Description": "Available value is 'IPv4', 'IPv6'"
+            },
+            "id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "port_range_max": {
+              "Type": "Int",
+              "Optional": true
+            },
+            "port_range_min": {
+              "Type": "Int",
+              "Optional": true
+            },
+            "protocol": {
+              "Type": "String",
+              "Required": true,
+              "Description": "Available value is udp,tcp,any,icmp,ah,dccp,egp,esp,gre,igmp,ospf,pgm,rsvp,sctp,udplite,vrrp,51,50,112"
+            },
+            "remote_ip_prefix": {
+              "Type": "String",
+              "Optional": true
+            },
+            "updated_at": {
+              "Type": "String",
+              "Computed": true
+            }
+          }
+        }
+      }
+    },
+    "gcore_servergroup": {
+      "instances": {
+        "Type": "List",
+        "Description": "Instances in this server group",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "instance_id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "instance_name": {
+              "Type": "String",
+              "Computed": true
+            }
+          }
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Required": true,
+        "Description": "Displayed server group name"
+      },
+      "policy": {
+        "Type": "String",
+        "Required": true,
+        "Description": "Server group policy. Available value is 'affinity', 'anti-affinity'"
+      },
+      "project_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "project_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "region_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "region_name": {
+        "Type": "String",
+        "Optional": true
+      }
+    },
+    "gcore_snapshot": {
+      "description": {
+        "Type": "String",
+        "Optional": true
+      },
+      "last_updated": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "metadata": {
+        "Type": "Map",
+        "Optional": true,
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "project_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "project_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "region_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "region_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "size": {
+        "Type": "Int",
+        "Computed": true
+      },
+      "status": {
+        "Type": "String",
+        "Computed": true
+      },
+      "volume_id": {
+        "Type": "String",
+        "Required": true
+      }
+    },
+    "gcore_storage_s3": {
+      "client_id": {
+        "Type": "Int",
+        "Optional": true,
+        "Description": "An client id of new storage resource.",
+        "Computed": true
+      },
+      "generated_access_key": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "A s3 access key for new storage resource.",
+        "Computed": true
+      },
+      "generated_endpoint": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "A s3 entry point for new storage resource.",
+        "Computed": true
+      },
+      "generated_http_endpoint": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "A http s3 entry point for new storage resource.",
+        "Computed": true
+      },
+      "generated_s3_endpoint": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "A s3 endpoint for new storage resource.",
+        "Computed": true
+      },
+      "generated_secret_key": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "A s3 secret key for new storage resource.",
+        "Computed": true
+      },
+      "location": {
+        "Type": "String",
+        "Required": true,
+        "Description": "A location of new storage resource. One of (s-ed1, s-darz1, s-ws1, s-dt2)"
+      },
+      "name": {
+        "Type": "String",
+        "Required": true,
+        "Description": "A name of new storage resource."
+      },
+      "storage_id": {
+        "Type": "Int",
+        "Optional": true,
+        "Description": "An id of new storage resource.",
+        "Computed": true
+      }
+    },
+    "gcore_storage_sftp": {
+      "client_id": {
+        "Type": "Int",
+        "Optional": true,
+        "Description": "An client id of new storage resource.",
+        "Computed": true
+      },
+      "generated_http_endpoint": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "A http sftp entry point for new storage resource.",
+        "Computed": true
+      },
+      "generated_password": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "An auto generated sftp password for new storage resource."
+      },
+      "generated_sftp_endpoint": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "A ssh sftp entry point for new storage resource.",
+        "Computed": true
+      },
+      "http_expires_header_value": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "A expires date of storage resource."
+      },
+      "http_servername_alias": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "An alias of storage resource."
+      },
+      "location": {
+        "Type": "String",
+        "Required": true,
+        "Description": "A location of new storage resource. One of (ams, sin, fra, mia)"
+      },
+      "name": {
+        "Type": "String",
+        "Required": true,
+        "Description": "A name of new storage resource."
+      },
+      "password": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "A sftp password for new storage resource."
+      },
+      "ssh_key_id": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "An ssh keys IDs to link with new sftp storage resource only. https://storage.gcorelabs.com/ssh-key/list",
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "Int"
+        }
+      },
+      "storage_id": {
+        "Type": "Int",
+        "Optional": true,
+        "Description": "An id of new storage resource.",
+        "Computed": true
+      },
+      "update_after_create": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "A temporary flag. An internal cheat, to skip update ssh keys. Skip it.",
+        "Computed": true
+      }
+    },
+    "gcore_storage_sftp_key": {
+      "key": {
+        "Type": "String",
+        "Required": true,
+        "Description": "A body of of new storage key resource."
+      },
+      "key_id": {
+        "Type": "Int",
+        "Optional": true,
+        "Description": "An id of of new storage key resource.",
+        "Computed": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true,
+        "Description": "A name of new storage key resource."
+      }
+    },
+    "gcore_subnet": {
+      "cidr": {
+        "Type": "String",
+        "Required": true
+      },
+      "connect_to_network_router": {
+        "Type": "Bool",
+        "Optional": true
+      },
+      "dns_nameservers": {
+        "Type": "List",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "enable_dhcp": {
+        "Type": "Bool",
+        "Optional": true,
+        "Computed": true
+      },
+      "gateway_ip": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "host_routes": {
+        "Type": "List",
+        "Optional": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "destination": {
+              "Type": "String",
+              "Required": true
+            },
+            "nexthop": {
+              "Type": "String",
+              "Required": true,
+              "Description": "IPv4 address to forward traffic to if it's destination IP matches 'destination' CIDR"
+            }
+          }
+        }
+      },
+      "last_updated": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "network_id": {
+        "Type": "String",
+        "Required": true
+      },
+      "project_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "project_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "region_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "region_name": {
+        "Type": "String",
+        "Optional": true
+      }
+    },
+    "gcore_volume": {
+      "image_id": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "Mandatory if volume is created from image"
+      },
+      "last_updated": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "project_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "project_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "region_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "region_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "size": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "snapshot_id": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "Mandatory if volume is created from a snapshot"
+      },
+      "type_name": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "Available value is 'standard', 'ssd_hiiops', 'cold', 'ultra'. Defaults to standard"
+      }
+    }
+  },
+  "data-sources": {
+    "gcore_floatingip": {
+      "fixed_ip_address": {
+        "Type": "String",
+        "Computed": true
+      },
+      "floating_ip_address": {
+        "Type": "String",
+        "Required": true
+      },
+      "port_id": {
+        "Type": "String",
+        "Optional": true
+      },
+      "project_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "project_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "region_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "region_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "router_id": {
+        "Type": "String",
+        "Computed": true
+      },
+      "status": {
+        "Type": "String",
+        "Computed": true
+      }
+    },
+    "gcore_image": {
+      "description": {
+        "Type": "String",
+        "Computed": true
+      },
+      "min_disk": {
+        "Type": "Int",
+        "Computed": true
+      },
+      "min_ram": {
+        "Type": "Int",
+        "Computed": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true,
+        "Description": "use 'os-version', for example 'ubuntu-20.04'"
+      },
+      "os_distro": {
+        "Type": "String",
+        "Computed": true
+      },
+      "os_version": {
+        "Type": "String",
+        "Computed": true
+      },
+      "project_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "project_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "region_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "region_name": {
+        "Type": "String",
+        "Optional": true
+      }
+    },
+    "gcore_instance": {
+      "addresses": {
+        "Type": "List",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "net": {
+              "Type": "List",
+              "Computed": true,
+              "IsBlock": true,
+              "ConfigImplicitMode": "ComputedBlock",
+              "Elem": {
+                "Type": "SchemaInfo",
+                "Info": {
+                  "addr": {
+                    "Type": "String",
+                    "Computed": true
+                  },
+                  "type": {
+                    "Type": "String",
+                    "Computed": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "flavor": {
+        "Type": "Map",
+        "Computed": true
+      },
+      "flavor_id": {
+        "Type": "String",
+        "Computed": true
+      },
+      "interface": {
+        "Type": "List",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "ip_address": {
+              "Type": "String",
+              "Computed": true
+            },
+            "network_id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "port_id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "subnet_id": {
+              "Type": "String",
+              "Computed": true
+            }
+          }
+        }
+      },
+      "metadata": {
+        "Type": "List",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "key": {
+              "Type": "String",
+              "Computed": true
+            },
+            "value": {
+              "Type": "String",
+              "Computed": true
+            }
+          }
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "project_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "project_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "region_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "region_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "security_group": {
+        "Type": "List",
+        "Description": "Firewalls list",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "name": {
+              "Type": "String",
+              "Computed": true
+            }
+          }
+        }
+      },
+      "status": {
+        "Type": "String",
+        "Computed": true
+      },
+      "vm_state": {
+        "Type": "String",
+        "Computed": true
+      },
+      "volume": {
+        "Type": "Set",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "delete_on_termination": {
+              "Type": "Bool",
+              "Computed": true
+            },
+            "volume_id": {
+              "Type": "String",
+              "Computed": true
+            }
+          }
+        }
+      }
+    },
+    "gcore_k8s": {
+      "api_address": {
+        "Type": "String",
+        "Computed": true
+      },
+      "auto_healing_enabled": {
+        "Type": "Bool",
+        "Computed": true
+      },
+      "cluster_id": {
+        "Type": "String",
+        "Required": true
+      },
+      "cluster_template_id": {
+        "Type": "String",
+        "Computed": true
+      },
+      "container_version": {
+        "Type": "String",
+        "Computed": true
+      },
+      "created_at": {
+        "Type": "String",
+        "Computed": true
+      },
+      "discovery_url": {
+        "Type": "String",
+        "Computed": true
+      },
+      "faults": {
+        "Type": "Map",
+        "Computed": true
+      },
+      "fixed_network": {
+        "Type": "String",
+        "Computed": true
+      },
+      "fixed_subnet": {
+        "Type": "String",
+        "Computed": true
+      },
+      "health_status": {
+        "Type": "String",
+        "Computed": true
+      },
+      "health_status_reason": {
+        "Type": "Map",
+        "Computed": true
+      },
+      "keypair": {
+        "Type": "String",
+        "Computed": true
+      },
+      "master_addresses": {
+        "Type": "List",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "master_flavor_id": {
+        "Type": "String",
+        "Computed": true
+      },
+      "master_lb_floating_ip_enabled": {
+        "Type": "Bool",
+        "Computed": true
+      },
+      "name": {
+        "Type": "String",
+        "Computed": true
+      },
+      "node_addresses": {
+        "Type": "List",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "node_count": {
+        "Type": "Int",
+        "Computed": true
+      },
+      "pool": {
+        "Type": "List",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "created_at": {
+              "Type": "String",
+              "Computed": true
+            },
+            "docker_volume_size": {
+              "Type": "Int",
+              "Computed": true
+            },
+            "docker_volume_type": {
+              "Type": "String",
+              "Computed": true
+            },
+            "flavor_id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "max_node_count": {
+              "Type": "Int",
+              "Computed": true
+            },
+            "min_node_count": {
+              "Type": "Int",
+              "Computed": true
+            },
+            "name": {
+              "Type": "String",
+              "Computed": true
+            },
+            "node_count": {
+              "Type": "Int",
+              "Computed": true
+            },
+            "stack_id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "uuid": {
+              "Type": "String",
+              "Computed": true
+            }
+          }
+        }
+      },
+      "project_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "project_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "region_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "region_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "status": {
+        "Type": "String",
+        "Computed": true
+      },
+      "status_reason": {
+        "Type": "String",
+        "Computed": true
+      },
+      "updated_at": {
+        "Type": "String",
+        "Computed": true
+      },
+      "user_id": {
+        "Type": "String",
+        "Computed": true
+      },
+      "version": {
+        "Type": "String",
+        "Computed": true
+      }
+    },
+    "gcore_k8s_pool": {
+      "cluster_id": {
+        "Type": "String",
+        "Required": true
+      },
+      "created_at": {
+        "Type": "String",
+        "Computed": true
+      },
+      "docker_volume_size": {
+        "Type": "Int",
+        "Computed": true
+      },
+      "docker_volume_type": {
+        "Type": "String",
+        "Description": "Available value is 'standard', 'ssd_hiiops', 'cold', 'ultra'.",
+        "Computed": true
+      },
+      "flavor_id": {
+        "Type": "String",
+        "Computed": true
+      },
+      "is_default": {
+        "Type": "Bool",
+        "Computed": true
+      },
+      "max_node_count": {
+        "Type": "Int",
+        "Computed": true
+      },
+      "min_node_count": {
+        "Type": "Int",
+        "Computed": true
+      },
+      "name": {
+        "Type": "String",
+        "Computed": true
+      },
+      "node_count": {
+        "Type": "Int",
+        "Computed": true
+      },
+      "pool_id": {
+        "Type": "String",
+        "Required": true
+      },
+      "project_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "project_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "region_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "region_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "stack_id": {
+        "Type": "String",
+        "Computed": true
+      }
+    },
+    "gcore_lblistener": {
+      "loadbalancer_id": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "operating_status": {
+        "Type": "String",
+        "Computed": true
+      },
+      "pool_count": {
+        "Type": "Int",
+        "Computed": true
+      },
+      "project_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "project_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "protocol": {
+        "Type": "String",
+        "Description": "Available values is 'HTTP', 'HTTPS', 'TCP', 'UDP'",
+        "Computed": true
+      },
+      "protocol_port": {
+        "Type": "Int",
+        "Computed": true
+      },
+      "provisioning_status": {
+        "Type": "String",
+        "Computed": true
+      },
+      "region_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "region_name": {
+        "Type": "String",
+        "Optional": true
+      }
+    },
+    "gcore_lbpool": {
+      "health_monitor": {
+        "Type": "List",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "delay": {
+              "Type": "Int",
+              "Computed": true
+            },
+            "expected_codes": {
+              "Type": "String",
+              "Computed": true
+            },
+            "http_method": {
+              "Type": "String",
+              "Computed": true
+            },
+            "id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "max_retries": {
+              "Type": "Int",
+              "Computed": true
+            },
+            "max_retries_down": {
+              "Type": "Int",
+              "Computed": true
+            },
+            "timeout": {
+              "Type": "Int",
+              "Computed": true
+            },
+            "type": {
+              "Type": "String",
+              "Description": "Available values is 'HTTP', 'HTTPS', 'PING', 'TCP', 'TLS-HELLO', 'UDP-CONNECT",
+              "Computed": true
+            },
+            "url_path": {
+              "Type": "String",
+              "Computed": true
+            }
+          }
+        }
+      },
+      "lb_algorithm": {
+        "Type": "String",
+        "Description": "Available values is 'ROUND_ROBIN', 'LEAST_CONNECTIONS', 'SOURCE_IP', 'SOURCE_IP_PORT'",
+        "Computed": true
+      },
+      "listener_id": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "loadbalancer_id": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "project_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "project_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "protocol": {
+        "Type": "String",
+        "Description": "Available values is 'HTTP' (currently work, other do not work on ed-8), 'HTTPS', 'TCP', 'UDP'",
+        "Computed": true
+      },
+      "region_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "region_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "session_persistence": {
+        "Type": "List",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "cookie_name": {
+              "Type": "String",
+              "Computed": true
+            },
+            "persistence_granularity": {
+              "Type": "String",
+              "Computed": true
+            },
+            "persistence_timeout": {
+              "Type": "Int",
+              "Computed": true
+            },
+            "type": {
+              "Type": "String",
+              "Computed": true
+            }
+          }
+        }
+      }
+    },
+    "gcore_loadbalancer": {
+      "listener": {
+        "Type": "List",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "name": {
+              "Type": "String",
+              "Computed": true
+            },
+            "protocol": {
+              "Type": "String",
+              "Description": "Available values is 'HTTP' (currently work, other do not work on ed-8), 'HTTPS', 'TCP', 'UDP'",
+              "Computed": true
+            },
+            "protocol_port": {
+              "Type": "Int",
+              "Computed": true
+            }
+          }
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "project_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "project_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "region_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "region_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "vip_address": {
+        "Type": "String",
+        "Computed": true
+      },
+      "vip_port_id": {
+        "Type": "String",
+        "Computed": true
+      }
+    },
+    "gcore_network": {
+      "external": {
+        "Type": "Bool",
+        "Computed": true
+      },
+      "mtu": {
+        "Type": "Int",
+        "Computed": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "project_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "project_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "region_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "region_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "shared": {
+        "Type": "Bool",
+        "Computed": true
+      },
+      "type": {
+        "Type": "String",
+        "Description": "'vlan' or 'vxlan' network type is allowed. Default value is 'vxlan'",
+        "Computed": true
+      }
+    },
+    "gcore_project": {
+      "name": {
+        "Type": "String",
+        "Required": true,
+        "Description": "Displayed project name"
+      }
+    },
+    "gcore_region": {
+      "name": {
+        "Type": "String",
+        "Required": true,
+        "Description": "Displayed region name"
+      }
+    },
+    "gcore_reservedfixedip": {
+      "allowed_address_pairs": {
+        "Type": "List",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "ip_address": {
+              "Type": "String",
+              "Computed": true
+            },
+            "mac_address": {
+              "Type": "String",
+              "Computed": true
+            }
+          }
+        }
+      },
+      "fixed_ip_address": {
+        "Type": "String",
+        "Required": true
+      },
+      "is_vip": {
+        "Type": "Bool",
+        "Computed": true
+      },
+      "network_id": {
+        "Type": "String",
+        "Computed": true
+      },
+      "port_id": {
+        "Type": "String",
+        "Description": "ID of the port_id underlying the reserved fixed IP",
+        "Computed": true
+      },
+      "project_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "project_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "region_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "region_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "status": {
+        "Type": "String",
+        "Computed": true
+      },
+      "subnet_id": {
+        "Type": "String",
+        "Computed": true
+      }
+    },
+    "gcore_router": {
+      "external_gateway_info": {
+        "Type": "List",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "enable_snat": {
+              "Type": "Bool",
+              "Computed": true
+            },
+            "external_fixed_ips": {
+              "Type": "List",
+              "Computed": true,
+              "IsBlock": true,
+              "ConfigImplicitMode": "ComputedBlock",
+              "Elem": {
+                "Type": "SchemaInfo",
+                "Info": {
+                  "ip_address": {
+                    "Type": "String",
+                    "Computed": true
+                  },
+                  "subnet_id": {
+                    "Type": "String",
+                    "Computed": true
+                  }
+                }
+              }
+            },
+            "network_id": {
+              "Type": "String",
+              "Computed": true
+            }
+          }
+        }
+      },
+      "interfaces": {
+        "Type": "List",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "subnet_id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "type": {
+              "Type": "String",
+              "Computed": true
+            }
+          }
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "project_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "project_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "region_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "region_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "routes": {
+        "Type": "List",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "destination": {
+              "Type": "String",
+              "Computed": true
+            },
+            "nexthop": {
+              "Type": "String",
+              "Description": "IPv4 address to forward traffic to if it's destination IP matches 'destination' CIDR",
+              "Computed": true
+            }
+          }
+        }
+      },
+      "status": {
+        "Type": "String",
+        "Computed": true
+      }
+    },
+    "gcore_securitygroup": {
+      "description": {
+        "Type": "String",
+        "Computed": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "project_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "project_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "region_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "region_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "security_group_rules": {
+        "Type": "Set",
+        "Description": "Firewall rules control what inbound(ingress) and outbound(egress) traffic is allowed to enter or leave a Instance. At least one 'egress' rule should be set",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "created_at": {
+              "Type": "String",
+              "Computed": true
+            },
+            "description": {
+              "Type": "String",
+              "Computed": true
+            },
+            "direction": {
+              "Type": "String",
+              "Description": "Available value is 'ingress', 'egress'",
+              "Computed": true
+            },
+            "ethertype": {
+              "Type": "String",
+              "Description": "Available value is 'IPv4', 'IPv6'",
+              "Computed": true
+            },
+            "id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "port_range_max": {
+              "Type": "Int",
+              "Computed": true
+            },
+            "port_range_min": {
+              "Type": "Int",
+              "Computed": true
+            },
+            "protocol": {
+              "Type": "String",
+              "Description": "Available value is udp,tcp,any,icmp,ah,dccp,egp,esp,gre,igmp,ospf,pgm,rsvp,sctp,udplite,vrrp,51,50,112",
+              "Computed": true
+            },
+            "remote_ip_prefix": {
+              "Type": "String",
+              "Computed": true
+            },
+            "updated_at": {
+              "Type": "String",
+              "Computed": true
+            }
+          }
+        }
+      }
+    },
+    "gcore_servergroup": {
+      "instances": {
+        "Type": "List",
+        "Description": "Instances in this server group",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "instance_id": {
+              "Type": "String",
+              "Computed": true
+            },
+            "instance_name": {
+              "Type": "String",
+              "Computed": true
+            }
+          }
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Required": true,
+        "Description": "Displayed server group name"
+      },
+      "policy": {
+        "Type": "String",
+        "Description": "Server group policy. Available value is 'affinity', 'anti-affinity'",
+        "Computed": true
+      },
+      "project_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "project_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "region_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "region_name": {
+        "Type": "String",
+        "Optional": true
+      }
+    },
+    "gcore_storage_s3": {
+      "client_id": {
+        "Type": "Int",
+        "Description": "An client id of new storage resource.",
+        "Computed": true
+      },
+      "generated_endpoint": {
+        "Type": "String",
+        "Description": "A s3 entry point for new storage resource.",
+        "Computed": true
+      },
+      "generated_http_endpoint": {
+        "Type": "String",
+        "Description": "A http s3 entry point for new storage resource.",
+        "Computed": true
+      },
+      "generated_s3_endpoint": {
+        "Type": "String",
+        "Description": "A s3 endpoint for new storage resource.",
+        "Computed": true
+      },
+      "location": {
+        "Type": "String",
+        "Description": "A location of new storage resource. One of (s-ed1, s-darz1, s-ws1)",
+        "Computed": true
+      },
+      "name": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "A name of new storage resource."
+      },
+      "storage_id": {
+        "Type": "Int",
+        "Optional": true,
+        "Description": "An id of new storage resource."
+      }
+    },
+    "gcore_storage_sftp": {
+      "client_id": {
+        "Type": "Int",
+        "Description": "An client id of storage resource.",
+        "Computed": true
+      },
+      "generated_http_endpoint": {
+        "Type": "String",
+        "Description": "A http sftp entry point for new storage resource.",
+        "Computed": true
+      },
+      "generated_sftp_endpoint": {
+        "Type": "String",
+        "Description": "A ssh sftp entry point for new storage resource.",
+        "Computed": true
+      },
+      "http_expires_header_value": {
+        "Type": "String",
+        "Description": "A expires date of storage resource.",
+        "Computed": true
+      },
+      "http_servername_alias": {
+        "Type": "String",
+        "Description": "An alias of storage resource.",
+        "Computed": true
+      },
+      "location": {
+        "Type": "String",
+        "Description": "A location of new storage resource. One of (ams, sin, fra, mia)",
+        "Computed": true
+      },
+      "name": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "A name of storage resource."
+      },
+      "ssh_key_id": {
+        "Type": "List",
+        "Description": "An ssh keys IDs to link with new sftp storage resource only. https://storage.gcorelabs.com/ssh-key/list",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "Int"
+        }
+      },
+      "storage_id": {
+        "Type": "Int",
+        "Optional": true,
+        "Description": "An id of storage resource."
+      }
+    },
+    "gcore_storage_sftp_key": {
+      "key_id": {
+        "Type": "Int",
+        "Description": "An id of of storage key resource.",
+        "Computed": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true,
+        "Description": "A name of storage key resource."
+      }
+    },
+    "gcore_subnet": {
+      "cidr": {
+        "Type": "String",
+        "Computed": true
+      },
+      "connect_to_network_router": {
+        "Type": "Bool",
+        "Computed": true
+      },
+      "dns_nameservers": {
+        "Type": "List",
+        "Computed": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "enable_dhcp": {
+        "Type": "Bool",
+        "Computed": true
+      },
+      "gateway_ip": {
+        "Type": "String",
+        "Computed": true
+      },
+      "host_routes": {
+        "Type": "List",
+        "Computed": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "ComputedBlock",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "destination": {
+              "Type": "String",
+              "Computed": true
+            },
+            "nexthop": {
+              "Type": "String",
+              "Description": "IPv4 address to forward traffic to if it's destination IP matches 'destination' CIDR",
+              "Computed": true
+            }
+          }
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "network_id": {
+        "Type": "String",
+        "Optional": true,
+        "Computed": true
+      },
+      "project_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "project_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "region_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "region_name": {
+        "Type": "String",
+        "Optional": true
+      }
+    },
+    "gcore_volume": {
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "project_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "project_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "region_id": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "region_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "size": {
+        "Type": "Int",
+        "Computed": true
+      },
+      "type_name": {
+        "Type": "String",
+        "Description": "Available value is 'standard', 'ssd_hiiops', 'cold', 'ultra'. Defaults to standard",
+        "Computed": true
+      }
+    }
+  }
+}

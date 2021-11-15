@@ -1,0 +1,376 @@
+{
+  ".schema_version": "2",
+  ".sdk_type": "terraform-plugin-sdk-v2",
+  "name": "cbs",
+  "type": "provider",
+  "version": "v0.6.0",
+  "provider": {
+    "aws": {
+      "Type": "List",
+      "Optional": true,
+      "MaxItems": 1,
+      "IsBlock": true,
+      "ConfigImplicitMode": "Block",
+      "Elem": {
+        "Type": "SchemaInfo",
+        "Info": {
+          "region": {
+            "Type": "String",
+            "Optional": true,
+            "DefaultFunc": "ENV(AWS_DEFAULT_REGION)"
+          }
+        }
+      }
+    },
+    "azure": {
+      "Type": "List",
+      "Optional": true,
+      "MaxItems": 1,
+      "IsBlock": true,
+      "ConfigImplicitMode": "Block",
+      "Elem": {
+        "Type": "SchemaInfo",
+        "Info": {
+          "client_id": {
+            "Type": "String",
+            "Optional": true,
+            "Description": "The Client ID which should be used for service principal authentication.",
+            "DefaultFunc": "ENV(ARM_CLIENT_ID)"
+          },
+          "client_secret": {
+            "Type": "String",
+            "Optional": true,
+            "Description": "The Client Secret which should be used. For use When authenticating as a Service Principal using a Client Secret.",
+            "DefaultFunc": "ENV(ARM_CLIENT_SECRET)"
+          },
+          "subscription_id": {
+            "Type": "String",
+            "Optional": true,
+            "Description": "The Subscription ID which should be used.",
+            "DefaultFunc": "ENV(ARM_SUBSCRIPTION_ID)"
+          },
+          "tenant_id": {
+            "Type": "String",
+            "Optional": true,
+            "Description": "The Tenant ID which should be used for service principal authentication.",
+            "DefaultFunc": "ENV(ARM_TENANT_ID)"
+          }
+        }
+      }
+    }
+  },
+  "resources": {
+    "cbs_array_aws": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "delete"
+      ],
+      "alert_recipients": {
+        "Type": "List",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "array_model": {
+        "Type": "String",
+        "Required": true
+      },
+      "array_name": {
+        "Type": "String",
+        "Required": true
+      },
+      "deployment_role_arn": {
+        "Type": "String",
+        "Required": true
+      },
+      "deployment_template_url": {
+        "Type": "String",
+        "Required": true
+      },
+      "gui_endpoint": {
+        "Type": "String",
+        "Computed": true
+      },
+      "iscsi_endpoint_ct0": {
+        "Type": "String",
+        "Computed": true
+      },
+      "iscsi_endpoint_ct1": {
+        "Type": "String",
+        "Computed": true
+      },
+      "iscsi_security_group": {
+        "Type": "String",
+        "Required": true
+      },
+      "iscsi_subnet": {
+        "Type": "String",
+        "Required": true
+      },
+      "license_key": {
+        "Type": "String",
+        "Required": true
+      },
+      "log_sender_domain": {
+        "Type": "String",
+        "Required": true
+      },
+      "management_endpoint": {
+        "Type": "String",
+        "Computed": true
+      },
+      "management_security_group": {
+        "Type": "String",
+        "Required": true
+      },
+      "management_subnet": {
+        "Type": "String",
+        "Required": true
+      },
+      "pureuser_key_pair_name": {
+        "Type": "String",
+        "Required": true
+      },
+      "replication_endpoint_ct0": {
+        "Type": "String",
+        "Computed": true
+      },
+      "replication_endpoint_ct1": {
+        "Type": "String",
+        "Computed": true
+      },
+      "replication_security_group": {
+        "Type": "String",
+        "Required": true
+      },
+      "replication_subnet": {
+        "Type": "String",
+        "Required": true
+      },
+      "resume_lambda": {
+        "Type": "String",
+        "Computed": true
+      },
+      "stack_name": {
+        "Type": "String",
+        "Computed": true
+      },
+      "system_subnet": {
+        "Type": "String",
+        "Required": true
+      },
+      "tags": {
+        "Type": "Map",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      }
+    },
+    "cbs_array_azure": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "delete"
+      ],
+      "alert_recipients": {
+        "Type": "List",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "application_name": {
+        "Type": "String",
+        "Computed": true
+      },
+      "array_model": {
+        "Type": "String",
+        "Required": true
+      },
+      "array_name": {
+        "Type": "String",
+        "Required": true
+      },
+      "ct0_name": {
+        "Type": "String",
+        "Computed": true
+      },
+      "ct1_name": {
+        "Type": "String",
+        "Computed": true
+      },
+      "iscsi_endpoint_ct0": {
+        "Type": "String",
+        "Computed": true
+      },
+      "iscsi_endpoint_ct1": {
+        "Type": "String",
+        "Computed": true
+      },
+      "iscsi_subnet": {
+        "Type": "String",
+        "Required": true
+      },
+      "jit_approval": {
+        "Type": "List",
+        "Required": true,
+        "MaxItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "activation_maximum_duration": {
+              "Type": "String",
+              "Optional": true,
+              "Default": {
+                "Type": "string",
+                "Value": "PT8H"
+              }
+            },
+            "approvers": {
+              "Type": "List",
+              "Required": true,
+              "MaxItems": 1,
+              "IsBlock": true,
+              "ConfigImplicitMode": "Block",
+              "Elem": {
+                "Type": "SchemaInfo",
+                "Info": {
+                  "groups": {
+                    "Type": "List",
+                    "Required": true,
+                    "ConfigImplicitMode": "Attr",
+                    "Elem": {
+                      "Type": "SchemaElements",
+                      "ElementsType": "String"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "key_vault_id": {
+        "Type": "String",
+        "Required": true
+      },
+      "license_key": {
+        "Type": "String",
+        "Required": true
+      },
+      "location": {
+        "Type": "String",
+        "Required": true
+      },
+      "log_sender_domain": {
+        "Type": "String",
+        "Required": true
+      },
+      "managed_resource_group_name": {
+        "Type": "String",
+        "Computed": true
+      },
+      "management_endpoint": {
+        "Type": "String",
+        "Computed": true
+      },
+      "management_endpoint_ct0": {
+        "Type": "String",
+        "Computed": true
+      },
+      "management_endpoint_ct1": {
+        "Type": "String",
+        "Computed": true
+      },
+      "management_subnet": {
+        "Type": "String",
+        "Required": true
+      },
+      "plan": {
+        "Type": "List",
+        "Optional": true,
+        "MaxItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "name": {
+              "Type": "String",
+              "Required": true
+            },
+            "product": {
+              "Type": "String",
+              "Required": true
+            },
+            "publisher": {
+              "Type": "String",
+              "Required": true
+            },
+            "version": {
+              "Type": "String",
+              "Required": true
+            }
+          }
+        }
+      },
+      "pureuser_private_key": {
+        "Type": "String",
+        "Optional": true
+      },
+      "pureuser_private_key_path": {
+        "Type": "String",
+        "Optional": true
+      },
+      "replication_endpoint_ct0": {
+        "Type": "String",
+        "Computed": true
+      },
+      "replication_endpoint_ct1": {
+        "Type": "String",
+        "Computed": true
+      },
+      "replication_subnet": {
+        "Type": "String",
+        "Required": true
+      },
+      "resource_group_name": {
+        "Type": "String",
+        "Required": true
+      },
+      "system_subnet": {
+        "Type": "String",
+        "Required": true
+      },
+      "tags": {
+        "Type": "Map",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "virtual_network_id": {
+        "Type": "String",
+        "Required": true
+      },
+      "zone": {
+        "Type": "Int",
+        "Required": true
+      }
+    }
+  },
+  "data-sources": {}
+}

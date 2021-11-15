@@ -30,6 +30,7 @@ function process_provisioner() {
     return 0
   fi
   repository="$(jq_get "$name" 'repository')"
+  repository="${repository#https://}"
   pkg_name="$(jq_get "$name" 'pkg_name')"
   provisioner_args="$(jq_get "$name" 'provisioner_args')"
   use_master="$(jq_get "$name" 'use_master')"

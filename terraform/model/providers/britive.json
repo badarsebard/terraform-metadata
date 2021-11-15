@@ -1,0 +1,369 @@
+{
+  ".schema_version": "2",
+  ".sdk_type": "terraform-plugin-sdk-v2",
+  "name": "britive",
+  "type": "provider",
+  "version": "v1.0.16",
+  "provider": {
+    "config_path": {
+      "Type": "String",
+      "Optional": true,
+      "Description": "This is the file path for Britive provider configuration. The default configuration path is ~/.britive/tf.config",
+      "DefaultFunc": "ENV(BRITIVE_CONFIG)"
+    },
+    "tenant": {
+      "Type": "String",
+      "Optional": true,
+      "Description": "This is the Britive Tenant URL",
+      "DefaultFunc": "ENV(BRITIVE_TENANT)"
+    },
+    "token": {
+      "Type": "String",
+      "Optional": true,
+      "Description": "This is the API Token to interact with your Britive API",
+      "DefaultFunc": "ENV(BRITIVE_TOKEN)"
+    }
+  },
+  "resources": {
+    "britive_profile": {
+      "app_container_id": {
+        "Type": "String",
+        "Required": true,
+        "Description": "The identity of the Britive application"
+      },
+      "app_name": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "The name of the Britive application",
+        "Computed": true
+      },
+      "associations": {
+        "Type": "List",
+        "Required": true,
+        "Description": "The list of associations for the Britive profile",
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "parent_name": {
+              "Type": "String",
+              "Optional": true,
+              "Description": "The parent name of the resource. Required only if the association type is ApplicationResource"
+            },
+            "type": {
+              "Type": "String",
+              "Required": true,
+              "Description": "The type of association, should be one of [Environment, EnvironmentGroup, ApplicationResource]"
+            },
+            "value": {
+              "Type": "String",
+              "Required": true,
+              "Description": "The association value"
+            }
+          }
+        }
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "The description of the Britive profile"
+      },
+      "destination_url": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "The destination url to redirect user after checkout"
+      },
+      "disabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "To disable the Britive profile",
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "expiration_duration": {
+        "Type": "String",
+        "Required": true,
+        "Description": "The expiration time for the Britive profile"
+      },
+      "extendable": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "The Boolean flag that indicates whether profile expiry is extendable or not",
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "extension_duration": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "The profile expiry extension as a time value"
+      },
+      "extension_limit": {
+        "Type": "Int",
+        "Optional": true,
+        "Description": "The repetition limit for extending the profile expiry"
+      },
+      "name": {
+        "Type": "String",
+        "Required": true,
+        "Description": "The name of the Britive profile"
+      },
+      "notification_prior_to_expiration": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "he profile expiry notification as a time value"
+      }
+    },
+    "britive_profile_identity": {
+      "access_period": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "The access period for the associated identity",
+        "MaxItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "end": {
+              "Type": "String",
+              "Required": true,
+              "Description": "The end of the access period for the associated identity"
+            },
+            "start": {
+              "Type": "String",
+              "Required": true,
+              "Description": "The start of the access period for the associated identity"
+            }
+          }
+        }
+      },
+      "app_name": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "The name of the application, profile is assciated with",
+        "Computed": true
+      },
+      "profile_id": {
+        "Type": "String",
+        "Required": true,
+        "Description": "The identifier of the profile"
+      },
+      "profile_name": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "The name of the profile",
+        "Computed": true
+      },
+      "username": {
+        "Type": "String",
+        "Required": true,
+        "Description": "The identity associate with the profile"
+      }
+    },
+    "britive_profile_permission": {
+      "app_name": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "The application name of the application, profile is assciated with",
+        "Computed": true
+      },
+      "permission_name": {
+        "Type": "String",
+        "Required": true,
+        "Description": "The name of permission"
+      },
+      "permission_type": {
+        "Type": "String",
+        "Required": true,
+        "Description": "The type of permission"
+      },
+      "profile_id": {
+        "Type": "String",
+        "Required": true,
+        "Description": "The identifier of the profile"
+      },
+      "profile_name": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "The name of the profile",
+        "Computed": true
+      }
+    },
+    "britive_profile_session_attribute": {
+      "app_name": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "The application name of the application, profile is assciated with",
+        "Computed": true
+      },
+      "attribute_name": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "The attribute name associate with the profile"
+      },
+      "attribute_type": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "The type of attribute associate with the profile, should be one of [Static, Identity]",
+        "Default": {
+          "Type": "string",
+          "Value": "Identity"
+        }
+      },
+      "attribute_value": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "The attribute value associate with the profile"
+      },
+      "mapping_name": {
+        "Type": "String",
+        "Required": true,
+        "Description": "The attribute mapping name associate with the profile"
+      },
+      "profile_id": {
+        "Type": "String",
+        "Required": true,
+        "Description": "The identifier of the profile"
+      },
+      "profile_name": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "The name of the profile",
+        "Computed": true
+      },
+      "transitive": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "The attribute transitive associate with the profile",
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      }
+    },
+    "britive_profile_tag": {
+      "access_period": {
+        "Type": "List",
+        "Optional": true,
+        "Description": "The access period for the associated tag",
+        "MaxItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "end": {
+              "Type": "String",
+              "Required": true,
+              "Description": "The end of the access period for the associated tag"
+            },
+            "start": {
+              "Type": "String",
+              "Required": true,
+              "Description": "The start of the access period for the associated tag"
+            }
+          }
+        }
+      },
+      "app_name": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "The application name of the application, profile is assciated with",
+        "Computed": true
+      },
+      "profile_id": {
+        "Type": "String",
+        "Required": true,
+        "Description": "The identifier of the profile"
+      },
+      "profile_name": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "The name of the profile",
+        "Computed": true
+      },
+      "tag_name": {
+        "Type": "String",
+        "Required": true,
+        "Description": "The tag associate with the profile"
+      }
+    },
+    "britive_tag": {
+      "description": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "The description of the Britive tag"
+      },
+      "disabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "To disable the Britive tag",
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "external": {
+        "Type": "Bool",
+        "Optional": true,
+        "Description": "The boolean attribute that indicates whether the tag is external or not",
+        "Computed": true
+      },
+      "identity_provider_id": {
+        "Type": "String",
+        "Required": true,
+        "Description": "The unique identity of the identity provider associated with the Britive tag"
+      },
+      "name": {
+        "Type": "String",
+        "Required": true,
+        "Description": "The name of Britive tag"
+      }
+    },
+    "britive_tag_member": {
+      "tag_id": {
+        "Type": "String",
+        "Required": true,
+        "Description": "The identifier of the Britive tag"
+      },
+      "tag_name": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "The name of the Britive tag",
+        "Computed": true
+      },
+      "username": {
+        "Type": "String",
+        "Required": true,
+        "Description": "The username of the user added to the Britive tag"
+      }
+    }
+  },
+  "data-sources": {
+    "britive_application": {
+      "name": {
+        "Type": "String",
+        "Required": true,
+        "Description": "The name of the application"
+      }
+    },
+    "britive_identity_provider": {
+      "name": {
+        "Type": "String",
+        "Required": true,
+        "Description": "The name of the identity provider"
+      },
+      "type": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "The type of the identity provider",
+        "Computed": true
+      }
+    }
+  }
+}

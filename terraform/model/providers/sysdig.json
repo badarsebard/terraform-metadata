@@ -1,0 +1,2820 @@
+{
+  ".schema_version": "2",
+  ".sdk_type": "terraform-plugin-sdk-v2",
+  "name": "sysdig",
+  "type": "provider",
+  "version": "v0.5.27",
+  "provider": {
+    "extra_headers": {
+      "Type": "Map",
+      "Optional": true,
+      "ConfigImplicitMode": "Attr",
+      "Elem": {
+        "Type": "SchemaElements",
+        "ElementsType": "String"
+      }
+    },
+    "sysdig_monitor_api_token": {
+      "Type": "String",
+      "Optional": true,
+      "DefaultFunc": "ENV(SYSDIG_MONITOR_API_TOKEN)"
+    },
+    "sysdig_monitor_insecure_tls": {
+      "Type": "Bool",
+      "Optional": true,
+      "DefaultFunc": "ENV(SYSDIG_MONITOR_INSECURE_TLS)"
+    },
+    "sysdig_monitor_url": {
+      "Type": "String",
+      "Optional": true,
+      "DefaultFunc": "ENV(SYSDIG_MONITOR_URL)"
+    },
+    "sysdig_secure_api_token": {
+      "Type": "String",
+      "Optional": true,
+      "DefaultFunc": "ENV(SYSDIG_SECURE_API_TOKEN)"
+    },
+    "sysdig_secure_insecure_tls": {
+      "Type": "Bool",
+      "Optional": true,
+      "DefaultFunc": "ENV(SYSDIG_SECURE_INSECURE_TLS)"
+    },
+    "sysdig_secure_url": {
+      "Type": "String",
+      "Optional": true,
+      "DefaultFunc": "ENV(SYSDIG_SECURE_URL)"
+    }
+  },
+  "resources": {
+    "sysdig_monitor_alert_anomaly": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "capture": {
+        "Type": "Set",
+        "Optional": true,
+        "MaxItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "duration": {
+              "Type": "Int",
+              "Required": true
+            },
+            "filename": {
+              "Type": "String",
+              "Required": true
+            },
+            "filter": {
+              "Type": "String",
+              "Optional": true,
+              "Default": {
+                "Type": "string"
+              }
+            }
+          }
+        }
+      },
+      "custom_notification": {
+        "Type": "List",
+        "Optional": true,
+        "MaxItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "append": {
+              "Type": "String",
+              "Optional": true
+            },
+            "prepend": {
+              "Type": "String",
+              "Optional": true
+            },
+            "title": {
+              "Type": "String",
+              "Required": true
+            }
+          }
+        }
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true
+      },
+      "enabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "true"
+        }
+      },
+      "monitor": {
+        "Type": "List",
+        "Required": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "multiple_alerts_by": {
+        "Type": "List",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "notification_channels": {
+        "Type": "List",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "Int"
+        }
+      },
+      "renotification_minutes": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "scope": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string"
+        }
+      },
+      "severity": {
+        "Type": "Int",
+        "Optional": true,
+        "Default": {
+          "Type": "int",
+          "Value": "4"
+        }
+      },
+      "team": {
+        "Type": "Int",
+        "Computed": true
+      },
+      "trigger_after_minutes": {
+        "Type": "Int",
+        "Required": true
+      },
+      "version": {
+        "Type": "Int",
+        "Computed": true
+      }
+    },
+    "sysdig_monitor_alert_downtime": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "capture": {
+        "Type": "Set",
+        "Optional": true,
+        "MaxItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "duration": {
+              "Type": "Int",
+              "Required": true
+            },
+            "filename": {
+              "Type": "String",
+              "Required": true
+            },
+            "filter": {
+              "Type": "String",
+              "Optional": true,
+              "Default": {
+                "Type": "string"
+              }
+            }
+          }
+        }
+      },
+      "custom_notification": {
+        "Type": "List",
+        "Optional": true,
+        "MaxItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "append": {
+              "Type": "String",
+              "Optional": true
+            },
+            "prepend": {
+              "Type": "String",
+              "Optional": true
+            },
+            "title": {
+              "Type": "String",
+              "Required": true
+            }
+          }
+        }
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true
+      },
+      "enabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "true"
+        }
+      },
+      "entities_to_monitor": {
+        "Type": "List",
+        "Required": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "notification_channels": {
+        "Type": "List",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "Int"
+        }
+      },
+      "renotification_minutes": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "scope": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string"
+        }
+      },
+      "severity": {
+        "Type": "Int",
+        "Optional": true,
+        "Default": {
+          "Type": "int",
+          "Value": "4"
+        }
+      },
+      "team": {
+        "Type": "Int",
+        "Computed": true
+      },
+      "trigger_after_minutes": {
+        "Type": "Int",
+        "Required": true
+      },
+      "trigger_after_pct": {
+        "Type": "Int",
+        "Optional": true,
+        "Default": {
+          "Type": "int",
+          "Value": "100"
+        }
+      },
+      "version": {
+        "Type": "Int",
+        "Computed": true
+      }
+    },
+    "sysdig_monitor_alert_event": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "capture": {
+        "Type": "Set",
+        "Optional": true,
+        "MaxItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "duration": {
+              "Type": "Int",
+              "Required": true
+            },
+            "filename": {
+              "Type": "String",
+              "Required": true
+            },
+            "filter": {
+              "Type": "String",
+              "Optional": true,
+              "Default": {
+                "Type": "string"
+              }
+            }
+          }
+        }
+      },
+      "custom_notification": {
+        "Type": "List",
+        "Optional": true,
+        "MaxItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "append": {
+              "Type": "String",
+              "Optional": true
+            },
+            "prepend": {
+              "Type": "String",
+              "Optional": true
+            },
+            "title": {
+              "Type": "String",
+              "Required": true
+            }
+          }
+        }
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true
+      },
+      "enabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "true"
+        }
+      },
+      "event_count": {
+        "Type": "Int",
+        "Required": true
+      },
+      "event_name": {
+        "Type": "String",
+        "Required": true
+      },
+      "event_rel": {
+        "Type": "String",
+        "Required": true
+      },
+      "multiple_alerts_by": {
+        "Type": "List",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "notification_channels": {
+        "Type": "List",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "Int"
+        }
+      },
+      "renotification_minutes": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "scope": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string"
+        }
+      },
+      "severity": {
+        "Type": "Int",
+        "Optional": true,
+        "Default": {
+          "Type": "int",
+          "Value": "4"
+        }
+      },
+      "source": {
+        "Type": "String",
+        "Required": true
+      },
+      "team": {
+        "Type": "Int",
+        "Computed": true
+      },
+      "trigger_after_minutes": {
+        "Type": "Int",
+        "Required": true
+      },
+      "version": {
+        "Type": "Int",
+        "Computed": true
+      }
+    },
+    "sysdig_monitor_alert_group_outlier": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "capture": {
+        "Type": "Set",
+        "Optional": true,
+        "MaxItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "duration": {
+              "Type": "Int",
+              "Required": true
+            },
+            "filename": {
+              "Type": "String",
+              "Required": true
+            },
+            "filter": {
+              "Type": "String",
+              "Optional": true,
+              "Default": {
+                "Type": "string"
+              }
+            }
+          }
+        }
+      },
+      "custom_notification": {
+        "Type": "List",
+        "Optional": true,
+        "MaxItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "append": {
+              "Type": "String",
+              "Optional": true
+            },
+            "prepend": {
+              "Type": "String",
+              "Optional": true
+            },
+            "title": {
+              "Type": "String",
+              "Required": true
+            }
+          }
+        }
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true
+      },
+      "enabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "true"
+        }
+      },
+      "monitor": {
+        "Type": "List",
+        "Required": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "notification_channels": {
+        "Type": "List",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "Int"
+        }
+      },
+      "renotification_minutes": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "scope": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string"
+        }
+      },
+      "severity": {
+        "Type": "Int",
+        "Optional": true,
+        "Default": {
+          "Type": "int",
+          "Value": "4"
+        }
+      },
+      "team": {
+        "Type": "Int",
+        "Computed": true
+      },
+      "trigger_after_minutes": {
+        "Type": "Int",
+        "Required": true
+      },
+      "version": {
+        "Type": "Int",
+        "Computed": true
+      }
+    },
+    "sysdig_monitor_alert_metric": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "capture": {
+        "Type": "Set",
+        "Optional": true,
+        "MaxItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "duration": {
+              "Type": "Int",
+              "Required": true
+            },
+            "filename": {
+              "Type": "String",
+              "Required": true
+            },
+            "filter": {
+              "Type": "String",
+              "Optional": true,
+              "Default": {
+                "Type": "string"
+              }
+            }
+          }
+        }
+      },
+      "custom_notification": {
+        "Type": "List",
+        "Optional": true,
+        "MaxItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "append": {
+              "Type": "String",
+              "Optional": true
+            },
+            "prepend": {
+              "Type": "String",
+              "Optional": true
+            },
+            "title": {
+              "Type": "String",
+              "Required": true
+            }
+          }
+        }
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true
+      },
+      "enabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "true"
+        }
+      },
+      "metric": {
+        "Type": "String",
+        "Required": true
+      },
+      "multiple_alerts_by": {
+        "Type": "List",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "notification_channels": {
+        "Type": "List",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "Int"
+        }
+      },
+      "renotification_minutes": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "scope": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string"
+        }
+      },
+      "severity": {
+        "Type": "Int",
+        "Optional": true,
+        "Default": {
+          "Type": "int",
+          "Value": "4"
+        }
+      },
+      "team": {
+        "Type": "Int",
+        "Computed": true
+      },
+      "trigger_after_minutes": {
+        "Type": "Int",
+        "Required": true
+      },
+      "version": {
+        "Type": "Int",
+        "Computed": true
+      }
+    },
+    "sysdig_monitor_alert_promql": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "capture": {
+        "Type": "Set",
+        "Optional": true,
+        "MaxItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "duration": {
+              "Type": "Int",
+              "Required": true
+            },
+            "filename": {
+              "Type": "String",
+              "Required": true
+            },
+            "filter": {
+              "Type": "String",
+              "Optional": true,
+              "Default": {
+                "Type": "string"
+              }
+            }
+          }
+        }
+      },
+      "custom_notification": {
+        "Type": "List",
+        "Optional": true,
+        "MaxItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "append": {
+              "Type": "String",
+              "Optional": true
+            },
+            "prepend": {
+              "Type": "String",
+              "Optional": true
+            },
+            "title": {
+              "Type": "String",
+              "Required": true
+            }
+          }
+        }
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true
+      },
+      "enabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "true"
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "notification_channels": {
+        "Type": "List",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "Int"
+        }
+      },
+      "promql": {
+        "Type": "String",
+        "Required": true
+      },
+      "renotification_minutes": {
+        "Type": "Int",
+        "Optional": true
+      },
+      "scope": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string"
+        }
+      },
+      "severity": {
+        "Type": "Int",
+        "Optional": true,
+        "Default": {
+          "Type": "int",
+          "Value": "4"
+        }
+      },
+      "team": {
+        "Type": "Int",
+        "Computed": true
+      },
+      "trigger_after_minutes": {
+        "Type": "Int",
+        "Required": true
+      },
+      "version": {
+        "Type": "Int",
+        "Computed": true
+      }
+    },
+    "sysdig_monitor_dashboard": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "description": {
+        "Type": "String",
+        "Optional": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "panel": {
+        "Type": "Set",
+        "Required": true,
+        "MinItems": 1,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "autosize_text": {
+              "Type": "Bool",
+              "Optional": true,
+              "Default": {
+                "Type": "bool",
+                "Value": "false"
+              }
+            },
+            "content": {
+              "Type": "String",
+              "Optional": true
+            },
+            "description": {
+              "Type": "String",
+              "Optional": true
+            },
+            "height": {
+              "Type": "Int",
+              "Required": true
+            },
+            "name": {
+              "Type": "String",
+              "Required": true
+            },
+            "pos_x": {
+              "Type": "Int",
+              "Required": true
+            },
+            "pos_y": {
+              "Type": "Int",
+              "Required": true
+            },
+            "query": {
+              "Type": "Set",
+              "Optional": true,
+              "MinItems": 1,
+              "IsBlock": true,
+              "ConfigImplicitMode": "Block",
+              "Elem": {
+                "Type": "SchemaInfo",
+                "Info": {
+                  "promql": {
+                    "Type": "String",
+                    "Required": true
+                  },
+                  "unit": {
+                    "Type": "String",
+                    "Required": true
+                  }
+                }
+              }
+            },
+            "transparent_background": {
+              "Type": "Bool",
+              "Optional": true,
+              "Default": {
+                "Type": "bool",
+                "Value": "false"
+              }
+            },
+            "type": {
+              "Type": "String",
+              "Required": true
+            },
+            "visible_title": {
+              "Type": "Bool",
+              "Optional": true,
+              "Default": {
+                "Type": "bool",
+                "Value": "false"
+              }
+            },
+            "width": {
+              "Type": "Int",
+              "Required": true
+            }
+          }
+        }
+      },
+      "public": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "public_token": {
+        "Type": "String",
+        "Computed": true,
+        "ComputedWhen": [
+          "public"
+        ]
+      },
+      "scope": {
+        "Type": "Set",
+        "Optional": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "comparator": {
+              "Type": "String",
+              "Optional": true
+            },
+            "metric": {
+              "Type": "String",
+              "Required": true
+            },
+            "value": {
+              "Type": "List",
+              "Optional": true,
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "variable": {
+              "Type": "String",
+              "Optional": true
+            }
+          }
+        }
+      },
+      "version": {
+        "Type": "Int",
+        "Computed": true
+      }
+    },
+    "sysdig_monitor_notification_channel_email": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "enabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "true"
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "notify_when_ok": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "notify_when_resolved": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "recipients": {
+        "Type": "Set",
+        "Required": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "send_test_notification": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "version": {
+        "Type": "Int",
+        "Computed": true
+      }
+    },
+    "sysdig_monitor_notification_channel_opsgenie": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "api_key": {
+        "Type": "String",
+        "Required": true
+      },
+      "enabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "true"
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "notify_when_ok": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "notify_when_resolved": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "send_test_notification": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "version": {
+        "Type": "Int",
+        "Computed": true
+      }
+    },
+    "sysdig_monitor_notification_channel_pagerduty": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "account": {
+        "Type": "String",
+        "Required": true
+      },
+      "enabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "true"
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "notify_when_ok": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "notify_when_resolved": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "send_test_notification": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "service_key": {
+        "Type": "String",
+        "Required": true
+      },
+      "service_name": {
+        "Type": "String",
+        "Required": true
+      },
+      "version": {
+        "Type": "Int",
+        "Computed": true
+      }
+    },
+    "sysdig_monitor_notification_channel_slack": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "channel": {
+        "Type": "String",
+        "Required": true
+      },
+      "enabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "true"
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "notify_when_ok": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "notify_when_resolved": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "send_test_notification": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "url": {
+        "Type": "String",
+        "Required": true
+      },
+      "version": {
+        "Type": "Int",
+        "Computed": true
+      }
+    },
+    "sysdig_monitor_notification_channel_sns": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "enabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "true"
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "notify_when_ok": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "notify_when_resolved": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "send_test_notification": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "topics": {
+        "Type": "Set",
+        "Required": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "version": {
+        "Type": "Int",
+        "Computed": true
+      }
+    },
+    "sysdig_monitor_notification_channel_victorops": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "api_key": {
+        "Type": "String",
+        "Required": true
+      },
+      "enabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "true"
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "notify_when_ok": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "notify_when_resolved": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "routing_key": {
+        "Type": "String",
+        "Required": true
+      },
+      "send_test_notification": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "version": {
+        "Type": "Int",
+        "Computed": true
+      }
+    },
+    "sysdig_monitor_notification_channel_webhook": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "additional_headers": {
+        "Type": "Map",
+        "Optional": true
+      },
+      "enabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "true"
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "notify_when_ok": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "notify_when_resolved": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "send_test_notification": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "url": {
+        "Type": "String",
+        "Required": true
+      },
+      "version": {
+        "Type": "Int",
+        "Computed": true
+      }
+    },
+    "sysdig_monitor_team": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "can_see_infrastructure_events": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "can_use_aws_data": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "can_use_sysdig_capture": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "default_team": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true
+      },
+      "entrypoint": {
+        "Type": "List",
+        "Required": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "selection": {
+              "Type": "String",
+              "Optional": true
+            },
+            "type": {
+              "Type": "String",
+              "Required": true
+            }
+          }
+        }
+      },
+      "filter": {
+        "Type": "String",
+        "Optional": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "scope_by": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string",
+          "Value": "host"
+        }
+      },
+      "theme": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string",
+          "Value": "#05C391"
+        }
+      },
+      "user_roles": {
+        "Type": "Set",
+        "Optional": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "email": {
+              "Type": "String",
+              "Required": true
+            },
+            "role": {
+              "Type": "String",
+              "Optional": true,
+              "Default": {
+                "Type": "string",
+                "Value": "ROLE_TEAM_STANDARD"
+              }
+            }
+          }
+        }
+      },
+      "version": {
+        "Type": "Int",
+        "Computed": true
+      }
+    },
+    "sysdig_secure_benchmark_task": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "delete"
+      ],
+      "enabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "true"
+        }
+      },
+      "id": {
+        "Type": "String",
+        "Computed": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "schedule": {
+        "Type": "String",
+        "Required": true
+      },
+      "schema": {
+        "Type": "String",
+        "Required": true
+      },
+      "scope": {
+        "Type": "String",
+        "Required": true
+      }
+    },
+    "sysdig_secure_cloud_account": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "account_id": {
+        "Type": "String",
+        "Required": true
+      },
+      "alias": {
+        "Type": "String",
+        "Optional": true
+      },
+      "cloud_provider": {
+        "Type": "String",
+        "Required": true
+      },
+      "external_id": {
+        "Type": "String",
+        "Computed": true
+      },
+      "role_enabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "role_name": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string",
+          "Value": "SysdigCloudBench"
+        }
+      }
+    },
+    "sysdig_secure_list": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "append": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "items": {
+        "Type": "List",
+        "Required": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "version": {
+        "Type": "Int",
+        "Computed": true
+      }
+    },
+    "sysdig_secure_macro": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "append": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "condition": {
+        "Type": "String",
+        "Required": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "version": {
+        "Type": "Int",
+        "Computed": true
+      }
+    },
+    "sysdig_secure_notification_channel_email": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "enabled": {
+        "Type": "Bool",
+        "Required": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "notify_when_ok": {
+        "Type": "Bool",
+        "Required": true
+      },
+      "notify_when_resolved": {
+        "Type": "Bool",
+        "Required": true
+      },
+      "recipients": {
+        "Type": "Set",
+        "Required": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "send_test_notification": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "version": {
+        "Type": "Int",
+        "Computed": true
+      }
+    },
+    "sysdig_secure_notification_channel_opsgenie": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "api_key": {
+        "Type": "String",
+        "Required": true
+      },
+      "enabled": {
+        "Type": "Bool",
+        "Required": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "notify_when_ok": {
+        "Type": "Bool",
+        "Required": true
+      },
+      "notify_when_resolved": {
+        "Type": "Bool",
+        "Required": true
+      },
+      "send_test_notification": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "version": {
+        "Type": "Int",
+        "Computed": true
+      }
+    },
+    "sysdig_secure_notification_channel_pagerduty": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "account": {
+        "Type": "String",
+        "Required": true
+      },
+      "enabled": {
+        "Type": "Bool",
+        "Required": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "notify_when_ok": {
+        "Type": "Bool",
+        "Required": true
+      },
+      "notify_when_resolved": {
+        "Type": "Bool",
+        "Required": true
+      },
+      "send_test_notification": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "service_key": {
+        "Type": "String",
+        "Required": true
+      },
+      "service_name": {
+        "Type": "String",
+        "Required": true
+      },
+      "version": {
+        "Type": "Int",
+        "Computed": true
+      }
+    },
+    "sysdig_secure_notification_channel_slack": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "channel": {
+        "Type": "String",
+        "Required": true
+      },
+      "enabled": {
+        "Type": "Bool",
+        "Required": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "notify_when_ok": {
+        "Type": "Bool",
+        "Required": true
+      },
+      "notify_when_resolved": {
+        "Type": "Bool",
+        "Required": true
+      },
+      "send_test_notification": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "url": {
+        "Type": "String",
+        "Required": true
+      },
+      "version": {
+        "Type": "Int",
+        "Computed": true
+      }
+    },
+    "sysdig_secure_notification_channel_sns": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "enabled": {
+        "Type": "Bool",
+        "Required": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "notify_when_ok": {
+        "Type": "Bool",
+        "Required": true
+      },
+      "notify_when_resolved": {
+        "Type": "Bool",
+        "Required": true
+      },
+      "send_test_notification": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "topics": {
+        "Type": "Set",
+        "Required": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "version": {
+        "Type": "Int",
+        "Computed": true
+      }
+    },
+    "sysdig_secure_notification_channel_victorops": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "api_key": {
+        "Type": "String",
+        "Required": true
+      },
+      "enabled": {
+        "Type": "Bool",
+        "Required": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "notify_when_ok": {
+        "Type": "Bool",
+        "Required": true
+      },
+      "notify_when_resolved": {
+        "Type": "Bool",
+        "Required": true
+      },
+      "routing_key": {
+        "Type": "String",
+        "Required": true
+      },
+      "send_test_notification": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "version": {
+        "Type": "Int",
+        "Computed": true
+      }
+    },
+    "sysdig_secure_notification_channel_webhook": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "enabled": {
+        "Type": "Bool",
+        "Required": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "notify_when_ok": {
+        "Type": "Bool",
+        "Required": true
+      },
+      "notify_when_resolved": {
+        "Type": "Bool",
+        "Required": true
+      },
+      "send_test_notification": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "url": {
+        "Type": "String",
+        "Required": true
+      },
+      "version": {
+        "Type": "Int",
+        "Computed": true
+      }
+    },
+    "sysdig_secure_policy": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "actions": {
+        "Type": "List",
+        "Optional": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "capture": {
+              "Type": "List",
+              "Optional": true,
+              "IsBlock": true,
+              "ConfigImplicitMode": "Block",
+              "Elem": {
+                "Type": "SchemaInfo",
+                "Info": {
+                  "seconds_after_event": {
+                    "Type": "Int",
+                    "Required": true
+                  },
+                  "seconds_before_event": {
+                    "Type": "Int",
+                    "Required": true
+                  }
+                }
+              }
+            },
+            "container": {
+              "Type": "String",
+              "Optional": true
+            }
+          }
+        }
+      },
+      "description": {
+        "Type": "String",
+        "Required": true
+      },
+      "enabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "true"
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "notification_channels": {
+        "Type": "Set",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "Int"
+        }
+      },
+      "rule_names": {
+        "Type": "Set",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "scope": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string"
+        }
+      },
+      "severity": {
+        "Type": "Int",
+        "Optional": true,
+        "Default": {
+          "Type": "int",
+          "Value": "4"
+        }
+      },
+      "type": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string",
+          "Value": "falco"
+        }
+      },
+      "version": {
+        "Type": "Int",
+        "Computed": true
+      }
+    },
+    "sysdig_secure_rule_container": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "containers": {
+        "Type": "List",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string"
+        }
+      },
+      "matching": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "true"
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "tags": {
+        "Type": "List",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "version": {
+        "Type": "Int",
+        "Computed": true
+      }
+    },
+    "sysdig_secure_rule_falco": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "append": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "condition": {
+        "Type": "String",
+        "Required": true
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string"
+        }
+      },
+      "exceptions": {
+        "Type": "List",
+        "Optional": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "comps": {
+              "Type": "List",
+              "Required": true,
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "fields": {
+              "Type": "List",
+              "Required": true,
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            },
+            "name": {
+              "Type": "String",
+              "Required": true
+            },
+            "values": {
+              "Type": "String",
+              "Required": true
+            }
+          }
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "output": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string"
+        }
+      },
+      "priority": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string",
+          "Value": "warning"
+        }
+      },
+      "source": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string"
+        }
+      },
+      "tags": {
+        "Type": "List",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "version": {
+        "Type": "Int",
+        "Computed": true
+      }
+    },
+    "sysdig_secure_rule_filesystem": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "description": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string"
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "read_only": {
+        "Type": "List",
+        "Optional": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "matching": {
+              "Type": "Bool",
+              "Optional": true,
+              "Default": {
+                "Type": "bool",
+                "Value": "true"
+              }
+            },
+            "paths": {
+              "Type": "List",
+              "Required": true,
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            }
+          }
+        }
+      },
+      "read_write": {
+        "Type": "List",
+        "Optional": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "matching": {
+              "Type": "Bool",
+              "Optional": true,
+              "Default": {
+                "Type": "bool",
+                "Value": "true"
+              }
+            },
+            "paths": {
+              "Type": "List",
+              "Required": true,
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "String"
+              }
+            }
+          }
+        }
+      },
+      "tags": {
+        "Type": "List",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "version": {
+        "Type": "Int",
+        "Computed": true
+      }
+    },
+    "sysdig_secure_rule_network": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "block_inbound": {
+        "Type": "Bool",
+        "Required": true
+      },
+      "block_outbound": {
+        "Type": "Bool",
+        "Required": true
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string"
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "tags": {
+        "Type": "List",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "tcp": {
+        "Type": "List",
+        "Optional": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "matching": {
+              "Type": "Bool",
+              "Optional": true,
+              "Default": {
+                "Type": "bool",
+                "Value": "true"
+              }
+            },
+            "ports": {
+              "Type": "Set",
+              "Required": true,
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "Int"
+              }
+            }
+          }
+        }
+      },
+      "udp": {
+        "Type": "List",
+        "Optional": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "matching": {
+              "Type": "Bool",
+              "Optional": true,
+              "Default": {
+                "Type": "bool",
+                "Value": "true"
+              }
+            },
+            "ports": {
+              "Type": "Set",
+              "Required": true,
+              "ConfigImplicitMode": "Attr",
+              "Elem": {
+                "Type": "SchemaElements",
+                "ElementsType": "Int"
+              }
+            }
+          }
+        }
+      },
+      "version": {
+        "Type": "Int",
+        "Computed": true
+      }
+    },
+    "sysdig_secure_rule_process": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "description": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string"
+        }
+      },
+      "matching": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "true"
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "processes": {
+        "Type": "List",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "tags": {
+        "Type": "List",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "version": {
+        "Type": "Int",
+        "Computed": true
+      }
+    },
+    "sysdig_secure_rule_syscall": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "description": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string"
+        }
+      },
+      "matching": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "true"
+        }
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "syscalls": {
+        "Type": "List",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "tags": {
+        "Type": "List",
+        "Optional": true,
+        "ConfigImplicitMode": "Attr",
+        "Elem": {
+          "Type": "SchemaElements",
+          "ElementsType": "String"
+        }
+      },
+      "version": {
+        "Type": "Int",
+        "Computed": true
+      }
+    },
+    "sysdig_secure_team": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "default_team": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "false"
+        }
+      },
+      "description": {
+        "Type": "String",
+        "Optional": true
+      },
+      "filter": {
+        "Type": "String",
+        "Optional": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "scope_by": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string",
+          "Value": "container"
+        }
+      },
+      "theme": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string",
+          "Value": "#73A1F7"
+        }
+      },
+      "use_sysdig_capture": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "true"
+        }
+      },
+      "user_roles": {
+        "Type": "Set",
+        "Optional": true,
+        "IsBlock": true,
+        "ConfigImplicitMode": "Block",
+        "Elem": {
+          "Type": "SchemaInfo",
+          "Info": {
+            "email": {
+              "Type": "String",
+              "Required": true
+            },
+            "role": {
+              "Type": "String",
+              "Optional": true,
+              "Default": {
+                "Type": "string",
+                "Value": "ROLE_TEAM_STANDARD"
+              }
+            }
+          }
+        }
+      },
+      "version": {
+        "Type": "Int",
+        "Computed": true
+      }
+    },
+    "sysdig_secure_vulnerability_exception": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "cve": {
+        "Type": "String",
+        "Required": true
+      },
+      "enabled": {
+        "Type": "Bool",
+        "Optional": true,
+        "Default": {
+          "Type": "bool",
+          "Value": "true"
+        }
+      },
+      "expiration_date": {
+        "Type": "Int",
+        "Optional": true,
+        "Default": {
+          "Type": "int",
+          "Value": "0"
+        }
+      },
+      "list_id": {
+        "Type": "String",
+        "Required": true
+      },
+      "notes": {
+        "Type": "String",
+        "Optional": true
+      }
+    },
+    "sysdig_secure_vulnerability_exception_list": {
+      "__timeouts__": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "description": {
+        "Type": "String",
+        "Optional": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      }
+    },
+    "sysdig_user": {
+      "__timeouts__": [
+        "create"
+      ],
+      "email": {
+        "Type": "String",
+        "Required": true
+      },
+      "first_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "last_name": {
+        "Type": "String",
+        "Optional": true
+      },
+      "system_role": {
+        "Type": "String",
+        "Optional": true,
+        "Default": {
+          "Type": "string",
+          "Value": "ROLE_USER"
+        }
+      },
+      "version": {
+        "Type": "Int",
+        "Computed": true
+      }
+    }
+  },
+  "data-sources": {
+    "sysdig_current_user": {
+      "__timeouts__": [
+        "read"
+      ],
+      "email": {
+        "Type": "String",
+        "Computed": true
+      },
+      "last_name": {
+        "Type": "String",
+        "Computed": true
+      },
+      "name": {
+        "Type": "String",
+        "Computed": true
+      },
+      "system_role": {
+        "Type": "String",
+        "Computed": true
+      }
+    },
+    "sysdig_fargate_workload_agent": {
+      "collector_host": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "the collector host to connect to"
+      },
+      "collector_port": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "the collector port to connect to"
+      },
+      "container_definitions": {
+        "Type": "String",
+        "Required": true,
+        "Description": "the input Fargate container definitions to instrument with the Sysdig workload agent"
+      },
+      "image_auth_secret": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "registry authentication secret"
+      },
+      "orchestrator_host": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "the orchestrator host to connect to"
+      },
+      "orchestrator_port": {
+        "Type": "String",
+        "Optional": true,
+        "Description": "the orchestrator port to connect to"
+      },
+      "output_container_definitions": {
+        "Type": "String",
+        "Computed": true
+      },
+      "sysdig_access_key": {
+        "Type": "String",
+        "Required": true,
+        "Description": "the Sysdig access key"
+      },
+      "workload_agent_image": {
+        "Type": "String",
+        "Required": true,
+        "Description": "the Sysdig workload agent image"
+      }
+    },
+    "sysdig_secure_notification_channel": {
+      "__timeouts__": [
+        "read"
+      ],
+      "account": {
+        "Type": "String",
+        "Computed": true
+      },
+      "api_key": {
+        "Type": "String",
+        "Computed": true
+      },
+      "channel": {
+        "Type": "String",
+        "Computed": true
+      },
+      "enabled": {
+        "Type": "Bool",
+        "Computed": true
+      },
+      "name": {
+        "Type": "String",
+        "Required": true
+      },
+      "notify_when_ok": {
+        "Type": "Bool",
+        "Computed": true
+      },
+      "notify_when_resolved": {
+        "Type": "Bool",
+        "Computed": true
+      },
+      "recipients": {
+        "Type": "String",
+        "Computed": true
+      },
+      "routing_key": {
+        "Type": "String",
+        "Computed": true
+      },
+      "send_test_notification": {
+        "Type": "Bool",
+        "Computed": true
+      },
+      "service_key": {
+        "Type": "String",
+        "Computed": true
+      },
+      "service_name": {
+        "Type": "String",
+        "Computed": true
+      },
+      "topics": {
+        "Type": "String",
+        "Computed": true
+      },
+      "type": {
+        "Type": "String",
+        "Computed": true
+      },
+      "url": {
+        "Type": "String",
+        "Computed": true
+      },
+      "version": {
+        "Type": "Int",
+        "Computed": true
+      }
+    },
+    "sysdig_secure_trusted_cloud_identity": {
+      "__timeouts__": [
+        "read"
+      ],
+      "aws_account_id": {
+        "Type": "String",
+        "Computed": true
+      },
+      "aws_role_name": {
+        "Type": "String",
+        "Computed": true
+      },
+      "azure_service_principal_id": {
+        "Type": "String",
+        "Computed": true
+      },
+      "azure_tenant_id": {
+        "Type": "String",
+        "Computed": true
+      },
+      "cloud_provider": {
+        "Type": "String",
+        "Required": true
+      },
+      "identity": {
+        "Type": "String",
+        "Computed": true
+      }
+    },
+    "sysdig_user": {
+      "__timeouts__": [
+        "read"
+      ],
+      "email": {
+        "Type": "String",
+        "Required": true
+      },
+      "first_name": {
+        "Type": "String",
+        "Computed": true
+      },
+      "last_name": {
+        "Type": "String",
+        "Computed": true
+      },
+      "system_role": {
+        "Type": "String",
+        "Computed": true
+      },
+      "version": {
+        "Type": "Int",
+        "Computed": true
+      }
+    }
+  }
+}
