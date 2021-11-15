@@ -1,0 +1,699 @@
+{
+  "__NAME__": {
+    "skip_generation": false,
+    "repository": "github.com/terraform-providers/terraform-provider-__NAME__",
+    "pkg_prefix": "__REPOSITORY__",
+    "file": "__NAME__.json",
+    "pkg_name": "__NAME__",
+    "go_envs": "GO111MODULE=off",
+    "go_args": "",
+    "provider_constr": "prvdr.Provider(__PROVIDER_ARGS__)",
+    "provider_args": ""
+  },
+  "aci": {
+    "repository": "https://github.com/CiscoDevNet/terraform-provider-aci"
+  },
+  "ad": {
+    "repository": "https://github.com/hashicorp/terraform-provider-ad"
+  },
+  "ah": {
+    "repository": "https://github.com/advancedhosting/terraform-provider-ah"
+  },
+  "aiven": {
+    "repository": "https://github.com/aiven/terraform-provider-aiven"
+  },
+  "akamai": {
+    "pkg_prefix": "__REPOSITORY__/v2",
+    "pkg_name": "pkg/__NAME__",
+    "provider_constr": "prvdr.Provider(__PROVIDER_ARGS__)()",
+    "repository": "https://github.com/akamai/terraform-provider-akamai"
+  },
+  "alicloud": {
+    "repository": "https://github.com/aliyun/terraform-provider-alicloud",
+    "go_envs": "GO111MODULE=on"
+  },
+  "alkira": {
+    "repository": "https://github.com/alkiranet/terraform-provider-alkira"
+  },
+  "amixr": {
+    "repository": "https://github.com/alertmixer/terraform-provider-amixr"
+  },
+  "anxcloud": {
+    "repository": "https://github.com/anexia-it/terraform-provider-anxcloud"
+  },
+  "aquasec": {
+    "provider_constr": "prvdr.Provider(\"\")",
+    "repository": "https://github.com/aquasecurity/terraform-provider-aquasec"
+  },
+  "archive": {
+    "pkg_name": "internal/provider",
+    "repository": "https://github.com/hashicorp/terraform-provider-archive"
+  },
+  "artifactory": {
+    "pkg_name": "pkg/artifactory",
+    "repository": "https://github.com/jfrog/terraform-provider-artifactory"
+  },
+  "astra": {
+    "pkg_name": "internal/provider",
+    "repository": "https://github.com/datastax/terraform-provider-astra"
+  },
+  "avi": {
+    "repository": "https://github.com/vmware/terraform-provider-avi"
+  },
+  "aviatrix": {
+    "repository": "https://github.com/AviatrixSystems/terraform-provider-aviatrix"
+  },
+  "aws": {
+    "pkg_name": "internal/provider",
+    "repository": "https://github.com/hashicorp/terraform-provider-aws"
+  },
+  "awscc": {
+    "pkg_name": "internal/provider",
+    "repository": "https://github.com/hashicorp/terraform-provider-awscc"
+  },
+  "azuread": {
+    "pkg_name": "internal/provider",
+    "provider_constr": "prvdr.AzureADProvider()",
+    "repository": "https://github.com/hashicorp/terraform-provider-azuread"
+  },
+  "azurecaf": {
+    "repository": "https://github.com/aztfmod/terraform-provider-azurecaf"
+  },
+  "azuredevops": {
+    "repository": "https://github.com/microsoft/terraform-provider-azuredevops"
+  },
+  "azurerm": {
+    "pkg_name": "internal/provider",
+    "provider_constr": "prvdr.AzureProvider()",
+    "repository": "https://github.com/hashicorp/terraform-provider-azurerm"
+  },
+  "azurestack": {
+    "repository": "https://github.com/hashicorp/terraform-provider-azurestack"
+  },
+  "b2": {
+    "provider_constr": "prvdr.New(__PROVIDER_ARGS__)",
+    "provider_args": "\"\", \"\"",
+    "repository": "https://github.com/Backblaze/terraform-provider-b2"
+  },
+  "better-uptime": {
+    "pkg_name": "internal/provider",
+    "repository": "https://github.com/BetterStackHQ/terraform-provider-better-uptime"
+  },
+  "bigip": {
+    "repository": "https://github.com/F5Networks/terraform-provider-bigip"
+  },
+  "boundary": {
+    "pkg_name": "internal/provider",
+    "repository": "https://github.com/hashicorp/terraform-provider-boundary"
+  },
+  "brightbox": {
+    "pkg_prefix": "github.com/terraform-providers/terraform-provider-brightbox",
+    "repository": "https://github.com/brightbox/terraform-provider-brightbox"
+  },
+  "britive": {
+    "provider_args": "\"\"",
+    "repository": "https://github.com/britive/terraform-provider-britive"
+  },
+  "buildkite": {
+    "repository": "https://github.com/buildkite/terraform-provider-buildkite"
+  },
+  "carvel": {
+    "pkg_name": "pkg/provider",
+    "repository": "https://github.com/vmware-tanzu/terraform-provider-carvel"
+  },
+  "cbs": {
+    "pkg_prefix": "github.dev.purestorage.com/FlashArray/terraform-provider-cbs",
+    "repository": "https://github.com/PureStorage-OpenConnect/terraform-provider-cbs"
+  },
+  "checkly": {
+    "repository": "https://github.com/checkly/terraform-provider-checkly"
+  },
+  "checkpoint": {
+    "repository": "https://github.com/CheckPointSW/terraform-provider-checkpoint"
+  },
+  "ciphertrust": {
+    "repository": "https://github.com/ThalesGroup/terraform-provider-ciphertrust"
+  },
+  "circonus": {
+    "repository": "https://github.com/circonus-labs/terraform-provider-circonus"
+  },
+  "ciscoasa": {
+    "repository": "https://github.com/CiscoDevNet/terraform-provider-ciscoasa"
+  },
+  "citrixadc": {
+    "repository": "https://github.com/citrix/terraform-provider-citrixadc"
+  },
+  "civo": {
+    "repository": "https://github.com/civo/terraform-provider-civo"
+  },
+  "cloudeos": {
+    "pkg_prefix": "github.com/terraform-providers/terraform-provider-cloudeos",
+    "repository": "https://github.com/aristanetworks/terraform-provider-cloudeos"
+  },
+  "cloudflare": {
+    "repository": "https://github.com/cloudflare/terraform-provider-cloudflare"
+  },
+  "cloudinit": {
+    "pkg_name": "internal/provider",
+    "repository": "https://github.com/hashicorp/terraform-provider-cloudinit"
+  },
+  "cloudscale": {
+    "repository": "https://github.com/cloudscale-ch/terraform-provider-cloudscale"
+  },
+  "cloudsigma": {
+    "repository": "https://github.com/cloudsigma/terraform-provider-cloudsigma"
+  },
+  "cloudsmith": {
+    "repository": "https://github.com/cloudsmith-io/terraform-provider-cloudsmith"
+  },
+  "cloudtamerio": {
+    "repository": "https://github.com/cloudtamer-io/terraform-provider-cloudtamerio"
+  },
+  "codefresh": {
+    "repository": "https://github.com/codefresh-io/terraform-provider-codefresh"
+  },
+  "cohesity": {
+    "repository": "https://github.com/cohesity/terraform-provider-cohesity"
+  },
+  "commvault": {
+    "pkg_prefix": "github.com/Commvault/terraform-provider-commvault",
+    "repository": "https://github.com/Commvault/terraform-provider-commvault"
+  },
+  "configcat": {
+    "repository": "https://github.com/configcat/terraform-provider-configcat"
+  },
+  "confluentcloud": {
+    "pkg_name": "internal/provider",
+    "repository": "https://github.com/confluentinc/terraform-provider-confluentcloud"
+  },
+  "constellix": {
+    "repository": "https://github.com/Constellix/terraform-provider-constellix"
+  },
+  "consul": {
+    "repository": "https://github.com/hashicorp/terraform-provider-consul"
+  },
+  "databricks": {
+    "pkg_name": "provider",
+    "repository": "https://github.com/databrickslabs/terraform-provider-databricks"
+  },
+  "datadog": {
+    "pkg_prefix": "github.com/terraform-providers/terraform-provider-datadog",
+    "repository": "https://github.com/DataDog/terraform-provider-datadog"
+  },
+  "dcnm": {
+    "repository": "https://github.com/CiscoDevNet/terraform-provider-dcnm"
+  },
+  "digitalocean": {
+    "repository": "https://github.com/digitalocean/terraform-provider-digitalocean"
+  },
+  "dme": {
+    "repository": "https://github.com/DNSMadeEasy/terraform-provider-dme"
+  },
+  "dns": {
+    "pkg_name": "internal/provider",
+    "repository": "https://github.com/hashicorp/terraform-provider-dns"
+  },
+  "dnsimple": {
+    "pkg_prefix": "github.com/terraform-providers/terraform-provider-dnsimple",
+    "repository": "https://github.com/dnsimple/terraform-provider-dnsimple"
+  },
+  "dome9": {
+    "pkg_prefix": "github.com/terraform-providers/terraform-provider-dome9",
+    "repository": "https://github.com/dome9/terraform-provider-dome9"
+  },
+  "dynatrace": {
+    "pkg_provider": "provider",
+    "repository": "https://github.com/dynatrace-oss/terraform-provider-dynatrace"
+  },
+  "ec": {
+    "repository": "https://github.com/elastic/terraform-provider-ec"
+  },
+  "ecl": {
+    "repository": "https://github.com/nttcom/terraform-provider-ecl"
+  },
+  "equinix": {
+    "repository": "https://github.com/equinix/terraform-provider-equinix"
+  },
+  "exoscale": {
+    "repository": "https://github.com/exoscale/terraform-provider-exoscale"
+  },
+  "external": {
+    "pkg_name": "internal/provider",
+    "pkg_prefix": "github.com/terraform-providers/terraform-provider-external",
+    "repository": "https://github.com/hashicorp/terraform-provider-external"
+  },
+  "fastly": {
+    "repository": "https://github.com/fastly/terraform-provider-fastly"
+  },
+  "fivetran": {
+    "repository": "https://github.com/fivetran/terraform-provider-fivetran"
+  },
+  "fmc": {
+    "repository": "https://github.com/CiscoDevNet/terraform-provider-fmc"
+  },
+  "fortimanager": {
+    "pkg_name": "fmg",
+    "repository": "https://github.com/fortinetdev/terraform-provider-fortimanager"
+  },
+  "fortios": {
+    "repository": "https://github.com/fortinetdev/terraform-provider-fortios"
+  },
+  "gcorelabs": {
+    "pkg_name": "gcore",
+    "pkg_prefix": "github.com/terraform-providers/terraform-provider-gcorelabs",
+    "repository": "https://github.com/G-Core/terraform-provider-gcorelabs"
+  },
+  "genesyscloud": {
+    "pkg_prefix": "github.com/mypurecloud/terraform-provider-genesyscloud",
+    "repository": "https://github.com/MyPureCloud/terraform-provider-genesyscloud"
+  },
+  "github": {
+    "repository": "https://github.com/integrations/terraform-provider-github"
+  },
+  "gitlab": {
+    "repository": "https://github.com/gitlabhq/terraform-provider-gitlab"
+  },
+  "gocache": {
+    "pkg_prefix": "github.com/gocache/terraform-provider-gocache",
+    "repository": "https://github.com/gocachebr/terraform-provider-gocache"
+  },
+  "google": {
+    "repository": "https://github.com/hashicorp/terraform-provider-google"
+  },
+  "google-beta": {
+    "repository": "https://github.com/hashicorp/terraform-provider-google-beta"
+  },
+  "googleworkspace": {
+    "pkg_name": "internal/provider",
+    "repository": "https://github.com/hashicorp/terraform-provider-googleworkspace"
+  },
+  "grafana": {
+    "repository": "https://github.com/grafana/terraform-provider-grafana"
+  },
+  "gridscale": {
+    "pkg_prefix": "github.com/terraform-providers/terraform-provider-gridscale",
+    "repository": "https://github.com/gridscale/terraform-provider-gridscale"
+  },
+  "harness": {
+    "pkg_name": "internal/provider",
+    "repository": "https://github.com/harness-io/terraform-provider-harness"
+  },
+  "hcloud": {
+    "repository": "https://github.com/hetznercloud/terraform-provider-hcloud"
+  },
+  "hcp": {
+    "pkg_name": "internal/provider",
+    "repository": "https://github.com/hashicorp/terraform-provider-hcp"
+  },
+  "hcs": {
+    "pkg_name": "internal/provider",
+    "repository": "https://github.com/hashicorp/terraform-provider-hcs"
+  },
+  "helm": {
+    "repository": "https://github.com/hashicorp/terraform-provider-helm"
+  },
+  "heroku": {
+    "pkg_prefix": "github.com/heroku/terraform-provider-heroku/v4",
+    "repository": "https://github.com/heroku/terraform-provider-heroku"
+  },
+  "http": {
+    "pkg_name": "internal/provider",
+    "repository": "https://github.com/hashicorp/terraform-provider-http"
+  },
+  "icinga2": {
+    "repository": "https://github.com/Icinga/terraform-provider-icinga2"
+  },
+  "ilert": {
+    "repository": "https://github.com/iLert/terraform-provider-ilert"
+  },
+  "illumio-core": {
+    "repository": "https://github.com/illumio/terraform-provider-illumio-core"
+  },
+  "infoblox": {
+    "repository": "https://github.com/infobloxopen/terraform-provider-infoblox"
+  },
+  "infracost": {
+    "repository": "https://github.com/infracost/terraform-provider-infracost"
+  },
+  "instaclustr": {
+    "repository": "https://github.com/instaclustr/terraform-provider-instaclustr"
+  },
+  "intersight": {
+    "repository": "https://github.com/CiscoDevNet/terraform-provider-intersight"
+  },
+  "ionoscloud": {
+    "repository": "https://github.com/ionos-cloud/terraform-provider-ionoscloud"
+  },
+  "iterative": {
+    "pkg_prefix": "terraform-provider-iterative",
+    "repository": "https://github.com/iterative/terraform-provider-iterative"
+  },
+  "kubernetes": {
+    "repository": "https://github.com/hashicorp/terraform-provider-kubernetes"
+  },
+  "kubernetes-alpha": {
+    "pkg_name": "provider",
+    "repository": "https://github.com/hashicorp/terraform-provider-kubernetes-alpha"
+  },
+  "lacework": {
+    "repository": "https://github.com/lacework/terraform-provider-lacework"
+  },
+  "launchdarkly": {
+    "repository": "https://github.com/launchdarkly/terraform-provider-launchdarkly"
+  },
+  "limelight": {
+    "repository": "https://github.com/llnw/terraform-provider-limelight"
+  },
+  "linode": {
+    "repository": "https://github.com/linode/terraform-provider-linode"
+  },
+  "local": {
+    "pkg_prefix": "github.com/terraform-providers/terraform-provider-local",
+    "pkg_name": "internal/provider",
+    "repository": "https://github.com/hashicorp/terraform-provider-local"
+  },
+  "logicmonitor": {
+    "repository": "https://github.com/logicmonitor/terraform-provider-logicmonitor"
+  },
+  "logtail": {
+    "pkg_prefix": "github.com/betterstackhq/terraform-provider-logtail",
+    "pkg_name": "internal/provider",
+    "repository": "https://github.com/BetterStackHQ/terraform-provider-logtail"
+  },
+  "logzio": {
+    "pkg_prefix": "github.com/logzio/logzio_terraform_provider",
+    "repository": "https://github.com/logzio/terraform-provider-logzio"
+  },
+  "metal": {
+    "repository": "https://github.com/equinix/terraform-provider-metal"
+  },
+  "metalcloud": {
+    "pkg_prefix": "github.com/terraform-providers/terraform-provider-metalcloud",
+    "repository": "https://github.com/metalsoft-io/terraform-provider-metalcloud"
+  },
+  "mongodbatlas": {
+    "repository": "https://github.com/mongodb/terraform-provider-mongodbatlas"
+  },
+  "mso": {
+    "repository": "https://github.com/CiscoDevNet/terraform-provider-mso"
+  },
+  "ncloud": {
+    "pkg_prefix": "github.com/terraform-providers/terraform-provider-ncloud",
+    "repository": "https://github.com/NaverCloudPlatform/terraform-provider-ncloud"
+  },
+  "netapp-cloudmanager": {
+    "pkg_name": "cloudmanager",
+    "pkg_prefix": "github.com/netapp/terraform-provider-netapp-cloudmanager",
+    "repository": "https://github.com/NetApp/terraform-provider-netapp-cloudmanager"
+  },
+  "netapp-elementsw": {
+    "pkg_name": "elementsw",
+    "pkg_prefix": "github.com/netapp/terraform-provider-netapp-elementsw",
+    "repository": "https://github.com/NetApp/terraform-provider-netapp-elementsw"
+  },
+  "netapp-gcp": {
+    "pkg_name": "gcp",
+    "pkg_prefix": "github.com/netapp/terraform-provider-netapp-gcp",
+    "repository": "https://github.com/NetApp/terraform-provider-netapp-gcp"
+  },
+  "newrelic": {
+    "pkg_prefix": "github.com/newrelic/terraform-provider-newrelic/v2",
+    "repository": "https://github.com/newrelic/terraform-provider-newrelic"
+  },
+  "ngrok": {
+    "repository": "https://github.com/ngrok/terraform-provider-ngrok"
+  },
+  "nirmata": {
+    "pkg_name": "pkg/niramata",
+    "repository": "https://github.com/nirmata/terraform-provider-nirmata"
+  },
+  "nomad": {
+    "repository": "https://github.com/hashicorp/terraform-provider-nomad"
+  },
+  "ns": {
+    "repository": "https://github.com/nullstone-io/terraform-provider-ns"
+  },
+  "ns1": {
+    "repository": "https://github.com/ns1-terraform/terraform-provider-ns1"
+  },
+  "nsxt": {
+    "repository": "https://github.com/vmware/terraform-provider-nsxt"
+  },
+  "null": {
+    "pkg_name": "internal/provider",
+    "repository": "https://github.com/hashicorp/terraform-provider-null"
+  },
+  "nutanix": {
+    "pkg_prefix": "github.com/terraform-providers/terraform-provider-nutanix",
+    "repository": "https://github.com/nutanix/terraform-provider-nutanix"
+  },
+  "nutanixkps": {
+    "pkg_prefix": "sherlock-terraform-provider-nutanixkps",
+    "repository": "https://github.com/nutanix/terraform-provider-nutanixkps"
+  },
+  "oci": {
+    "repository": "https://github.com/terraform-providers/terraform-provider-oci"
+  },
+  "octopusdeploy": {
+    "pkg_prefix": "github.com/OctopusDeploy/terraform-provider-octopusdeploy",
+    "repository": "https://github.com/OctopusDeployLabs/terraform-provider-octopusdeploy"
+  },
+  "okta": {
+    "repository": "https://github.com/okta/terraform-provider-okta"
+  },
+  "oktaasa": {
+    "repository": "https://github.com/oktadeveloper/terraform-provider-oktaasa"
+  },
+  "onelogin": {
+    "repository": "https://github.com/onelogin/terraform-provider-onelogin"
+  },
+  "onepassword": {
+    "repository": "https://github.com/1Password/terraform-provider-onepassword"
+  },
+  "oneview": {
+    "repository": "https://github.com/HewlettPackard/terraform-provider-oneview"
+  },
+  "opc": {
+    "repository": "https://github.com/terraform-providers/terraform-provider-opc"
+  },
+  "opennebula": {
+    "repository": "https://github.com/OpenNebula/terraform-provider-opennebula"
+  },
+  "oraclepaas": {
+    "repository": "https://github.com/terraform-providers/terraform-provider-oraclepaas"
+  },
+  "outscale": {
+    "repository": "https://github.com/outscale-dev/terraform-provider-outscale"
+  },
+  "ovh": {
+    "repository": "https://github.com/ovh/terraform-provider-ovh"
+  },
+  "packet": {
+    "repository": "https://github.com/packethost/terraform-provider-packet"
+  },
+  "pagerduty": {
+    "repository": "https://github.com/PagerDuty/terraform-provider-pagerduty"
+  },
+  "panos": {
+    "repository": "https://github.com/PaloAltoNetworks/terraform-provider-panos"
+  },
+  "pnap": {
+    "repository": "https://github.com/phoenixnap/terraform-provider-pnap"
+  },
+  "polaris": {
+    "pkg_name": "internal/provider",
+    "repository": "https://github.com/rubrikinc/terraform-provider-polaris"
+  },
+  "prismacloud": {
+    "repository": "https://github.com/PaloAltoNetworks/terraform-provider-prismacloud"
+  },
+  "prismacloudcompute": {
+    "repository": "https://github.com/PaloAltoNetworks/terraform-provider-prismacloudcompute"
+  },
+  "profitbricks": {
+    "repository": "https://github.com/ionos-cloud/terraform-provider-profitbricks"
+  },
+  "quorum": {
+    "pkg_prefix": "github.com/terraform-providers/terraform-provider-quorum",
+    "repository": "https://github.com/ConsenSys/terraform-provider-quorum"
+  },
+  "rafay": {
+    "repository": "https://github.com/RafaySystems/terraform-provider-rafay"
+  },
+  "rancher2": {
+    "pkg_prefix": "github.com/terraform-providers/terraform-provider-rancher2",
+    "repository": "https://github.com/rancher/terraform-provider-rancher2"
+  },
+  "random": {
+    "pkg_name": "internal/provider",
+    "pkg_prefix": "github.com/terraform-providers/terraform-provider-random",
+    "repository": "https://github.com/hashicorp/terraform-provider-random"
+  },
+  "rediscloud": {
+    "pkg_name": "internal/provider",
+    "repository": "https://github.com/RedisLabs/terraform-provider-rediscloud"
+  },
+  "rke": {
+    "repository": "https://github.com/rancher/terraform-provider-rke"
+  },
+  "rollbar": {
+    "repository": "https://github.com/rollbar/terraform-provider-rollbar"
+  },
+  "rundeck": {
+    "repository": "https://github.com/rundeck/terraform-provider-rundeck"
+  },
+  "satori": {
+    "pkg_prefix": "github.com/satoricyber/terraform-provider-satori",
+    "repository": "https://github.com/SatoriCyber/terraform-provider-satori"
+  },
+  "scaleway": {
+    "provider_args": "&ProviderConfig{}",
+    "repository": "https://github.com/scaleway/terraform-provider-scaleway"
+  },
+  "sdm": {
+    "repository": "https://github.com/strongdm/terraform-provider-sdm"
+  },
+  "sdwan": {
+    "repository": "https://github.com/CiscoDevNet/terraform-provider-sdwan"
+  },
+  "sematext": {
+    "repository": "https://github.com/sematext/terraform-provider-sematext"
+  },
+  "shipa": {
+    "repository": "https://github.com/shipa-corp/terraform-provider-shipa"
+  },
+  "shoreline": {
+    "pkg_name": "provider",
+    "pkg_prefix": "shoreline.io/terraform/terraform-provider-shoreline",
+    "repository": "https://github.com/shorelinesoftware/terraform-provider-shoreline"
+  },
+  "signalfx": {
+    "repository": "https://github.com/splunk-terraform/terraform-provider-signalfx"
+  },
+  "sigsci": {
+    "pkg_name": "provider",
+    "repository": "https://github.com/signalsciences/terraform-provider-sigsci"
+  },
+  "skytap": {
+    "repository": "https://github.com/skytap/terraform-provider-skytap"
+  },
+  "spectrocloud": {
+    "repository": "https://github.com/spectrocloud/terraform-provider-spectrocloud"
+  },
+  "splunk": {
+    "repository": "https://github.com/splunk/terraform-provider-splunk"
+  },
+  "splunkconfig": {
+    "pkg_prefix": "terraform-provider-splunkconfig",
+    "pkg_name": "internal/provider",
+    "repository": "https://github.com/splunk/terraform-provider-splunkconfig"
+  },
+  "spotinst": {
+    "repository": "https://github.com/spotinst/terraform-provider-spotinst"
+  },
+  "stackpath": {
+    "repository": "https://github.com/stackpath/terraform-provider-stackpath"
+  },
+  "statuscake": {
+    "repository": "https://github.com/StatusCakeDev/terraform-provider-statuscake"
+  },
+  "sumologic": {
+    "repository": "https://github.com/SumoLogic/terraform-provider-sumologic"
+  },
+  "synthetics": {
+    "repository": "https://github.com/splunk/terraform-provider-synthetics"
+  },
+  "sysdig": {
+    "pkg_prefix": "github.com/draios/terraform-provider-sysdig",
+    "repository": "https://github.com/sysdiglabs/terraform-provider-sysdig"
+  },
+  "template": {
+    "repository": "https://github.com/hashicorp/terraform-provider-template"
+  },
+  "tencentcloud": {
+    "repository": "https://github.com/tencentcloudstack/terraform-provider-tencentcloud"
+  },
+  "terraform": {
+    "repository": "https://github.com/hashicorp/terraform-provider-terraform"
+  },
+  "tetration": {
+    "pkg_prefix": "github.com/tetration-exchange/terraform-provider",
+    "repository": "https://github.com/CiscoDevNet/terraform-provider-tetration"
+  },
+  "tfe": {
+    "repository": "https://github.com/hashicorp/terraform-provider-tfe"
+  },
+  "thunder": {
+    "repository": "https://github.com/a10networks/terraform-provider-thunder"
+  },
+  "time": {
+    "pkg_name": "internal/provider",
+    "repository": "https://github.com/hashicorp/terraform-provider-time"
+  },
+  "tls": {
+    "pkg_name": "internal/provider",
+    "repository": "https://github.com/hashicorp/terraform-provider-tls"
+  },
+  "transloadit": {
+    "repository": "https://github.com/transloadit/terraform-provider-transloadit"
+  },
+  "triton": {
+    "repository": "https://github.com/joyent/terraform-provider-triton"
+  },
+  "turbot": {
+    "repository": "https://github.com/turbot/terraform-provider-turbot"
+  },
+  "upcloud": {
+    "repository": "https://github.com/UpCloudLtd/terraform-provider-upcloud"
+  },
+  "valtix": {
+    "repository": "https://github.com/valtix-security/terraform-provider-valtix"
+  },
+  "vault": {
+    "repository": "https://github.com/hashicorp/terraform-provider-vault"
+  },
+  "vcd": {
+    "pkg_prefix": "github.com/vmware/terraform-provider-vcd/v3",
+    "repository": "https://github.com/vmware/terraform-provider-vcd"
+  },
+  "venafi": {
+    "repository": "https://github.com/Venafi/terraform-provider-venafi"
+  },
+  "victorops": {
+    "pkg_prefix": "github.com/terraform-providers/terraform-provider-victorops",
+    "repository": "https://github.com/splunk/terraform-provider-victorops"
+  },
+  "vmc": {
+    "repository": "https://github.com/vmware/terraform-provider-vmc"
+  },
+  "volterra": {
+    "repository": "https://github.com/volterraedge/terraform-provider-volterra"
+  },
+  "vra": {
+    "repository": "https://github.com/vmware/terraform-provider-vra"
+  },
+  "vra7": {
+    "repository": "https://github.com/vmware/terraform-provider-vra7"
+  },
+  "vsphere": {
+    "repository": "https://github.com/hashicorp/terraform-provider-vsphere"
+  },
+  "vthunder": {
+    "pkg_prefix": "github.com/a10networks/terraform-provider-thunder",
+    "pkg_name": "thunder",
+    "repository": "https://github.com/a10networks/terraform-provider-vthunder"
+  },
+  "vultr": {
+    "repository": "https://github.com/vultr/terraform-provider-vultr"
+  },
+  "waapm": {
+    "repository": "https://github.com/wallix/terraform-provider-waapm"
+  },
+  "wavefront": {
+    "repository": "https://github.com/vmware/terraform-provider-wavefront"
+  },
+  "zerotier": {
+    "pkg_name": "pkg/zerotier",
+    "repository": "https://github.com/zerotier/terraform-provider-zerotier"
+  }
+}

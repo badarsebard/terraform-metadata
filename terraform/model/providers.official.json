@@ -1,0 +1,177 @@
+{
+  "aws": {
+    "full-name": "hashicorp/aws",
+    "repository": "https://github.com/hashicorp/terraform-provider-aws",
+    "latest-version": "3.65.0"
+  },
+  "null": {
+    "full-name": "hashicorp/null",
+    "repository": "https://github.com/hashicorp/terraform-provider-null",
+    "latest-version": "3.1.0"
+  },
+  "template": {
+    "full-name": "hashicorp/template",
+    "repository": "https://github.com/hashicorp/terraform-provider-template",
+    "latest-version": "2.2.0"
+  },
+  "random": {
+    "full-name": "hashicorp/random",
+    "repository": "https://github.com/hashicorp/terraform-provider-random",
+    "latest-version": "3.1.0"
+  },
+  "google": {
+    "full-name": "hashicorp/google",
+    "repository": "https://github.com/hashicorp/terraform-provider-google",
+    "latest-version": "4.0.0"
+  },
+  "azurerm": {
+    "full-name": "hashicorp/azurerm",
+    "repository": "https://github.com/hashicorp/terraform-provider-azurerm",
+    "latest-version": "2.85.0"
+  },
+  "kubernetes": {
+    "full-name": "hashicorp/kubernetes",
+    "repository": "https://github.com/hashicorp/terraform-provider-kubernetes",
+    "latest-version": "2.6.1"
+  },
+  "local": {
+    "full-name": "hashicorp/local",
+    "repository": "https://github.com/hashicorp/terraform-provider-local",
+    "latest-version": "2.1.0"
+  },
+  "archive": {
+    "full-name": "hashicorp/archive",
+    "repository": "https://github.com/hashicorp/terraform-provider-archive",
+    "latest-version": "2.2.0"
+  },
+  "external": {
+    "full-name": "hashicorp/external",
+    "repository": "https://github.com/hashicorp/terraform-provider-external",
+    "latest-version": "2.1.0"
+  },
+  "vault": {
+    "full-name": "hashicorp/vault",
+    "repository": "https://github.com/hashicorp/terraform-provider-vault",
+    "latest-version": "2.24.1"
+  },
+  "google-beta": {
+    "full-name": "hashicorp/google-beta",
+    "repository": "https://github.com/hashicorp/terraform-provider-google-beta",
+    "latest-version": "4.0.0"
+  },
+  "tls": {
+    "full-name": "hashicorp/tls",
+    "repository": "https://github.com/hashicorp/terraform-provider-tls",
+    "latest-version": "3.1.0"
+  },
+  "helm": {
+    "full-name": "hashicorp/helm",
+    "repository": "https://github.com/hashicorp/terraform-provider-helm",
+    "latest-version": "2.4.1"
+  },
+  "azuread": {
+    "full-name": "hashicorp/azuread",
+    "repository": "https://github.com/hashicorp/terraform-provider-azuread",
+    "latest-version": "2.9.0"
+  },
+  "time": {
+    "full-name": "hashicorp/time",
+    "repository": "https://github.com/hashicorp/terraform-provider-time",
+    "latest-version": "0.7.2"
+  },
+  "http": {
+    "full-name": "hashicorp/http",
+    "repository": "https://github.com/hashicorp/terraform-provider-http",
+    "latest-version": "2.1.0"
+  },
+  "dns": {
+    "full-name": "hashicorp/dns",
+    "repository": "https://github.com/hashicorp/terraform-provider-dns",
+    "latest-version": "3.2.1"
+  },
+  "consul": {
+    "full-name": "hashicorp/consul",
+    "repository": "https://github.com/hashicorp/terraform-provider-consul",
+    "latest-version": "2.14.0"
+  },
+  "vsphere": {
+    "full-name": "hashicorp/vsphere",
+    "repository": "https://github.com/hashicorp/terraform-provider-vsphere",
+    "latest-version": "2.0.2"
+  },
+  "oci": {
+    "full-name": "hashicorp/oci",
+    "repository": "https://github.com/terraform-providers/terraform-provider-oci",
+    "latest-version": "4.52.0"
+  },
+  "tfe": {
+    "full-name": "hashicorp/tfe",
+    "repository": "https://github.com/hashicorp/terraform-provider-tfe",
+    "latest-version": "0.26.1"
+  },
+  "cloudinit": {
+    "full-name": "hashicorp/cloudinit",
+    "repository": "https://github.com/hashicorp/terraform-provider-cloudinit",
+    "latest-version": "2.2.0"
+  },
+  "kubernetes-alpha": {
+    "full-name": "hashicorp/kubernetes-alpha",
+    "repository": "https://github.com/hashicorp/terraform-provider-kubernetes-alpha",
+    "latest-version": "0.6.0"
+  },
+  "nomad": {
+    "full-name": "hashicorp/nomad",
+    "repository": "https://github.com/hashicorp/terraform-provider-nomad",
+    "latest-version": "1.4.15"
+  },
+  "azurestack": {
+    "full-name": "hashicorp/azurestack",
+    "repository": "https://github.com/hashicorp/terraform-provider-azurestack",
+    "latest-version": "0.10.0"
+  },
+  "hcp": {
+    "full-name": "hashicorp/hcp",
+    "repository": "https://github.com/hashicorp/terraform-provider-hcp",
+    "latest-version": "0.20.0"
+  },
+  "ad": {
+    "full-name": "hashicorp/ad",
+    "repository": "https://github.com/hashicorp/terraform-provider-ad",
+    "latest-version": "0.4.3"
+  },
+  "googleworkspace": {
+    "full-name": "hashicorp/googleworkspace",
+    "repository": "https://github.com/hashicorp/terraform-provider-googleworkspace",
+    "latest-version": "0.5.1"
+  },
+  "hcs": {
+    "full-name": "hashicorp/hcs",
+    "repository": "https://github.com/hashicorp/terraform-provider-hcs",
+    "latest-version": "0.5.0"
+  },
+  "boundary": {
+    "full-name": "hashicorp/boundary",
+    "repository": "https://github.com/hashicorp/terraform-provider-boundary",
+    "latest-version": "1.0.5"
+  },
+  "opc": {
+    "full-name": "hashicorp/opc",
+    "repository": "https://github.com/terraform-providers/terraform-provider-opc",
+    "latest-version": "1.4.1"
+  },
+  "oraclepaas": {
+    "full-name": "hashicorp/oraclepaas",
+    "repository": "https://github.com/terraform-providers/terraform-provider-oraclepaas",
+    "latest-version": "1.5.3"
+  },
+  "terraform": {
+    "full-name": "hashicorp/terraform",
+    "repository": "https://github.com/hashicorp/terraform-provider-terraform",
+    "latest-version": "1.0.2"
+  },
+  "awscc": {
+    "full-name": "hashicorp/awscc",
+    "repository": "https://github.com/hashicorp/terraform-provider-awscc",
+    "latest-version": "0.6.0"
+  }
+}

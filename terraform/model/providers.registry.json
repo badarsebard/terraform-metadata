@@ -1,0 +1,997 @@
+{
+  "aws": {
+    "full-name": "hashicorp/aws",
+    "repository": "https://github.com/hashicorp/terraform-provider-aws",
+    "latest-version": "3.65.0"
+  },
+  "null": {
+    "full-name": "hashicorp/null",
+    "repository": "https://github.com/hashicorp/terraform-provider-null",
+    "latest-version": "3.1.0"
+  },
+  "template": {
+    "full-name": "hashicorp/template",
+    "repository": "https://github.com/hashicorp/terraform-provider-template",
+    "latest-version": "2.2.0"
+  },
+  "random": {
+    "full-name": "hashicorp/random",
+    "repository": "https://github.com/hashicorp/terraform-provider-random",
+    "latest-version": "3.1.0"
+  },
+  "google": {
+    "full-name": "hashicorp/google",
+    "repository": "https://github.com/hashicorp/terraform-provider-google",
+    "latest-version": "4.0.0"
+  },
+  "azurerm": {
+    "full-name": "hashicorp/azurerm",
+    "repository": "https://github.com/hashicorp/terraform-provider-azurerm",
+    "latest-version": "2.85.0"
+  },
+  "kubernetes": {
+    "full-name": "hashicorp/kubernetes",
+    "repository": "https://github.com/hashicorp/terraform-provider-kubernetes",
+    "latest-version": "2.6.1"
+  },
+  "local": {
+    "full-name": "hashicorp/local",
+    "repository": "https://github.com/hashicorp/terraform-provider-local",
+    "latest-version": "2.1.0"
+  },
+  "archive": {
+    "full-name": "hashicorp/archive",
+    "repository": "https://github.com/hashicorp/terraform-provider-archive",
+    "latest-version": "2.2.0"
+  },
+  "external": {
+    "full-name": "hashicorp/external",
+    "repository": "https://github.com/hashicorp/terraform-provider-external",
+    "latest-version": "2.1.0"
+  },
+  "vault": {
+    "full-name": "hashicorp/vault",
+    "repository": "https://github.com/hashicorp/terraform-provider-vault",
+    "latest-version": "2.24.1"
+  },
+  "google-beta": {
+    "full-name": "hashicorp/google-beta",
+    "repository": "https://github.com/hashicorp/terraform-provider-google-beta",
+    "latest-version": "4.0.0"
+  },
+  "tls": {
+    "full-name": "hashicorp/tls",
+    "repository": "https://github.com/hashicorp/terraform-provider-tls",
+    "latest-version": "3.1.0"
+  },
+  "helm": {
+    "full-name": "hashicorp/helm",
+    "repository": "https://github.com/hashicorp/terraform-provider-helm",
+    "latest-version": "2.4.1"
+  },
+  "azuread": {
+    "full-name": "hashicorp/azuread",
+    "repository": "https://github.com/hashicorp/terraform-provider-azuread",
+    "latest-version": "2.9.0"
+  },
+  "time": {
+    "full-name": "hashicorp/time",
+    "repository": "https://github.com/hashicorp/terraform-provider-time",
+    "latest-version": "0.7.2"
+  },
+  "http": {
+    "full-name": "hashicorp/http",
+    "repository": "https://github.com/hashicorp/terraform-provider-http",
+    "latest-version": "2.1.0"
+  },
+  "dns": {
+    "full-name": "hashicorp/dns",
+    "repository": "https://github.com/hashicorp/terraform-provider-dns",
+    "latest-version": "3.2.1"
+  },
+  "consul": {
+    "full-name": "hashicorp/consul",
+    "repository": "https://github.com/hashicorp/terraform-provider-consul",
+    "latest-version": "2.14.0"
+  },
+  "vsphere": {
+    "full-name": "hashicorp/vsphere",
+    "repository": "https://github.com/hashicorp/terraform-provider-vsphere",
+    "latest-version": "2.0.2"
+  },
+  "oci": {
+    "full-name": "hashicorp/oci",
+    "repository": "https://github.com/terraform-providers/terraform-provider-oci",
+    "latest-version": "4.52.0"
+  },
+  "tfe": {
+    "full-name": "hashicorp/tfe",
+    "repository": "https://github.com/hashicorp/terraform-provider-tfe",
+    "latest-version": "0.26.1"
+  },
+  "cloudinit": {
+    "full-name": "hashicorp/cloudinit",
+    "repository": "https://github.com/hashicorp/terraform-provider-cloudinit",
+    "latest-version": "2.2.0"
+  },
+  "kubernetes-alpha": {
+    "full-name": "hashicorp/kubernetes-alpha",
+    "repository": "https://github.com/hashicorp/terraform-provider-kubernetes-alpha",
+    "latest-version": "0.6.0"
+  },
+  "nomad": {
+    "full-name": "hashicorp/nomad",
+    "repository": "https://github.com/hashicorp/terraform-provider-nomad",
+    "latest-version": "1.4.15"
+  },
+  "azurestack": {
+    "full-name": "hashicorp/azurestack",
+    "repository": "https://github.com/hashicorp/terraform-provider-azurestack",
+    "latest-version": "0.10.0"
+  },
+  "hcp": {
+    "full-name": "hashicorp/hcp",
+    "repository": "https://github.com/hashicorp/terraform-provider-hcp",
+    "latest-version": "0.20.0"
+  },
+  "ad": {
+    "full-name": "hashicorp/ad",
+    "repository": "https://github.com/hashicorp/terraform-provider-ad",
+    "latest-version": "0.4.3"
+  },
+  "googleworkspace": {
+    "full-name": "hashicorp/googleworkspace",
+    "repository": "https://github.com/hashicorp/terraform-provider-googleworkspace",
+    "latest-version": "0.5.1"
+  },
+  "hcs": {
+    "full-name": "hashicorp/hcs",
+    "repository": "https://github.com/hashicorp/terraform-provider-hcs",
+    "latest-version": "0.5.0"
+  },
+  "boundary": {
+    "full-name": "hashicorp/boundary",
+    "repository": "https://github.com/hashicorp/terraform-provider-boundary",
+    "latest-version": "1.0.5"
+  },
+  "opc": {
+    "full-name": "hashicorp/opc",
+    "repository": "https://github.com/terraform-providers/terraform-provider-opc",
+    "latest-version": "1.4.1"
+  },
+  "oraclepaas": {
+    "full-name": "hashicorp/oraclepaas",
+    "repository": "https://github.com/terraform-providers/terraform-provider-oraclepaas",
+    "latest-version": "1.5.3"
+  },
+  "terraform": {
+    "full-name": "hashicorp/terraform",
+    "repository": "https://github.com/hashicorp/terraform-provider-terraform",
+    "latest-version": "1.0.2"
+  },
+  "awscc": {
+    "full-name": "hashicorp/awscc",
+    "repository": "https://github.com/hashicorp/terraform-provider-awscc",
+    "latest-version": "0.6.0"
+  },
+  "datadog": {
+    "full-name": "DataDog/datadog",
+    "repository": "https://github.com/DataDog/terraform-provider-datadog",
+    "latest-version": "3.6.0"
+  },
+  "cloudflare": {
+    "full-name": "cloudflare/cloudflare",
+    "repository": "https://github.com/cloudflare/terraform-provider-cloudflare",
+    "latest-version": "3.4.0"
+  },
+  "github": {
+    "full-name": "integrations/github",
+    "repository": "https://github.com/integrations/terraform-provider-github",
+    "latest-version": "4.18.0"
+  },
+  "newrelic": {
+    "full-name": "newrelic/newrelic",
+    "repository": "https://github.com/newrelic/terraform-provider-newrelic",
+    "latest-version": "2.31.1"
+  },
+  "pagerduty": {
+    "full-name": "PagerDuty/pagerduty",
+    "repository": "https://github.com/PagerDuty/terraform-provider-pagerduty",
+    "latest-version": "2.1.1"
+  },
+  "grafana": {
+    "full-name": "grafana/grafana",
+    "repository": "https://github.com/grafana/terraform-provider-grafana",
+    "latest-version": "1.14.0"
+  },
+  "gitlab": {
+    "full-name": "gitlabhq/gitlab",
+    "repository": "https://github.com/gitlabhq/terraform-provider-gitlab",
+    "latest-version": "3.7.0"
+  },
+  "mongodbatlas": {
+    "full-name": "mongodb/mongodbatlas",
+    "repository": "https://github.com/mongodb/terraform-provider-mongodbatlas",
+    "latest-version": "1.0.2"
+  },
+  "alicloud": {
+    "full-name": "aliyun/alicloud",
+    "repository": "https://github.com/aliyun/terraform-provider-alicloud",
+    "latest-version": "1.143.0"
+  },
+  "okta": {
+    "full-name": "okta/okta",
+    "repository": "https://github.com/okta/terraform-provider-okta",
+    "latest-version": "3.19.0"
+  },
+  "rancher2": {
+    "full-name": "rancher/rancher2",
+    "repository": "https://github.com/rancher/terraform-provider-rancher2",
+    "latest-version": "1.21.0"
+  },
+  "rollbar": {
+    "full-name": "rollbar/rollbar",
+    "repository": "https://github.com/rollbar/terraform-provider-rollbar",
+    "latest-version": "1.4.0"
+  },
+  "signalfx": {
+    "full-name": "splunk-terraform/signalfx",
+    "repository": "https://github.com/splunk-terraform/terraform-provider-signalfx",
+    "latest-version": "6.7.8"
+  },
+  "azuredevops": {
+    "full-name": "microsoft/azuredevops",
+    "repository": "https://github.com/microsoft/terraform-provider-azuredevops",
+    "latest-version": "0.1.7"
+  },
+  "ec": {
+    "full-name": "elastic/ec",
+    "repository": "https://github.com/elastic/terraform-provider-ec",
+    "latest-version": "0.3.0"
+  },
+  "digitalocean": {
+    "full-name": "digitalocean/digitalocean",
+    "repository": "https://github.com/digitalocean/terraform-provider-digitalocean",
+    "latest-version": "2.16.0"
+  },
+  "spectrocloud": {
+    "full-name": "spectrocloud/spectrocloud",
+    "repository": "https://github.com/spectrocloud/terraform-provider-spectrocloud",
+    "latest-version": "0.5.13"
+  },
+  "fastly": {
+    "full-name": "fastly/fastly",
+    "repository": "https://github.com/fastly/terraform-provider-fastly",
+    "latest-version": "0.38.0"
+  },
+  "databricks": {
+    "full-name": "databrickslabs/databricks",
+    "repository": "https://github.com/databrickslabs/terraform-provider-databricks",
+    "latest-version": "0.3.11"
+  },
+  "heroku": {
+    "full-name": "heroku/heroku",
+    "repository": "https://github.com/heroku/terraform-provider-heroku",
+    "latest-version": "4.6.0"
+  },
+  "spotinst": {
+    "full-name": "spotinst/spotinst",
+    "repository": "https://github.com/spotinst/terraform-provider-spotinst",
+    "latest-version": "1.62.0"
+  },
+  "vcd": {
+    "full-name": "vmware/vcd",
+    "repository": "https://github.com/vmware/terraform-provider-vcd",
+    "latest-version": "3.4.0"
+  },
+  "nsxt": {
+    "full-name": "vmware/nsxt",
+    "repository": "https://github.com/vmware/terraform-provider-nsxt",
+    "latest-version": "3.2.4"
+  },
+  "hcloud": {
+    "full-name": "hetznercloud/hcloud",
+    "repository": "https://github.com/hetznercloud/terraform-provider-hcloud",
+    "latest-version": "1.32.0"
+  },
+  "ns1": {
+    "full-name": "ns1-terraform/ns1",
+    "repository": "https://github.com/ns1-terraform/terraform-provider-ns1",
+    "latest-version": "1.12.1"
+  },
+  "sumologic": {
+    "full-name": "SumoLogic/sumologic",
+    "repository": "https://github.com/SumoLogic/terraform-provider-sumologic",
+    "latest-version": "2.11.2"
+  },
+  "azurecaf": {
+    "full-name": "aztfmod/azurecaf",
+    "repository": "https://github.com/aztfmod/terraform-provider-azurecaf",
+    "latest-version": "1.2.7"
+  },
+  "aiven": {
+    "full-name": "aiven/aiven",
+    "repository": "https://github.com/aiven/terraform-provider-aiven",
+    "latest-version": "2.3.2"
+  },
+  "wavefront": {
+    "full-name": "vmware/wavefront",
+    "repository": "https://github.com/vmware/terraform-provider-wavefront",
+    "latest-version": "3.0.0"
+  },
+  "scaleway": {
+    "full-name": "scaleway/scaleway",
+    "repository": "https://github.com/scaleway/terraform-provider-scaleway",
+    "latest-version": "2.1.0"
+  },
+  "artifactory": {
+    "full-name": "jfrog/artifactory",
+    "repository": "https://github.com/jfrog/terraform-provider-artifactory",
+    "latest-version": "2.6.18"
+  },
+  "octopusdeploy": {
+    "full-name": "OctopusDeployLabs/octopusdeploy",
+    "repository": "https://github.com/OctopusDeployLabs/terraform-provider-octopusdeploy",
+    "latest-version": "0.7.60"
+  },
+  "dnsimple": {
+    "full-name": "dnsimple/dnsimple",
+    "repository": "https://github.com/dnsimple/terraform-provider-dnsimple",
+    "latest-version": "0.10.0"
+  },
+  "akamai": {
+    "full-name": "akamai/akamai",
+    "repository": "https://github.com/akamai/terraform-provider-akamai",
+    "latest-version": "1.8.0"
+  },
+  "ovh": {
+    "full-name": "ovh/ovh",
+    "repository": "https://github.com/ovh/terraform-provider-ovh",
+    "latest-version": "0.16.0"
+  },
+  "linode": {
+    "full-name": "linode/linode",
+    "repository": "https://github.com/linode/terraform-provider-linode",
+    "latest-version": "1.24.0"
+  },
+  "launchdarkly": {
+    "full-name": "launchdarkly/launchdarkly",
+    "repository": "https://github.com/launchdarkly/terraform-provider-launchdarkly",
+    "latest-version": "2.1.1"
+  },
+  "lacework": {
+    "full-name": "lacework/lacework",
+    "repository": "https://github.com/lacework/terraform-provider-lacework",
+    "latest-version": "0.12.2"
+  },
+  "rke": {
+    "full-name": "rancher/rke",
+    "repository": "https://github.com/rancher/terraform-provider-rke",
+    "latest-version": "1.2.4"
+  },
+  "statuscake": {
+    "full-name": "StatusCakeDev/statuscake",
+    "repository": "https://github.com/StatusCakeDev/terraform-provider-statuscake",
+    "latest-version": "1.0.1"
+  },
+  "turbot": {
+    "full-name": "turbot/turbot",
+    "repository": "https://github.com/turbot/terraform-provider-turbot",
+    "latest-version": "1.8.2"
+  },
+  "vultr": {
+    "full-name": "vultr/vultr",
+    "repository": "https://github.com/vultr/terraform-provider-vultr",
+    "latest-version": "2.5.0"
+  },
+  "sdm": {
+    "full-name": "strongdm/sdm",
+    "repository": "https://github.com/strongdm/terraform-provider-sdm",
+    "latest-version": "1.0.31"
+  },
+  "nutanix": {
+    "full-name": "nutanix/nutanix",
+    "repository": "https://github.com/nutanix/terraform-provider-nutanix",
+    "latest-version": "1.2.1"
+  },
+  "vra": {
+    "full-name": "vmware/vra",
+    "repository": "https://github.com/vmware/terraform-provider-vra",
+    "latest-version": "0.4.0"
+  },
+  "fortios": {
+    "full-name": "fortinetdev/fortios",
+    "repository": "https://github.com/fortinetdev/terraform-provider-fortios",
+    "latest-version": "1.13.2"
+  },
+  "aviatrix": {
+    "full-name": "AviatrixSystems/aviatrix",
+    "repository": "https://github.com/AviatrixSystems/terraform-provider-aviatrix",
+    "latest-version": "2.20.1"
+  },
+  "venafi": {
+    "full-name": "Venafi/venafi",
+    "repository": "https://github.com/Venafi/terraform-provider-venafi",
+    "latest-version": "0.13.0"
+  },
+  "vra7": {
+    "full-name": "vmware/vra7",
+    "repository": "https://github.com/vmware/terraform-provider-vra7",
+    "latest-version": "3.0.3"
+  },
+  "bigip": {
+    "full-name": "F5Networks/bigip",
+    "repository": "https://github.com/F5Networks/terraform-provider-bigip",
+    "latest-version": "1.12.0"
+  },
+  "packet": {
+    "full-name": "packethost/packet",
+    "repository": "https://github.com/packethost/terraform-provider-packet",
+    "latest-version": "3.2.1"
+  },
+  "panos": {
+    "full-name": "PaloAltoNetworks/panos",
+    "repository": "https://github.com/PaloAltoNetworks/terraform-provider-panos",
+    "latest-version": "1.8.3"
+  },
+  "oktaasa": {
+    "full-name": "oktadeveloper/oktaasa",
+    "repository": "https://github.com/oktadeveloper/terraform-provider-oktaasa",
+    "latest-version": "1.0.1"
+  },
+  "buildkite": {
+    "full-name": "buildkite/buildkite",
+    "repository": "https://github.com/buildkite/terraform-provider-buildkite",
+    "latest-version": "0.5.0"
+  },
+  "prismacloud": {
+    "full-name": "PaloAltoNetworks/prismacloud",
+    "repository": "https://github.com/PaloAltoNetworks/terraform-provider-prismacloud",
+    "latest-version": "1.1.5"
+  },
+  "dome9": {
+    "full-name": "dome9/dome9",
+    "repository": "https://github.com/dome9/terraform-provider-dome9",
+    "latest-version": "1.23.2"
+  },
+  "tencentcloud": {
+    "full-name": "tencentcloudstack/tencentcloud",
+    "repository": "https://github.com/tencentcloudstack/terraform-provider-tencentcloud",
+    "latest-version": "1.60.6"
+  },
+  "exoscale": {
+    "full-name": "exoscale/exoscale",
+    "repository": "https://github.com/exoscale/terraform-provider-exoscale",
+    "latest-version": "0.30.0"
+  },
+  "splunk": {
+    "full-name": "splunk/splunk",
+    "repository": "https://github.com/splunk/terraform-provider-splunk",
+    "latest-version": "1.4.9"
+  },
+  "quorum": {
+    "full-name": "ConsenSys/quorum",
+    "repository": "https://github.com/ConsenSys/terraform-provider-quorum",
+    "latest-version": "0.3.0"
+  },
+  "iterative": {
+    "full-name": "iterative/iterative",
+    "repository": "https://github.com/iterative/terraform-provider-iterative",
+    "latest-version": "0.8.0"
+  },
+  "aci": {
+    "full-name": "CiscoDevNet/aci",
+    "repository": "https://github.com/CiscoDevNet/terraform-provider-aci",
+    "latest-version": "1.0.1"
+  },
+  "sysdig": {
+    "full-name": "sysdiglabs/sysdig",
+    "repository": "https://github.com/sysdiglabs/terraform-provider-sysdig",
+    "latest-version": "0.5.27"
+  },
+  "infoblox": {
+    "full-name": "infobloxopen/infoblox",
+    "repository": "https://github.com/infobloxopen/terraform-provider-infoblox",
+    "latest-version": "2.0.1"
+  },
+  "b2": {
+    "full-name": "Backblaze/b2",
+    "repository": "https://github.com/Backblaze/terraform-provider-b2",
+    "latest-version": "0.7.1"
+  },
+  "onelogin": {
+    "full-name": "onelogin/onelogin",
+    "repository": "https://github.com/onelogin/terraform-provider-onelogin",
+    "latest-version": "0.1.25"
+  },
+  "outscale": {
+    "full-name": "outscale-dev/outscale",
+    "repository": "https://github.com/outscale-dev/terraform-provider-outscale",
+    "latest-version": "0.5.0"
+  },
+  "dynatrace": {
+    "full-name": "dynatrace-oss/dynatrace",
+    "repository": "https://github.com/dynatrace-oss/terraform-provider-dynatrace",
+    "latest-version": "1.8.4"
+  },
+  "instaclustr": {
+    "full-name": "instaclustr/instaclustr",
+    "repository": "https://github.com/instaclustr/terraform-provider-instaclustr",
+    "latest-version": "1.14.4"
+  },
+  "vmc": {
+    "full-name": "vmware/vmc",
+    "repository": "https://github.com/vmware/terraform-provider-vmc",
+    "latest-version": "1.7.0"
+  },
+  "checkly": {
+    "full-name": "checkly/checkly",
+    "repository": "https://github.com/checkly/terraform-provider-checkly",
+    "latest-version": "1.2.1"
+  },
+  "onepassword": {
+    "full-name": "1Password/onepassword",
+    "repository": "https://github.com/1Password/terraform-provider-onepassword",
+    "latest-version": "1.1.3"
+  },
+  "ionoscloud": {
+    "full-name": "ionos-cloud/ionoscloud",
+    "repository": "https://github.com/ionos-cloud/terraform-provider-ionoscloud",
+    "latest-version": "5.2.18"
+  },
+  "checkpoint": {
+    "full-name": "CheckPointSW/checkpoint",
+    "repository": "https://github.com/CheckPointSW/terraform-provider-checkpoint",
+    "latest-version": "1.5.0"
+  },
+  "metal": {
+    "full-name": "equinix/metal",
+    "repository": "https://github.com/equinix/terraform-provider-metal",
+    "latest-version": "3.2.0"
+  },
+  "rediscloud": {
+    "full-name": "RedisLabs/rediscloud",
+    "repository": "https://github.com/RedisLabs/terraform-provider-rediscloud",
+    "latest-version": "0.2.5"
+  },
+  "intersight": {
+    "full-name": "CiscoDevNet/intersight",
+    "repository": "https://github.com/CiscoDevNet/terraform-provider-intersight",
+    "latest-version": "1.0.18"
+  },
+  "logicmonitor": {
+    "full-name": "logicmonitor/logicmonitor",
+    "repository": "https://github.com/logicmonitor/terraform-provider-logicmonitor",
+    "latest-version": "1.3.4"
+  },
+  "netapp-cloudmanager": {
+    "full-name": "NetApp/netapp-cloudmanager",
+    "repository": "https://github.com/NetApp/terraform-provider-netapp-cloudmanager",
+    "latest-version": "21.11.0"
+  },
+  "opennebula": {
+    "full-name": "OpenNebula/opennebula",
+    "repository": "https://github.com/OpenNebula/terraform-provider-opennebula",
+    "latest-version": "0.3.0"
+  },
+  "dme": {
+    "full-name": "DNSMadeEasy/dme",
+    "repository": "https://github.com/DNSMadeEasy/terraform-provider-dme",
+    "latest-version": "1.0.3"
+  },
+  "mso": {
+    "full-name": "CiscoDevNet/mso",
+    "repository": "https://github.com/CiscoDevNet/terraform-provider-mso",
+    "latest-version": "0.3.2"
+  },
+  "upcloud": {
+    "full-name": "UpCloudLtd/upcloud",
+    "repository": "https://github.com/UpCloudLtd/terraform-provider-upcloud",
+    "latest-version": "2.1.2"
+  },
+  "equinix": {
+    "full-name": "equinix/equinix",
+    "repository": "https://github.com/equinix/terraform-provider-equinix",
+    "latest-version": "1.2.0"
+  },
+  "triton": {
+    "full-name": "joyent/triton",
+    "repository": "https://github.com/joyent/terraform-provider-triton",
+    "latest-version": "0.8.2"
+  },
+  "circonus": {
+    "full-name": "circonus-labs/circonus",
+    "repository": "https://github.com/circonus-labs/terraform-provider-circonus",
+    "latest-version": "0.12.3"
+  },
+  "logzio": {
+    "full-name": "logzio/logzio",
+    "repository": "https://github.com/logzio/terraform-provider-logzio",
+    "latest-version": "1.7.0"
+  },
+  "netapp-gcp": {
+    "full-name": "NetApp/netapp-gcp",
+    "repository": "https://github.com/NetApp/terraform-provider-netapp-gcp",
+    "latest-version": "21.10.1"
+  },
+  "gridscale": {
+    "full-name": "gridscale/gridscale",
+    "repository": "https://github.com/gridscale/terraform-provider-gridscale",
+    "latest-version": "1.13.0"
+  },
+  "victorops": {
+    "full-name": "splunk/victorops",
+    "repository": "https://github.com/splunk/terraform-provider-victorops",
+    "latest-version": "0.1.4"
+  },
+  "valtix": {
+    "full-name": "valtix-security/valtix",
+    "repository": "https://github.com/valtix-security/terraform-provider-valtix",
+    "latest-version": "2.10.2"
+  },
+  "zerotier": {
+    "full-name": "zerotier/zerotier",
+    "repository": "https://github.com/zerotier/terraform-provider-zerotier",
+    "latest-version": "1.2.0"
+  },
+  "harness": {
+    "full-name": "harness-io/harness",
+    "repository": "https://github.com/harness-io/terraform-provider-harness",
+    "latest-version": "0.1.4"
+  },
+  "alkira": {
+    "full-name": "alkiranet/alkira",
+    "repository": "https://github.com/alkiranet/terraform-provider-alkira",
+    "latest-version": "0.7.2"
+  },
+  "constellix": {
+    "full-name": "Constellix/constellix",
+    "repository": "https://github.com/Constellix/terraform-provider-constellix",
+    "latest-version": "0.3.11"
+  },
+  "transloadit": {
+    "full-name": "transloadit/transloadit",
+    "repository": "https://github.com/transloadit/terraform-provider-transloadit",
+    "latest-version": "0.4.0"
+  },
+  "cloudscale": {
+    "full-name": "cloudscale-ch/cloudscale",
+    "repository": "https://github.com/cloudscale-ch/terraform-provider-cloudscale",
+    "latest-version": "3.2.0"
+  },
+  "civo": {
+    "full-name": "civo/civo",
+    "repository": "https://github.com/civo/terraform-provider-civo",
+    "latest-version": "1.0.5"
+  },
+  "genesyscloud": {
+    "full-name": "MyPureCloud/genesyscloud",
+    "repository": "https://github.com/MyPureCloud/terraform-provider-genesyscloud",
+    "latest-version": "0.14.0"
+  },
+  "icinga2": {
+    "full-name": "Icinga/icinga2",
+    "repository": "https://github.com/Icinga/terraform-provider-icinga2",
+    "latest-version": "0.5.0"
+  },
+  "cloudtamerio": {
+    "full-name": "cloudtamer-io/cloudtamerio",
+    "repository": "https://github.com/cloudtamer-io/terraform-provider-cloudtamerio",
+    "latest-version": "0.1.4"
+  },
+  "infracost": {
+    "full-name": "infracost/infracost",
+    "repository": "https://github.com/infracost/terraform-provider-infracost",
+    "latest-version": "0.0.9"
+  },
+  "sigsci": {
+    "full-name": "signalsciences/sigsci",
+    "repository": "https://github.com/signalsciences/terraform-provider-sigsci",
+    "latest-version": "0.4.3"
+  },
+  "volterra": {
+    "full-name": "volterraedge/volterra",
+    "repository": "https://github.com/volterraedge/terraform-provider-volterra",
+    "latest-version": "0.10.0"
+  },
+  "profitbricks": {
+    "full-name": "ionos-cloud/profitbricks",
+    "repository": "https://github.com/ionos-cloud/terraform-provider-profitbricks",
+    "latest-version": "1.6.5"
+  },
+  "cloudeos": {
+    "full-name": "aristanetworks/cloudeos",
+    "repository": "https://github.com/aristanetworks/terraform-provider-cloudeos",
+    "latest-version": "1.1.2"
+  },
+  "ns": {
+    "full-name": "nullstone-io/ns",
+    "repository": "https://github.com/nullstone-io/terraform-provider-ns",
+    "latest-version": "0.5.12"
+  },
+  "ncloud": {
+    "full-name": "NaverCloudPlatform/ncloud",
+    "repository": "https://github.com/NaverCloudPlatform/terraform-provider-ncloud",
+    "latest-version": "2.1.2"
+  },
+  "gcorelabs": {
+    "full-name": "G-Core/gcorelabs",
+    "repository": "https://github.com/G-Core/terraform-provider-gcorelabs",
+    "latest-version": "0.2.22"
+  },
+  "avi": {
+    "full-name": "vmware/avi",
+    "repository": "https://github.com/vmware/terraform-provider-avi",
+    "latest-version": "21.1.2"
+  },
+  "rundeck": {
+    "full-name": "rundeck/rundeck",
+    "repository": "https://github.com/rundeck/terraform-provider-rundeck",
+    "latest-version": "0.4.2"
+  },
+  "citrixadc": {
+    "full-name": "citrix/citrixadc",
+    "repository": "https://github.com/citrix/terraform-provider-citrixadc",
+    "latest-version": "1.8.0"
+  },
+  "thunder": {
+    "full-name": "a10networks/thunder",
+    "repository": "https://github.com/a10networks/terraform-provider-thunder",
+    "latest-version": "0.4.27"
+  },
+  "confluentcloud": {
+    "full-name": "confluentinc/confluentcloud",
+    "repository": "https://github.com/confluentinc/terraform-provider-confluentcloud",
+    "latest-version": "0.2.0"
+  },
+  "rafay": {
+    "full-name": "RafaySystems/rafay",
+    "repository": "https://github.com/RafaySystems/terraform-provider-rafay",
+    "latest-version": "0.0.21"
+  },
+  "better-uptime": {
+    "full-name": "BetterStackHQ/better-uptime",
+    "repository": "https://github.com/BetterStackHQ/terraform-provider-better-uptime",
+    "latest-version": "0.3.5"
+  },
+  "cloudsigma": {
+    "full-name": "cloudsigma/cloudsigma",
+    "repository": "https://github.com/cloudsigma/terraform-provider-cloudsigma",
+    "latest-version": "1.6.0"
+  },
+  "dcnm": {
+    "full-name": "CiscoDevNet/dcnm",
+    "repository": "https://github.com/CiscoDevNet/terraform-provider-dcnm",
+    "latest-version": "1.0.0"
+  },
+  "amixr": {
+    "full-name": "alertmixer/amixr",
+    "repository": "https://github.com/alertmixer/terraform-provider-amixr",
+    "latest-version": "0.2.3"
+  },
+  "ilert": {
+    "full-name": "iLert/ilert",
+    "repository": "https://github.com/iLert/terraform-provider-ilert",
+    "latest-version": "1.3.2"
+  },
+  "ah": {
+    "full-name": "advancedhosting/ah",
+    "repository": "https://github.com/advancedhosting/terraform-provider-ah",
+    "latest-version": "0.1.7"
+  },
+  "anxcloud": {
+    "full-name": "anexia-it/anxcloud",
+    "repository": "https://github.com/anexia-it/terraform-provider-anxcloud",
+    "latest-version": "0.3.3"
+  },
+  "aquasec": {
+    "full-name": "aquasecurity/aquasec",
+    "repository": "https://github.com/aquasecurity/terraform-provider-aquasec",
+    "latest-version": "0.8.2"
+  },
+  "configcat": {
+    "full-name": "configcat/configcat",
+    "repository": "https://github.com/configcat/terraform-provider-configcat",
+    "latest-version": "1.1.0"
+  },
+  "brightbox": {
+    "full-name": "brightbox/brightbox",
+    "repository": "https://github.com/brightbox/terraform-provider-brightbox",
+    "latest-version": "2.0.6"
+  },
+  "stackpath": {
+    "full-name": "stackpath/stackpath",
+    "repository": "https://github.com/stackpath/terraform-provider-stackpath",
+    "latest-version": "1.3.3"
+  },
+  "cbs": {
+    "full-name": "PureStorage-OpenConnect/cbs",
+    "repository": "https://github.com/PureStorage-OpenConnect/terraform-provider-cbs",
+    "latest-version": "0.6.0"
+  },
+  "ciscoasa": {
+    "full-name": "CiscoDevNet/ciscoasa",
+    "repository": "https://github.com/CiscoDevNet/terraform-provider-ciscoasa",
+    "latest-version": "1.3.0"
+  },
+  "nirmata": {
+    "full-name": "nirmata/nirmata",
+    "repository": "https://github.com/nirmata/terraform-provider-nirmata",
+    "latest-version": "1.1.3"
+  },
+  "astra": {
+    "full-name": "datastax/astra",
+    "repository": "https://github.com/datastax/terraform-provider-astra",
+    "latest-version": "1.0.11"
+  },
+  "oneview": {
+    "full-name": "HewlettPackard/oneview",
+    "repository": "https://github.com/HewlettPackard/terraform-provider-oneview",
+    "latest-version": null
+  },
+  "ecl": {
+    "full-name": "nttcom/ecl",
+    "repository": "https://github.com/nttcom/terraform-provider-ecl",
+    "latest-version": "2.0.0"
+  },
+  "metalcloud": {
+    "full-name": "metalsoft-io/metalcloud",
+    "repository": "https://github.com/metalsoft-io/terraform-provider-metalcloud",
+    "latest-version": "1.1.7"
+  },
+  "limelight": {
+    "full-name": "llnw/limelight",
+    "repository": "https://github.com/llnw/terraform-provider-limelight",
+    "latest-version": "1.0.3"
+  },
+  "skytap": {
+    "full-name": "skytap/skytap",
+    "repository": "https://github.com/skytap/terraform-provider-skytap",
+    "latest-version": "0.14.4"
+  },
+  "commvault": {
+    "full-name": "Commvault/commvault",
+    "repository": "https://github.com/Commvault/terraform-provider-commvault",
+    "latest-version": "1.1.0"
+  },
+  "logtail": {
+    "full-name": "BetterStackHQ/logtail",
+    "repository": "https://github.com/BetterStackHQ/terraform-provider-logtail",
+    "latest-version": "0.1.4"
+  },
+  "fivetran": {
+    "full-name": "fivetran/fivetran",
+    "repository": "https://github.com/fivetran/terraform-provider-fivetran",
+    "latest-version": "0.2.0"
+  },
+  "britive": {
+    "full-name": "britive/britive",
+    "repository": "https://github.com/britive/terraform-provider-britive",
+    "latest-version": "1.0.16"
+  },
+  "pnap": {
+    "full-name": "phoenixnap/pnap",
+    "repository": "https://github.com/phoenixnap/terraform-provider-pnap",
+    "latest-version": "0.8.0"
+  },
+  "ngrok": {
+    "full-name": "ngrok/ngrok",
+    "repository": "https://github.com/ngrok/terraform-provider-ngrok",
+    "latest-version": "0.1.3"
+  },
+  "cloudsmith": {
+    "full-name": "cloudsmith-io/cloudsmith",
+    "repository": "https://github.com/cloudsmith-io/terraform-provider-cloudsmith",
+    "latest-version": "0.0.6"
+  },
+  "satori": {
+    "full-name": "SatoriCyber/satori",
+    "repository": "https://github.com/SatoriCyber/terraform-provider-satori",
+    "latest-version": "0.0.3"
+  },
+  "netapp-elementsw": {
+    "full-name": "NetApp/netapp-elementsw",
+    "repository": "https://github.com/NetApp/terraform-provider-netapp-elementsw",
+    "latest-version": "20.11.0"
+  },
+  "fmc": {
+    "full-name": "CiscoDevNet/fmc",
+    "repository": "https://github.com/CiscoDevNet/terraform-provider-fmc",
+    "latest-version": "0.1.1"
+  },
+  "fortimanager": {
+    "full-name": "fortinetdev/fortimanager",
+    "repository": "https://github.com/fortinetdev/terraform-provider-fortimanager",
+    "latest-version": "1.3.5"
+  },
+  "shoreline": {
+    "full-name": "shorelinesoftware/shoreline",
+    "repository": "https://github.com/shorelinesoftware/terraform-provider-shoreline",
+    "latest-version": "1.1.0"
+  },
+  "codefresh": {
+    "full-name": "codefresh-io/codefresh",
+    "repository": "https://github.com/codefresh-io/terraform-provider-codefresh",
+    "latest-version": "0.0.21"
+  },
+  "vthunder": {
+    "full-name": "a10networks/vthunder",
+    "repository": "https://github.com/a10networks/terraform-provider-vthunder",
+    "latest-version": "0.4.27"
+  },
+  "gocache": {
+    "full-name": "gocachebr/gocache",
+    "repository": "https://github.com/gocachebr/terraform-provider-gocache",
+    "latest-version": "0.2.2"
+  },
+  "nutanixkps": {
+    "full-name": "nutanix/nutanixkps",
+    "repository": "https://github.com/nutanix/terraform-provider-nutanixkps",
+    "latest-version": "1.1.9"
+  },
+  "sematext": {
+    "full-name": "sematext/sematext",
+    "repository": "https://github.com/sematext/terraform-provider-sematext",
+    "latest-version": "0.4.0"
+  },
+  "shipa": {
+    "full-name": "shipa-corp/shipa",
+    "repository": "https://github.com/shipa-corp/terraform-provider-shipa",
+    "latest-version": "0.0.6"
+  },
+  "tetration": {
+    "full-name": "CiscoDevNet/tetration",
+    "repository": "https://github.com/CiscoDevNet/terraform-provider-tetration",
+    "latest-version": "0.1.0"
+  },
+  "sdwan": {
+    "full-name": "CiscoDevNet/sdwan",
+    "repository": "https://github.com/CiscoDevNet/terraform-provider-sdwan",
+    "latest-version": "0.1.0"
+  },
+  "cohesity": {
+    "full-name": "cohesity/cohesity",
+    "repository": "https://github.com/cohesity/terraform-provider-cohesity",
+    "latest-version": "1.0.1"
+  },
+  "polaris": {
+    "full-name": "rubrikinc/polaris",
+    "repository": "https://github.com/rubrikinc/terraform-provider-polaris",
+    "latest-version": "0.3.0"
+  },
+  "illumio-core": {
+    "full-name": "illumio/illumio-core",
+    "repository": "https://github.com/illumio/terraform-provider-illumio-core",
+    "latest-version": "0.1.1"
+  },
+  "prismacloudcompute": {
+    "full-name": "PaloAltoNetworks/prismacloudcompute",
+    "repository": "https://github.com/PaloAltoNetworks/terraform-provider-prismacloudcompute",
+    "latest-version": "0.1.0"
+  },
+  "ciphertrust": {
+    "full-name": "ThalesGroup/ciphertrust",
+    "repository": "https://github.com/ThalesGroup/terraform-provider-ciphertrust",
+    "latest-version": null
+  },
+  "splunkconfig": {
+    "full-name": "splunk/splunkconfig",
+    "repository": "https://github.com/splunk/terraform-provider-splunkconfig",
+    "latest-version": "1.6.0"
+  },
+  "carvel": {
+    "full-name": "vmware-tanzu/carvel",
+    "repository": "https://github.com/vmware-tanzu/terraform-provider-carvel",
+    "latest-version": "0.10.0"
+  },
+  "synthetics": {
+    "full-name": "splunk/synthetics",
+    "repository": "https://github.com/splunk/terraform-provider-synthetics",
+    "latest-version": "0.1.3"
+  },
+  "waapm": {
+    "full-name": "wallix/waapm",
+    "repository": "https://github.com/wallix/terraform-provider-waapm",
+    "latest-version": "2.0.2"
+  }
+}

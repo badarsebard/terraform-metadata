@@ -1,0 +1,17 @@
+artifactory
+azure
+azurerm
+consul
+cos
+etcd
+etcdv3
+gcs
+http
+inmem
+local
+manta
+oss
+pg
+remote
+s3
+swift
